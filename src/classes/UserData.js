@@ -3,8 +3,9 @@ class UserData {
     this.username = username;
     this.favoriteRecipes = [];
     this.recipesToCook = [];
-
   }
+
+
 };
 
 
