@@ -3,13 +3,17 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles.css">
-    <title>Whats Cookin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=STIX+Two+Math&display=swap" rel="stylesheet">
+    <title>What's Cookin'?</title>
   </head>
   <body>
     <header>
       <article class="title-container">
-        <h1>Whats Cookin'?</h1>
+        <h1>What's Cookin'?</h1>
       </article>
+      <button type="button" class="login-button" name="login">Login</button>
     </header>
     <nav>
       <button type="button" name="all recipes">All Recipes</button>
@@ -18,23 +22,56 @@
     </nav>
     <aside class="sidebars">
       <section class="left-sidebar">
-        <button type="button" name="add a recipe">Add a Recipe</button>
+        <button type="button" name="add a recipe"><h1>Add a Recipe</h1></button>
       </section>
       <section class="right-sidebar">
-        <button type="button" name="login">Login</button>
-        <article class="scroll-arrow">
-          <img src="" alt="scroll arrow">
-        </article>
+        <!-- <article class="scroll-arrow"> -->
+          <img src="./data/assets/Right-arrow.svg" class="right-arrow" alt="scroll arrow">
+        <!-- </article> -->
       </section>
     </aside>
     <section class="content-container">
       <section section="main-content">
         <section class="recipe-grid">
           <article class="recipe">
+            <div class="meal-image">
+              <img src="./data/assets/pancakes.svg" alt="meal image" class="image">
+            </div>
             <div class="recipe-content">
-              <img src="" alt="meal image" class="image">
               <div class="favorite-star"></div>
-              <img class= src="" alt="favorite">
+              <img class="star" src="./data/assets/star-active.svg" alt="favorite">
+              <div class="recipe-info">
+                <h2>Dish Name</h2>
+                <div class="ingredient-section">
+                  <h4>Ingredients</h4>
+                <section class="ingredient-info">
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="recipe">
+            <div class="meal-image">
+              <img src="./data/assets/pancakes.svg" alt="meal image" class="image">
+            </div>
+            <div class="recipe-content">
+              <div class="favorite-star"></div>
+              <img class="star" src="./data/assets/star-active.svg" alt="favorite">
+              <div class="recipe-info">
+                <h2>Dish Name</h2>
+                <div class="ingredient-section">
+                  <h4>Ingredients</h4>
+                <section class="ingredient-info">
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="recipe">
+            <div class="meal-image">
+              <img src="./data/assets/pancakes.svg" alt="meal image" class="image">
+            </div>
+            <div class="recipe-content">
+              <div class="favorite-star"></div>
+              <img class="star" src="./data/assets/star-active.svg" alt="favorite">
               <div class="recipe-info">
                 <h2>Dish Name</h2>
                 <div class="ingredient-section">
