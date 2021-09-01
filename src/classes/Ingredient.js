@@ -10,9 +10,10 @@ class Ingredient {
     grabUniqueIngredientData(){
       let self = this;
       let ingredientsData = require('../data/ingredients.js')
+      // console.log('ingredientData',ingredientsData);
       let returnedData = ingredientsData.find(({id}) => id === self.id);
       this.uniqueIngredientData = returnedData;
     }
-  
+
   }
   export default Ingredient;
