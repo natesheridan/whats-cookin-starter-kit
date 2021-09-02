@@ -1,11 +1,12 @@
 body {
   background-color: darkgrey;
   color: black;
-  height: 100%;
+  height: 1vh;
   width: 100%;
   background-color: #FFE3D6;
   margin: 0px;
   font-family: 'Montserrat', sans-serif;
+  overflow: scroll;
 }
 
 nav {
@@ -23,8 +24,16 @@ nav > button {
   color: white;
 }
 
+nav > button:hover {
+  background-color: #E08757;
+}
+
+nav > button:active {
+  background-color: #c8553d;
+}
+
 button {
-  height: 1.5rem;
+  height: 2.5rem;
   width: auto;
   padding: 0rem 1rem 0rem 1rem;
   border: 0px;
@@ -43,18 +52,22 @@ h4 {
   margin: 0px;
 }
 
-.hidden {
-  display: none;
-}
-
-.header {
+header,
+footer {
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   text-align: center;
   justify-content: center;
   background-color: #c8553d;
-  /* padding-top: 1rem; */
+  width: 100%;
+}
+
+footer {
+  height: 2rem;
+  background-color: #c8553d;
+  position: absolute;
+  bottom: 0;
 }
 
 .title-container {
@@ -74,7 +87,7 @@ h4 {
   border: 0px;
 }
 
-aside>button {
+aside > button {
   margin-top: 2rem;
   padding: 0px;
   border: 0px;
@@ -85,7 +98,7 @@ aside>button {
 .left-sidebar {
   display: inline-block;
   position: absolute;
-  left: 1rem;
+  left: 2rem;
   width: 14%;
   height: 100%;
   padding-top: 2rem;
@@ -96,8 +109,14 @@ aside>button {
   flex-direction: column;
 }
 
-.left-sidebar > h1 {
-  font-size: 600;
+.left-sidebar > button:hover {
+  color: white;
+  background-color: #5F9595;
+}
+
+.left-sidebar > button:active {
+  color: white;
+  background-color: #EFB87E;
 }
 
 .right-sidebar {
@@ -109,12 +128,12 @@ aside>button {
   right: 1rem;
   width: 10%;
   height: 100%;
-  top: 32%;
+  top: 40%;
 }
 
 .login-button {
   position: absolute;
-  top: 2%;
+  top: 2.3%;
   right: 5%;
 }
 
@@ -137,12 +156,13 @@ aside>button {
   background-color: #8FB7B7;
   padding-top: 3rem;
   padding-bottom: 3rem;
+  height: 25rem;
 }
 
 .main-content {
   background-color: #588b8b;
-  height: 40rem;
-  width: 40rem;
+  /* height: 40rem;
+  width: 40rem; */
 }
 
 .recipe-grid {
@@ -160,7 +180,7 @@ aside>button {
   height: 22rem;
   width: 15rem;
   background-color: #ffffff;
-  padding: .5rem;
+  padding: .8rem;
   border-radius: 1rem;
   margin: 0rem .4rem 0rem .4rem;
 }
@@ -173,6 +193,46 @@ aside>button {
 
 .recipe-info {
   margin: 0rem .4rem 0rem .4rem;
+}
+
+.login-popup {
+
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 12rem;
+  line-height: 2rem;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  border: 1px solid black;
+  background-color: #fff8f4;
+  top: 8%;
+  right: 9.5%;
+  z-index: 2;
+}
+
+.login-form > button {
+  margin-top: 1rem;
+  height: 2rem;
+  width: auto;
+  background-color: #1e9692;
+  color: white;
+}
+
+.login-form > .sign-up-button {
+  background-color: #C8553D;
+}
+
+.login-form > .cancel-login {
+  border: 0px;
+  background-color: none;
+}
+
+.confirm-password {
+  display: flex;
+  flex-direction: column;
 }
 
 .meal-image {
@@ -198,4 +258,34 @@ aside>button {
   top: 4%;
   right: 4%;
   z-index: 1;
+  cursor: pointer;
+}
+
+.all-recipe-grid {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.filtered-recipe-grid {
+  flex-direction: row;
+  /* display: grid; */
+  display: block;
+  align-items: center;
+  width: 70%;
+}
+
+.filtered-recipe-grid > img {
+  /* display: grid; */
+  height: 20%;
+  width: 20%;
+  padding: .5rem;
+}
+
+.hidden {
+  display: none;
 }

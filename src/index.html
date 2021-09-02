@@ -82,16 +82,24 @@
             </div>
           </article>
         </section>
-        <section class="login hidden">
-          <h2>No account? Sign up!</h2>
-          <h2>User Name</h2> <br>
-            <input type="text" name="user name" value="">
-            <h2>Password</h2> <br>
-            <input type="text" name="password" value="">
-            <h2 hidden>Repeat Password</h2>
-            <input type="text" name="repeat-password" value="">
-            <button type="button" name="confirm"></button>
-        </section>
+        <article class="login-popup" id="loginForm">
+          <form class="login-form">
+
+            <h1>Login</h1>
+            <!-- <button type="submit" class="cancel-login" onclick="closeForm()"><img src="" class="x-button" alt="close form"></button> -->
+              <!--Cancel button here ^^^ -->
+            <label for="email"><b>Username</b></label>
+            <input type="text" placeholder="Username" name="username" required>
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Password" name="password" required>
+            <article class="confirm-password">
+              <label for="repeat-password"><b>Repeat Password</b></label>
+              <input type="text" placeholder="Repeat password" name="password">
+            </article>
+            <button type="submit" class="log-in-button">Login</button>
+            <button type="submit" class="sign-up-button" onclick="closeForm()">Sign Up</button>
+          </form>
+        </article>
         <section class="add-recipe hidden">
           <h2>Title</h2> <br>
           <input type="text" name="title" value="">
@@ -100,23 +108,25 @@
           <h2>Ingredients</h2>
           <input type="text" name="ingredient" value="">
           <input type="text" name="amount" value="">
-          <img src="" alt="plus arrow">
+          <img src="" class="plus-arrow" alt="plus arrow">
           <button type="button" name="submit"></button>
         </section>
-        <section class="all-recipe-grid hidden">
-          <h2>Recipes</h2>
-          <input type="radio" name="favorites?" value="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <aside class="all-scroll-arrow">
-            <img src="" alt="scroll arrow">
-          </aside>
+      <section class="all-recipe-grid hidden">
+        <!-- <h2>Recipes</h2>
+        <input type="radio" name="favorites" value=""> -->
+        <section class="filtered-recipe-grid">
+          <img class="mini-card" src="./data/assets/pancakes.svg" alt="default">
+          <img class="mini-card" src="./data/assets/pancakes.svg" alt="default">
+          <img class="mini-card" src="./data/assets/pancakes.svg" alt="default">
+          <img class="mini-card" src="./data/assets/pancakes.svg" alt="default">
+          <img class="mini-card" src="./data/assets/pancakes.svg" alt="default">
+          <img class="mini-card" src="./data/assets/pancakes.svg" alt="default">
+          <img class="mini-card" src="./data/assets/pancakes.svg" alt="default">
+          <img class="mini-card" src="./data/assets/pancakes.svg" alt="default">
+        </section>
+        <!-- <aside class="all-scroll-arrow"> -->
+            <!-- <img src="" alt="scroll arrow"> -->
+          <!-- </aside> -->
         </section>
       </section>
     </section>
