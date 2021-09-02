@@ -1,6 +1,7 @@
 import styles from './styles.css';
 import Recipe from './classes/Recipe.js';
 import RecipeRepository from './classes/RecipeRepository.js';
+import Ingredient from './classes/Ingredient.js';
 import rightArrow from './data/assets/Right-arrow.svg';
 import pancakes from './data/assets/pancakes.svg';
 import starActive from './data/assets/star-active.svg';
@@ -13,28 +14,66 @@ const allRecipeGrid = document.querySelector('#allRecipeGrid');
 const mainContent = document.querySelector('#mainContent');
 const allRecipes = document.querySelector('#allRecipesButton');
 const recipeGrid = document.querySelector('#recipeGrid');
+const contentContainer = document.querySelector('.content-container');
+
 
 allRecipes.addEventListener('click', viewAllRecipes);
-//
-// As a user, I should be able to view a list of all recipes.
-//populate recipe grid with all recipes
-//need recipeRepo to hold an array of recipes
+contentContainer.addEventListener('click', getDirections);
+
 function viewAllRecipes() {
   allRecipeGrid.classList.remove('hidden');
   recipeGrid.classList.add('hidden');
 
   const recipeRepo = new RecipeRepository(recipeData);
-/*images are populating, but cannot get the correct section to hide*/
   const recipeCard = recipeRepo.recipeData.reduce((acc, recipe) => {
     acc +=
-      `<img src= "${recipe.image}" alt= "${recipe.name}">
-       <p>${recipe.name}</p>`
+      `<article class="mini-recipe" id="${recipe.id}">
+       <img src= "${recipe.image}" alt= "${recipe.name}">
+       <p>${recipe.name}</p>
+       </article>`
 
-    console.log(acc);
     return acc;
   }, []);
   return allRecipeGrid.innerHTML = recipeCard
-}
+};
+
+function getDirections(event){
+  allRecipeGrid.classList.add('hidden');
+  let targetID = event.target.closest('.mini-recipe').id;
+  let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
+  let selectedRecipe = new Recipe(newRecipeInfo);
+
+  selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {
+    let ingredient = new Ingredient(element)
+    return ingredient
+  })
+  let instructions = selectedRecipe.instructions.map((element) => {
+    return element.instruction
+  });
+
+  let allIngredients = selectedRecipe.ingredients.map((element) => {
+    let name = element.name;
+    let amount = element.quantity.amount;
+    let unit = element.quantity.unit;
+
+    return [name, amount, unit]
+  })
+
+  let ingredients = allIngredients.reduce((acc, element) => {
+    acc += element
+    return acc
+  }, '')
+
+  let fullRecipe =
+    `<h3 class= "full-recipe"> ${selectedRecipe.name}</h3>
+    <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}">
+    <p class= "ingredients">${ingredients.split(/[ ,]+/).join(' ,')}</p>
+    <p class= "cost">${selectedRecipe.returnCostEstimation()}</p>
+    <p class= "instructions">${instructions}</p>`
+
+  return contentContainer.innerHTML = fullRecipe
+
+};
 
 
 function searchData(input) {
