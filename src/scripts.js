@@ -11,8 +11,9 @@ import {recipeData} from './data/recipes.js';
 
 const allRecipeGrid = document.querySelector('#allRecipeGrid');
 const mainContent = document.querySelector('#mainContent');
-const allRecipes = document.querySelector('#allRecipes');
+const allRecipes = document.querySelector('#allRecipesButton');
 const recipeGrid = document.querySelector('#recipeGrid');
+
 allRecipes.addEventListener('click', viewAllRecipes);
 //
 // As a user, I should be able to view a list of all recipes.

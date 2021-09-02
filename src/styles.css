@@ -164,12 +164,12 @@ aside > button {
 }
 
 .main-content {
-  background-color: #588b8b;
+  /* background-color: #588b8b; */
   /* height: 40rem;
   width: 40rem; */
 }
 
-.main-cards {
+.recipe-grid {
   display: flex;
   flex-direction: row;
 }
