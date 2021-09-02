@@ -1,10 +1,11 @@
-import Recipe from './Recipe.js';
-import RecipeRepository from 'src/classes/RecipeRepository.js';
-import recipeData from 'src/data/recipes.js'
+import styles from './styles.css';
+import Recipe from './classes/Recipe';
+import RecipeRepository from './classes/RecipeRepository.js';
+import UserData from './classes/UserData';
+import recipeData from './data/recipes'
 const allRecipeGrid = document.querySelector('#allRecipeGrid');
 const mainContent = document.querySelector('#mainContent');
-const allRecipes = document.querySelector('#allRecipes');
-allRecipes.addEventListener('click', viewAllRecipes);
+const allRecipes = document.querySelector('#allRecipesBtn');
 //
 // As a user, I should be able to view a list of all recipes.
 //populate recipe grid with all recipes
