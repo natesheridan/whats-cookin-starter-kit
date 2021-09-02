@@ -17,19 +17,13 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-              {
-                loader: 'file-loader',
-                options: {
-                  name: '[name].[ext]',
-                  outputPath: 'images/',
-                  publicPath: 'images/'
-                }
-              }
-            ]
+        test: /\.(png|svg|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          name: 'images/[name].[ext]',
+        },
       }
-    ],
+    ]
   },
   // Below is needed for webpack-dev-server
   plugins: [

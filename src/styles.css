@@ -1,54 +1,81 @@
 body {
   background-color: darkgrey;
   color: black;
-  height: 100%;
+  height: 1vh;
   width: 100%;
   background-color: #FFE3D6;
   margin: 0px;
+  font-family: 'Montserrat', sans-serif;
+  overflow: scroll;
 }
 
 nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-left: 20%;
-  padding-right: 20%;
-  padding-bottom: .5rem;
+  padding-left: 35%;
+  padding-right: 35%;
+  padding-bottom: .3rem;
+  padding-top: 1rem;
+}
+
+nav > button {
+  background-color: #0B3954;
+  color: white;
+}
+
+nav > button:hover {
+  background-color: #0668a0;
+}
+
+nav > button:active {
   background-color: #c8553d;
-  margin: 0px;
 }
 
 button {
-  height: 1.5rem;
+  height: 2.5rem;
   width: auto;
   padding: 0rem 1rem 0rem 1rem;
   border: 0px;
   border-radius: .5rem;
+  cursor: pointer;
 }
 
-h1 {
+h1, h3 {
+  margin-bottom: 0px;
+  padding: 0px;
+  border: 0px;
+  font-family: 'STIX Two Math', serif;
+}
+
+h4 {
   margin: 0px;
 }
 
-.hidden {
-  display: none;
-}
-
-.header {
-  display: flex;
+header,
+footer {
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   text-align: center;
   justify-content: center;
   background-color: #c8553d;
+  width: 100%;
+}
+
+footer {
+  height: 2rem;
+  background-color: #c8553d;
+  position: absolute;
+  bottom: 0;
 }
 
 .title-container {
   text-align: center;
   color: white;
   background-color: #c8553d;
-  padding: .5rem 0rem .3rem 0rem;
-  margin: 0px;
+  margin: 0rem;
+  padding: .1rem 0rem 1rem 0rem;
   border: 0px;
 }
 
@@ -60,7 +87,7 @@ h1 {
   border: 0px;
 }
 
-aside>button {
+aside > button {
   margin-top: 2rem;
   padding: 0px;
   border: 0px;
@@ -71,21 +98,47 @@ aside>button {
 .left-sidebar {
   display: inline-block;
   position: absolute;
-  left: 1rem;
+  left: 2rem;
   width: 14%;
   height: 100%;
   padding-top: 2rem;
 }
 
+.left-sidebar > button {
+  height: 3rem;
+  flex-direction: column;
+}
+
+.left-sidebar > button:hover {
+  color: white;
+  background-color: #5F9595;
+}
+
+.left-sidebar > button:active {
+  color: white;
+  background-color: #EFB87E;
+}
+
 .right-sidebar {
   display: inline-block;
+  flex-direction: column;
   position: absolute;
   align-items: center;
   justify-content: center;
   right: 1rem;
   width: 10%;
   height: 100%;
-  padding-top: 2rem;
+  top: 40%;
+}
+
+.login-button {
+  position: absolute;
+  right: 5%;
+  color: black;
+  background-color: #FFF8F3;
+  height: auto;
+  width: 5rem;
+  padding: .5rem 0rem .5rem 0rem;
 }
 
 .scroll-arrow {
@@ -93,7 +146,10 @@ aside>button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 8rem;
+  position: relative;
+  height: 8rem;
+  width: 5rem;
+  cursor: pointer;
 }
 
 .content-container {
@@ -104,27 +160,148 @@ aside>button {
   background-color: #8FB7B7;
   padding-top: 3rem;
   padding-bottom: 3rem;
+  height: 25rem;
 }
 
 .main-content {
   background-color: #588b8b;
-  height: 30rem;
-  width: 40rem;
+  /* height: 40rem;
+  width: 40rem; */
+}
+
+.main-cards {
+  display: flex;
+  flex-direction: row;
 }
 
 .recipe {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   justify-content: center;
-  height: 15rem;
-  width: 12rem;
+  text-align: center;
+  position: relative;
+  height: 22rem;
+  width: 15rem;
   background-color: #ffffff;
-  padding: 1rem;
+  padding: .8rem;
+  border-radius: 1rem;
+  margin: 0rem .4rem 0rem .4rem;
+}
+
+.recipe-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.recipe-info {
+  margin: 0rem .4rem 0rem .4rem;
+}
+
+.login-popup {
+
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 12rem;
+  line-height: 2rem;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  border: 1px solid black;
+  background-color: #fff8f4;
+  top: 8%;
+  right: 9.5%;
+  z-index: 2;
+}
+
+.login-form > button {
+  margin-top: 1rem;
+  height: 2rem;
+  width: auto;
+  background-color: #1e9692;
+  color: white;
+}
+
+.login-form > .sign-up-button {
+  background-color: #C8553D;
+}
+
+.login-form > .cancel-login {
+  border: 0px;
+  background-color: none;
+}
+
+.confirm-password {
+  display: flex;
+  flex-direction: column;
+}
+
+.meal-image {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: baseline;
+  margin-top: -25%;
+}
+
+.meal-image > img {
+  height: 9rem;
+  width: 9rem;
+  padding: 0px;
+  margin: 0px;
+  /* border: 1px transparent black; */
+}
+
+.star {
+  height: 3rem;
+  width: 3rem;
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.all-recipe-grid {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.filtered-recipe-grid {
+  flex-direction: row;
+  /* display: grid; */
+  display: block;
+  align-items: center;
+  width: 70%;
+}
+
+.filtered-recipe-grid > img {
+  /* display: grid; */
+  height: 20%;
+  width: 20%;
+  padding: .5rem;
+  margin: .3rem;
+  background-color: white;
+  border: 1px solid grey;
   border-radius: 1rem;
 }
 
-.recipe-content>img {
-  height: 5rem;
-  width: 5rem;
+.add-recipe {
+  height: auto;
+  width: auto;
+  padding: 2rem;
+  background-color: #FFF8F3;
+  border: 1px solid black;
+}
+
+.hidden {
+  display: none;
 }
