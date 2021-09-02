@@ -13,10 +13,11 @@ const allRecipeGrid = document.querySelector('#allRecipeGrid');
 const mainContent = document.querySelector('#mainContent');
 const allRecipes = document.querySelector('#allRecipes');
 const recipeGrid = document.querySelector('#recipeGrid');
-
-
 allRecipes.addEventListener('click', viewAllRecipes);
-
+//
+// As a user, I should be able to view a list of all recipes.
+//populate recipe grid with all recipes
+//need recipeRepo to hold an array of recipes
 function viewAllRecipes() {
   allRecipeGrid.classList.remove('hidden');
   recipeGrid.classList.add('hidden');
@@ -34,6 +35,7 @@ function viewAllRecipes() {
   return allRecipeGrid.innerHTML = recipeCard
 }
 
+
 function searchData(input) {
   let searchedData = recipeData.filter(recipe => recipe[`${input}`].includes(searchBar.input));
 };
@@ -43,7 +45,6 @@ function setUserData(){
 // if the user login matches the user.name....
 //...then the app populates with that user's info
 };
-
 
 // As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
 // As a user, I should be able to filter recipes by multiple tags.
