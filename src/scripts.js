@@ -24,13 +24,13 @@ function viewAllRecipes() {
   const recipeRepo = new RecipeRepository(recipeData);
 /*images are populating, but cannot get the correct section to hide*/
   const recipeCard = recipeRepo.recipeData.reduce((acc, recipe) => {
-    acc =
+    acc +=
       `<img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>`
 
     console.log(acc);
     return acc;
-  }, '');
+  }, []);
   return allRecipeGrid.innerHTML = recipeCard
 }
 
