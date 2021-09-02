@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="text/css" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=STIX+Two+Math&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
       <button type="button" class="login-button" name="login">Login</button>
     </header>
     <nav>
-      <button type="button" name="all recipes">All Recipes</button>
+      <button class="button" id="allRecipes">All Recipes</button>
       <button type="button" name="home">Home</button>
       <button type="button" name="saved recipes">Saved Recipes</button>
     </nav>
@@ -26,20 +26,20 @@
       </section>
       <section class="right-sidebar">
         <!-- <article class="scroll-arrow"> -->
-          <img src="./data/assets/Right-arrow.svg" class="right-arrow" alt="scroll arrow">
+          <img src=images/Right-arrow.svg class="right-arrow" alt="scroll arrow">
         <!-- </article> -->
       </section>
     </aside>
     <section class="content-container">
-      <section section="main-content">
-        <section class="recipe-grid">
+      <section class="main-content" id="mainContent">
+        <section class="recipe-grid" id="recipeGrid">
           <article class="recipe">
             <div class="meal-image">
-              <img src="./data/assets/pancakes.svg" alt="meal image" class="image">
+              <img src="images/pancakes.svg" alt="meal image" class="image">
             </div>
             <div class="recipe-content">
               <div class="favorite-star"></div>
-              <img class="star" src="./data/assets/star-active.svg" alt="favorite">
+              <img class="star" src="images/star-active.svg" alt="favorite">
               <div class="recipe-info">
                 <h2>Dish Name</h2>
                 <div class="ingredient-section">
@@ -51,11 +51,11 @@
           </article>
           <article class="recipe">
             <div class="meal-image">
-              <img src="./data/assets/pancakes.svg" alt="meal image" class="image">
+              <img src="images/pancakes.svg" alt="meal image" class="image">
             </div>
             <div class="recipe-content">
               <div class="favorite-star"></div>
-              <img class="star" src="./data/assets/star-active.svg" alt="favorite">
+              <img class="star" src="images/star-active.svg" alt="favorite">
               <div class="recipe-info">
                 <h2>Dish Name</h2>
                 <div class="ingredient-section">
@@ -67,11 +67,11 @@
           </article>
           <article class="recipe">
             <div class="meal-image">
-              <img src="./data/assets/pancakes.svg" alt="meal image" class="image">
+              <img src="images/pancakes.svg" alt="meal image" class="image">
             </div>
             <div class="recipe-content">
               <div class="favorite-star"></div>
-              <img class="star" src="./data/assets/star-active.svg" alt="favorite">
+              <img class="star" src="images/star-active.svg" alt="favorite">
               <div class="recipe-info">
                 <h2>Dish Name</h2>
                 <div class="ingredient-section">
@@ -103,7 +103,7 @@
           <img src="" alt="plus arrow">
           <button type="button" name="submit"></button>
         </section>
-        <section class="all-recipe-grid hidden">
+      <section class="all-recipe-grid hidden" id="allRecipeGrid">
           <h2>Recipes</h2>
           <input type="radio" name="favorites?" value="">
           <img src="" alt="">
