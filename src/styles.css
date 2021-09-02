@@ -25,7 +25,7 @@ nav > button {
 }
 
 nav > button:hover {
-  background-color: #E08757;
+  background-color: #0668a0;
 }
 
 nav > button:active {
@@ -165,7 +165,7 @@ aside > button {
   width: 40rem; */
 }
 
-.recipe-grid {
+.main-cards {
   display: flex;
   flex-direction: row;
 }
