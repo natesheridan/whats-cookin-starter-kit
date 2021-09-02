@@ -1,3 +1,4 @@
+
 import Ingredient from '../classes/Ingredient';
 class Recipe {
     constructor(recipeObj) {

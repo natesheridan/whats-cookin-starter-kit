@@ -14,7 +14,7 @@ describe('Recipe / Ingredient Test', () => {
             {
             "id": 111,
             "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
-            "ingredients": 
+            "ingredients":
               [
                 {
                 "id": 4025,
@@ -36,7 +36,7 @@ describe('Recipe / Ingredient Test', () => {
                   }
                 },
               ],
-            "instructions": 
+            "instructions":
               [
                 {
                 "instruction": "1-INSTRUCTION1",
@@ -50,7 +50,7 @@ describe('Recipe / Ingredient Test', () => {
                 }
               ],
             "name": "TEST RECIPE 1",
-            "tags": 
+            "tags":
               [
               "1antipasto",
               "1hor d'oeuvre"
@@ -59,7 +59,7 @@ describe('Recipe / Ingredient Test', () => {
             {
             "id": 2222,
             "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
-            "ingredients": 
+            "ingredients":
               [
                 {
                 "id": 4025,
@@ -81,7 +81,7 @@ describe('Recipe / Ingredient Test', () => {
                   }
                 },
               ],
-            "instructions": 
+            "instructions":
               [
                 {
                 "instruction": "2-INSTRUCTION1",
@@ -103,7 +103,7 @@ describe('Recipe / Ingredient Test', () => {
             {
             "id": 3333,
             "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
-            "ingredients": 
+            "ingredients":
               [
                 {
                 "id": 4025,
@@ -125,7 +125,7 @@ describe('Recipe / Ingredient Test', () => {
                   }
                 },
               ],
-            "instructions": 
+            "instructions":
               [
                 {
                 "instruction": "3-INSTRUCTION1",
@@ -158,7 +158,7 @@ describe('Recipe / Ingredient Test', () => {
         expect(testRecipe3).to.be.instanceOf(Recipe);
     });
     it('Be able to store data about the recipe (id, image, etc.)', () => {
-        
+
         expect(testRecipe1.name).to.deep.equal(testRecipes[0].name)
         expect(testRecipe1.name).to.deep.equal("TEST RECIPE 1")
 
@@ -166,31 +166,31 @@ describe('Recipe / Ingredient Test', () => {
         expect(testRecipe3.name).to.deep.equal("TEST RECIPE 3")
     });
     it('Should be able to store the ingredients of the recipe', () => {
-        
+
         testRecipe1.updateIngredientData()
 
         expect(testRecipe1.ingredients[1]).to.be.instanceOf(Ingredient);
         expect(testRecipe1.ingredients[0].name).to.deep.equal("mayonnaise")
         expect(testRecipe1.ingredients[1].name).to.deep.equal("farro")
         expect(testRecipe1.ingredients[2].name).to.deep.equal("cheese")
-        
+
     });
     it('Should be able to return the ingredients of the recipe', () => {
-        
+
         expect(testRecipe1.returnIngredients()).to.deep.equal("mayonnaise,farro,cheese 1cups,2units,3tsp")
         //need more tests here but sample data isn't mapped correctly for ingredients
 
-        
+
     });
     it('Should be able to return the estimated cost of the recipe', () => {
-        
+
         expect(testRecipe1.returnCostEstimation()).to.deep.equal("3752 cents.")
         //need more tests here too lacking bc same reason as above
 
     });
     it('Should be able to return the instructions/directions', () => {
-        
-        
+
+
         expect(testRecipe1.returnInstructions()).to.deep.equal(['1-INSTRUCTION1', '1-INSTRUCTION2', '1-INSTRUCTION3'])
         expect(testRecipe2.returnInstructions()).to.deep.equal(['2-INSTRUCTION1', '2-INSTRUCTION2', '2-INSTRUCTION3'])
         expect(testRecipe3.returnInstructions()).to.deep.equal(['3-INSTRUCTION1', '3-INSTRUCTION2', '3-INSTRUCTION3'])
