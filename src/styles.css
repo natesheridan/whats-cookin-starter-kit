@@ -271,8 +271,27 @@ aside > button {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
+  height: auto;
+  width: auto;
+  overflow: hidden;
+}
+
+.mini-recipe {
+  justify-content: center;
+  height: 15rem;
+  width: 10rem;
+  padding: .5rem;
+  margin: .3rem;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 1rem;
+  break-after: auto;
+}
+
+.mini-recipe > img {
+  height: 8rem;
+  width: 10rem;
+  flex-flow: row wrap;
 }
 
 .filtered-recipe-grid {

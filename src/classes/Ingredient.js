@@ -13,6 +13,6 @@ class Ingredient {
       let returnedData = ingredientsData.find(({id}) => id === self.id);
       this.uniqueIngredientData = returnedData;
     }
-  
+
   }
   export default Ingredient;

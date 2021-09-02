@@ -535,7 +535,7 @@ class Ingredient {
       let returnedData = ingredientsData.find(({id}) => id === self.id);
       this.uniqueIngredientData = returnedData;
     }
-  
+
   }
   /* harmony default export */ __webpack_exports__["default"] = (Ingredient);
 
@@ -7331,7 +7331,7 @@ const recipeData = [
     }
   ]
 
-  
+
 
 
 /***/ }),
@@ -13828,7 +13828,7 @@ const usersData = [
     }
   ]
 
-  
+
 
 
 /***/ }),
@@ -13918,7 +13918,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js!../node_modules/sass-loader/dist/cjs.js!./styles.css */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles.css");
 
-            
+
 
 var options = {};
 

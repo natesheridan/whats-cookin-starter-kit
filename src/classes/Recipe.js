@@ -1,6 +1,7 @@
 import Ingredient from '../classes/Ingredient';
 class Recipe {
     constructor(recipeObj) {
+      // console.log(recipeObj)
         this.recipeObj = recipeObj;
         this.id = this.recipeObj.id;
         this.image = this.recipeObj.image;
@@ -24,7 +25,7 @@ class Recipe {
             totalCostEstimation = totalCostEstimation + (element.estimatedCostInCents * element.quantity.amount)
         }
         );
-        return totalCostEstimation+" cents.";
+        return "$" + (Math.round(totalCostEstimation / 1000));
         //this is all working but the values that it is returning seem very wrong...
     }
     returnInstructions() {
