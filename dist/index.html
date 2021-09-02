@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="text/css" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=STIX+Two+Math&display=swap" rel="stylesheet">
+    <title>What's Cookin'?</title>
+  </head>
+  <body>
+    <header>
+      <article class="title-container">
+        <h1>What's Cookin'?</h1>
+      </article>
+      <button type="button" class="login-button" name="login">Login</button>
+    </header>
+    <nav>
+      <button class="button" id="allRecipes">All Recipes</button>
+      <button type="button" name="home">Home</button>
+      <button type="button" name="saved recipes">Saved Recipes</button>
+    </nav>
+    <aside class="sidebars">
+      <section class="left-sidebar">
+        <button type="button" name="add a recipe"><h1>Add a Recipe</h1></button>
+      </section>
+      <section class="right-sidebar">
+        <!-- <article class="scroll-arrow"> -->
+          <img src=images/Right-arrow.svg class="right-arrow" alt="scroll arrow">
+        <!-- </article> -->
+      </section>
+    </aside>
+    <section class="content-container">
+      <section class="main-content" id="mainContent">
+        <section class="recipe-grid" id="recipeGrid">
+          <article class="recipe">
+            <div class="meal-image">
+              <img src="images/pancakes.svg" alt="meal image" class="image">
+            </div>
+            <div class="recipe-content">
+              <div class="favorite-star"></div>
+              <img class="star" src="images/star-active.svg" alt="favorite">
+              <div class="recipe-info">
+                <h2>Dish Name</h2>
+                <div class="ingredient-section">
+                  <h4>Ingredients</h4>
+                <section class="ingredient-info">
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="recipe">
+            <div class="meal-image">
+              <img src="images/pancakes.svg" alt="meal image" class="image">
+            </div>
+            <div class="recipe-content">
+              <div class="favorite-star"></div>
+              <img class="star" src="images/star-active.svg" alt="favorite">
+              <div class="recipe-info">
+                <h2>Dish Name</h2>
+                <div class="ingredient-section">
+                  <h4>Ingredients</h4>
+                <section class="ingredient-info">
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="recipe">
+            <div class="meal-image">
+              <img src="images/pancakes.svg" alt="meal image" class="image">
+            </div>
+            <div class="recipe-content">
+              <div class="favorite-star"></div>
+              <img class="star" src="images/star-active.svg" alt="favorite">
+              <div class="recipe-info">
+                <h2>Dish Name</h2>
+                <div class="ingredient-section">
+                  <h4>Ingredients</h4>
+                <section class="ingredient-info">
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+        <section class="login hidden">
+          <h2>No account? Sign up!</h2>
+          <h2>User Name</h2> <br>
+            <input type="text" name="user name" value="">
+            <h2>Password</h2> <br>
+            <input type="text" name="password" value="">
+            <h2 hidden>Repeat Password</h2>
+            <input type="text" name="repeat-password" value="">
+            <button type="button" name="confirm"></button>
+        </section>
+        <section class="add-recipe hidden">
+          <h2>Title</h2> <br>
+          <input type="text" name="title" value="">
+          <h2>Image</h2> <br>
+          <input type="text" name="image" value="">
+          <h2>Ingredients</h2>
+          <input type="text" name="ingredient" value="">
+          <input type="text" name="amount" value="">
+          <img src="" alt="plus arrow">
+          <button type="button" name="submit"></button>
+        </section>
+      <section class="all-recipe-grid hidden" id="allRecipeGrid">
+          <h2>Recipes</h2>
+          <input type="radio" name="favorites?" value="">
+          <img src="" alt="">
+          <img src="" alt="">
+          <img src="" alt="">
+          <img src="" alt="">
+          <img src="" alt="">
+          <img src="" alt="">
+          <img src="" alt="">
+          <img src="" alt="">
+          <aside class="all-scroll-arrow">
+            <img src="" alt="scroll arrow">
+          </aside>
+        </section>
+      </section>
+    </section>
+    <footer>
+    </footer>
+  <script src="main.bundle.js"></script></body>
+</html>
