@@ -4,13 +4,13 @@ class RecipeRepository {
   }
   filterByTag(tagName){
     const filteredRecipes = this.recipeData.filter((recipe) => {
-      return recipe.tags.includes(tagName)
+      return recipe.tags.toLowerCase().indexOf(tagName.toLowerCase())
     })
     return filteredRecipes;
   }
   filterByName(recipeName){
     const filteredRecipes = this.recipeData.filter((recipe) => {
-      return recipe.name.includes(recipeName)
+      return recipe.name.toLowerCase().includes(recipeName.toLowerCase())
     })
     return filteredRecipes;
   }
