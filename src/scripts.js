@@ -1,4 +1,5 @@
 import styles from './styles.css';
+import UserData from './classes/UserData.js';
 import Recipe from './classes/Recipe.js';
 import RecipeRepository from './classes/RecipeRepository.js';
 import Ingredient from './classes/Ingredient.js';
@@ -6,7 +7,7 @@ import rightArrow from './data/assets/Right-arrow.svg';
 import pancakes from './data/assets/pancakes.svg';
 import starActive from './data/assets/star-active.svg';
 import star from './data/assets/star.svg';
-import {userData} from './data/users.js';
+import {usersData} from './data/users.js';
 import {recipeData} from './data/recipes.js';
 
 
@@ -165,7 +166,14 @@ function popupMessage(message, timeInMS, color = "gold"){
 }
 
 function selectFavoriteRecipe() {
-  let user = new UserData(userData);
+  const randomUser = generateRandomUser();
+  const user = new UserData(randomUser);
+  console.log(randomUser);
+};
+
+function generateRandomUser() {
+  const randomUser = Math.floor(Math.random() * usersData.length);
+  return randomUser;
 }
 
 
