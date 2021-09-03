@@ -17,12 +17,14 @@ const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
+const favoriteStar = document.querySelector('#favoriteStar')
 
 
 
 searchSubmitBtn.addEventListener('click', searchByName);
 allRecipes.addEventListener('click', viewAllRecipes);
 contentContainer.addEventListener('click', getDirections);
+favoriteStar.addEventListener('click', selectFavoriteRecipe);
 
 function viewAllRecipes() {
   const recipeRepo = new RecipeRepository(recipeData);
@@ -138,13 +140,10 @@ function searchByTag(recipesArray, searchTags){
       if (indexMatchAllSearchTags){
         returnedArr.push(recipe);
       }
-      
+
     }, []);
   return returnedArr;
 };
-
-
-
 
 function hide(element){
   element.classList.add('hidden')
@@ -163,6 +162,10 @@ function popupMessage(message, timeInMS, color = "gold"){
       popupContainer.classList.remove(`${color}-popup`)
       hide(popupContainer);
   }, timeInMS)
+}
+
+function selectFavoriteRecipe() {
+  let user = new UserData(userData);
 }
 
 

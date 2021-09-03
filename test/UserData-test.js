@@ -148,12 +148,11 @@ describe('UserData', () => {
     expect(user1.recipesToCook).to.deep.equal([]);
   });
 
-  it.only('Should be able to save a favorite recipe', () => {
+  it('Should be able to save a favorite recipe', () => {
     user1.toggleFavoriteRecipe(recipeData[2]);
     expect(user1.favoriteRecipes).to.deep.equal([recipeData[2]]);
     user1.toggleFavoriteRecipe(recipeData[2]);
     expect(user1.favoriteRecipes).to.deep.equal([]);
-    // console.log('recipeData: ',recipeData)
     user1.toggleFavoriteRecipe(recipeData[0]);
     console.log('before: ',user1.favoriteRecipes)
     user1.toggleFavoriteRecipe(recipeData[1]);
