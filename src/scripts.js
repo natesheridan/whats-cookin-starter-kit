@@ -25,20 +25,8 @@ allRecipes.addEventListener('click', viewAllRecipes);
 contentContainer.addEventListener('click', getDirections);
 
 function viewAllRecipes() {
-  show(allRecipeGrid);
-  hide(recipeGrid);
-
   const recipeRepo = new RecipeRepository(recipeData);
-  const recipeCard = recipeRepo.recipeData.reduce((acc, recipe) => {
-    acc +=
-      `<article class="mini-recipe" id="${recipe.id}">
-       <img src= "${recipe.image}" alt= "${recipe.name}">
-       <p>${recipe.name}</p>
-       </article>`
-
-    return acc;
-  }, []);
-  return allRecipeGrid.innerHTML = recipeCard
+  populateCards(recipeRepo.recipeData);
 };
 
 function getDirections(event){
@@ -81,12 +69,26 @@ function getDirections(event){
 
 
 function searchByName(){
+  if(searchFieldInput.value ===""){
+    popupMessage("Please enter a search term!", 1000, "red")
+    return
+  }
   let recipeRepo = new RecipeRepository(recipeData);
   let filteredRecipes = recipeRepo.filterByName(searchFieldInput.value)
+  if (filteredRecipes.length === 0){
+
+    popupMessage("No results found! Sorry!", 1000, "red")
+    return
+  }
+  populateCards(filteredRecipes)
+
+}
+
+function populateCards(arr){
   show(allRecipeGrid);
   hide(recipeGrid);
-
-  const recipeCard = filteredRecipes.reduce((acc, recipe) => {
+  allRecipeGrid.innerHTML = ""
+  const recipeCard = arr.reduce((acc, recipe) => {
     acc +=
       `<article class="mini-recipe" id="${recipe.id}">
        <img src= "${recipe.image}" alt= "${recipe.name}">
@@ -98,9 +100,6 @@ function searchByName(){
   return allRecipeGrid.innerHTML = recipeCard
 
 }
-
-
-
 
 function searchData(input) {
   let searchedData = recipeData.filter(recipe => recipe[`${input}`].includes(searchFieldInput.value));
@@ -114,12 +113,56 @@ function setUserData(){
 
   // if the user login matches the user.name....
   //...then the app populates with that user's info
-  };
+};
+
+
+function joinToString(array){
+  return array.join(" ")
+}
+
+
+function searchByTag(recipesArray, searchTags){
+  let indexMatchAllStrings
+  let returnedArr = []
+  let filteredArray = recipesArray.reduce((acc, recipe) => {
+      let tagsString = joinToString(recipe.tags);
+      let numOfTags = searchTags.length;
+      let testTags = searchTags.reduce((acc, tag) => {
+        if (tagsString.includes(tag)){
+          acc++;
+        }
+        return acc;
+      }, 0)
+      console.log(testTags===numOfTags)
+      indexMatchAllSearchTags = (numOfTags===testTags)
+      if (indexMatchAllSearchTags){
+        returnedArr.push(recipe);
+      }
+      
+    }, []);
+  return returnedArr;
+};
+
+
+
+
 function hide(element){
   element.classList.add('hidden')
 }
 function show(element){
   element.classList.remove('hidden')
+}
+
+function popupMessage(message, timeInMS, color = "gold"){
+  let popupContainer = document.querySelector('#popup')
+  popupContainer.classList.add(`${color}-popup`)
+  popupContainer.innerHTML=`<p>${message}</p>`
+  show(popupContainer)
+
+  setTimeout(function(){
+      popupContainer.classList.remove(`${color}-popup`)
+      hide(popupContainer);
+  }, timeInMS)
 }
 
 
