@@ -22,6 +22,66 @@
       <button type="button" id="homeButton" name="home">Home</button>
       <button type="button" id="savedRecipesButton" name="saved recipes">Saved Recipes</button>
     </nav>
+    <section class="filter-select" id="filters">
+      <section class="meals" id="meals">
+        <input type="checkbox" id="breakfast" name="Breakfast" value="Breakfast">
+        <label for="breakfast">Breakfast</label><br>
+        <input type="checkbox" id="lunch" name="Lunch" value="lunch">
+        <label for="lunch">Lunch</label><br>
+        <input type="checkbox" id="dinner" name="Dinner" value="dinner">
+        <label for="dinner">Dinner</label><br>
+        <input type="checkbox" id="antipasti" name="Antipasti" value="antipasti">
+        <label for="antipasti">Antipasti</label><br>
+        <input type="checkbox" id="starter" name="Starter" value="starter">
+        <label for="starter">Starter</label><br>
+      </section><br>
+      <section class="other-options" id="otherOptions">
+        <input type="checkbox" id="snack" name="Snack" value="snack">
+        <label for="snack">Snack</label><br>
+        <input type="checkbox" id="appetizer" name="Appetizer" value="appetizer">
+        <label for="appetizer">Appetizer</label><br>
+        <input type="checkbox" id="horsDeouvre" name="Hors d'oeuvre" value="hors d'oeuvre">
+        <label for="hors-deouvre">Hors d'eouvre</label><br>
+        <input type="checkbox" id="mainCourse" name="Main course" value="main course">
+        <label for="main-course">Main course</label><br>
+        <input type="checkbox" id="mainDish" name="Main Dish" value="main dish">
+        <label for="main-dish">Main dish</label><br>
+      </section>
+      <section class="other-options-2" id="otherOptions2">
+        <input type="checkbox" id="sauce" name="Sauce" value="sauce">
+        <label for="snack">Sauce</label><br>
+        <input type="checkbox" id="sideDish" name="Side dish" value="side dish">
+        <label for="side-dish">Side dish</label><br>
+        <input type="checkbox" id="morningMeal" name="Morning meal" value="morning meal">
+        <label for="morning-meal">Morning meal</label><br>
+        <input type="checkbox" id="salad" name="Salad" value="salad">
+        <label for="salad">Salad</label><br>
+        <input type="checkbox" id="condiment" name="Condiment" value="condiment">
+        <label for="condiment">Condiment</label><br>
+      </section>
+      <section class="other-options-3" id="otherOptions3">
+        <input type="checkbox" id="dip" name="Dip" value="dip">
+        <label for="dip">Dip</label><br>
+        <input type="checkbox" id="spread" name="Spread" value="spread">
+        <label for="spread">Spread</label><br>
+      </section>
+    </section>
+
+<!-- 0: “antipasti”
+2: “snack”
+3: “appetizer”
+5: “hor d’oeuvre”
+7: “main course”
+8: “main dish”
+
+10: “sauce”
+11: “side dish”
+12: “morning meal”
+
+15: “salad”
+16: “condiment”
+17: “dip”
+18: “spread” -->
     <aside class="sidebars">
       <section class="left-sidebar">
         <button type="button" id="addRecipeButton" name="add a recipe"><h1>Add a Recipe</h1></button>
@@ -117,14 +177,6 @@
       <section class="all-recipe-grid hidden" id="allRecipeGrid">
           <h2>Recipes</h2>
           <input type="radio" name="favorites?" value="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
-          <img src="" alt="">
           <aside class="all-scroll-arrow">
             <img src="" alt="scroll arrow">
           </aside>
