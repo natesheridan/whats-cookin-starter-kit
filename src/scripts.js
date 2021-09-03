@@ -16,7 +16,7 @@ const allRecipes = document.querySelector('#allRecipesButton');
 const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
-const searchFieldInput = document.querySelector('#searchField');
+const searchFieldInput = document.querySelector('.search-field');
 
 
 
