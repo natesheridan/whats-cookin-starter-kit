@@ -173,7 +173,7 @@ function selectFavoriteRecipe() {
 
 function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);
-  return randomUser;
+  return usersData[randomUser];
 }
 
 
