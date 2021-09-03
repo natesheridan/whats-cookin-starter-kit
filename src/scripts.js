@@ -15,14 +15,18 @@ const mainContent = document.querySelector('#mainContent');
 const allRecipes = document.querySelector('#allRecipesButton');
 const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
+const searchSubmitBtn = document.querySelector('.search-submit-btn');
+const searchFieldInput = document.querySelector('#searchField');
 
 
+
+searchSubmitBtn.addEventListener('click', searchByName);
 allRecipes.addEventListener('click', viewAllRecipes);
 contentContainer.addEventListener('click', getDirections);
 
 function viewAllRecipes() {
-  allRecipeGrid.classList.remove('hidden');
-  recipeGrid.classList.add('hidden');
+  show(allRecipeGrid);
+  hide(recipeGrid);
 
   const recipeRepo = new RecipeRepository(recipeData);
   const recipeCard = recipeRepo.recipeData.reduce((acc, recipe) => {
@@ -76,15 +80,48 @@ function getDirections(event){
 };
 
 
+function searchByName(){
+  let recipeRepo = new RecipeRepository(recipeData);
+  let filteredRecipes = recipeRepo.filterByName(searchFieldInput.value)
+  show(allRecipeGrid);
+  hide(recipeGrid);
+
+  const recipeCard = filteredRecipes.reduce((acc, recipe) => {
+    acc +=
+      `<article class="mini-recipe" id="${recipe.id}">
+       <img src= "${recipe.image}" alt= "${recipe.name}">
+       <p>${recipe.name}</p>
+       </article>`
+
+    return acc;
+  }, []);
+  return allRecipeGrid.innerHTML = recipeCard
+
+}
+
+
+
+
 function searchData(input) {
-  let searchedData = recipeData.filter(recipe => recipe[`${input}`].includes(searchBar.input));
+  let searchedData = recipeData.filter(recipe => recipe[`${input}`].includes(searchFieldInput.value));
+  return searchedData
 };
 
 function setUserData(){
   let user = new UserData()
-// if the user login matches the user.name....
-//...then the app populates with that user's info
-};
+
+
+
+  // if the user login matches the user.name....
+  //...then the app populates with that user's info
+  };
+function hide(element){
+  element.classList.add('hidden')
+}
+function show(element){
+  element.classList.remove('hidden')
+}
+
 
 // As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
 // As a user, I should be able to filter recipes by multiple tags.
