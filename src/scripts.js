@@ -168,7 +168,8 @@ function popupMessage(message, timeInMS, color = "gold"){
 function selectFavoriteRecipe() {
   const randomUser = generateRandomUser();
   const user = new UserData(randomUser);
-  console.log(randomUser);
+  user.toggleItemInArray('favoriteRecipes', 595736);
+  console.log(user.favoriteRecipes);
 };
 
 function generateRandomUser() {
