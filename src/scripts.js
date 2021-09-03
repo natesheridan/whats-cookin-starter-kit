@@ -17,17 +17,42 @@ const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
-
+const homeButton = document.querySelector('#homeButton');
+const savedRecipesButton = document.querySelector('#savedRecipesButton');
+const addRecipeButton = document.querySelector('#addRecipeButton');
+const addRecipeForm = document.querySelector('#addRecipeForm');
+const loginPopup = document.querySelector('#loginPopup');
+const loginButton = document.querySelector('#loginButton');
 
 
 searchSubmitBtn.addEventListener('click', searchByName);
 allRecipes.addEventListener('click', viewAllRecipes);
 contentContainer.addEventListener('click', getDirections);
+homeButton.addEventListener('click', showHomeView);
+addRecipeButton.addEventListener('click', showRecipeForm);
+loginButton.addEventListener('click', showLogin);
+savedRecipesButton.addEventListener('click', viewAllRecipes);
 
 function viewAllRecipes() {
   const recipeRepo = new RecipeRepository(recipeData);
   populateCards(recipeRepo.recipeData);
 };
+
+function showHomeView() {
+  show(recipeGrid);
+  hide(addRecipeForm);
+  hide(allRecipeGrid);
+}
+
+function showRecipeForm() {
+  show(addRecipeForm);
+  hide(recipeGrid);
+  hide(allRecipeGrid);
+}
+
+function showLogin() {
+  loginPopup.classList.toggle('hidden');
+}
 
 function getDirections(event){
   allRecipeGrid.classList.add('hidden');
@@ -138,7 +163,7 @@ function searchByTag(recipesArray, searchTags){
       if (indexMatchAllSearchTags){
         returnedArr.push(recipe);
       }
-      
+
     }, []);
   return returnedArr;
 };
@@ -164,8 +189,3 @@ function popupMessage(message, timeInMS, color = "gold"){
       hide(popupContainer);
   }, timeInMS)
 }
-
-
-// As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
-// As a user, I should be able to filter recipes by multiple tags.
-// As a user, I should be able to search recipes by their name or ingredients.
