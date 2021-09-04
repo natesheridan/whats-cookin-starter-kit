@@ -70,8 +70,8 @@ function filterRecipes() {
 function addIngredient() {
   let ingredient = recipeFormIngredient.value;
   let unit = unitSelect.value;
-  let unitCount =
-  addedIngredients.push(`${ingredient}: `)
+  let unitCount = ingredientAmount.value;
+  addedIngredients.push(`${ingredient}: ${unitCount} ${unit}`);
 }
 
 function generateRandomNumber() {
