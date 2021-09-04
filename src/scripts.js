@@ -33,7 +33,7 @@ const loginPopup = document.querySelector('#loginPopup');
 const loginButton = document.querySelector('#loginButton');
 const plusButton = document.querySelector('#plusButtonContainer');
 const submitRecipeButton = document.querySelector('#submitRecipe');
-const addIngredientButton = document.querySelector('#addIngredientButton')
+const addIngredientButton = document.querySelector('#plusButtonContainer');
 
 // FILTER CHECKBOXES && SEARCH ARRAY //
 
@@ -69,9 +69,12 @@ function filterRecipes() {
 
 function addIngredient() {
   let ingredient = recipeFormIngredient.value;
-  let unit = unitSelect.value;
+  let unit = unitSelection.value;
   let unitCount = ingredientAmount.value;
   addedIngredients.push(`${ingredient}: ${unitCount} ${unit}`);
+  recipeFormIngredient.value = null;
+  unitSelection.value = null;
+  ingredientAmount.value = null;
 }
 
 function generateRandomNumber() {
@@ -83,7 +86,8 @@ function addNewRecipe() {
   let imageField = recipeFormImage.value;
   let ingredients = recipeFormIngredient.value;
   let unitField = unitSelection.value;
-  let newRecipe = new Recipe({id: generateRandomNumber(), name: titleField, image: imageField, ingredients: ingredients});
+  addIngredient();
+  let newRecipe = new Recipe({id: generateRandomNumber(), name: titleField, image: imageField, ingredients: [addedIngredients]});
 
   console.log(newRecipe);
   recipeData.push(newRecipe);
