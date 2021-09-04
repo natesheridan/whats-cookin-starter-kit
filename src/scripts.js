@@ -247,3 +247,4 @@ function popupMessage(message, timeInMS, color = "gold"){
       hide(popupContainer);
   }, timeInMS)
 }
+// Test //
