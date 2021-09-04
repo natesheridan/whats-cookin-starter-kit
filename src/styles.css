@@ -83,6 +83,27 @@ footer {
   border: 0px;
 }
 
+.filter-select {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  /* width: 50rem; */
+  background-color: #13577f;
+  color: white;
+}
+
+.filter-select > label {
+  padding: 0rem .5rem 0rem .5rem;
+}
+
+.meals {
+  padding-right: 1rem;
+  font-weight: bold;
+}
+
 .sidebars {
   display: inline-flex;
   /* position: relative; */

@@ -10,6 +10,7 @@ import star from './data/assets/star.svg';
 import {usersData} from './data/users.js';
 import {recipeData} from './data/recipes.js';
 
+// BUTTONS & SECTIONS //
 
 const allRecipeGrid = document.querySelector('#allRecipeGrid');
 const mainContent = document.querySelector('#mainContent');
@@ -19,19 +20,65 @@ const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
 const favoriteStar = document.querySelector('#favoriteStar')
-let currentUser;
+let currentUser={};
+
+const homeButton = document.querySelector('#homeButton');
+const savedRecipesButton = document.querySelector('#savedRecipesButton');
+const addRecipeButton = document.querySelector('#addRecipeButton');
+const addRecipeForm = document.querySelector('#addRecipeForm');
+const loginPopup = document.querySelector('#loginPopup');
+const loginButton = document.querySelector('#loginButton');
 
 
+// FILTER CHECKBOXES && SEARCH ARRAY //
+
+const filters = document.querySelector('#filters');
+let filterSelection = [];
+
+// EVENT LISTENERS //
 
 searchSubmitBtn.addEventListener('click', searchByName);
 allRecipes.addEventListener('click', viewAllRecipes);
 contentContainer.addEventListener('click', getDirections);
-favoriteStar.addEventListener('click', selectFavoriteRecipe);
+
+homeButton.addEventListener('click', showHomeView);
+addRecipeButton.addEventListener('click', showRecipeForm);
+loginButton.addEventListener('click', showLogin);
+savedRecipesButton.addEventListener('click', viewAllRecipes);
+filters.addEventListener('click', filterRecipes);
+
+// MAIN FUNCTIONS //
+
+function filterRecipes() {
+  // event.preventDefault();
+  if (event.target.value) {
+    filterSelection.push(event.target.value);
+    console.log(filterSelection);
+    searchByTag(recipeData, filterSelection);
+  }
+}
+
 
 function viewAllRecipes() {
   const recipeRepo = new RecipeRepository(recipeData);
   populateCards(recipeRepo.recipeData);
 };
+
+function showHomeView() {
+  show(recipeGrid);
+  hide(addRecipeForm);
+  hide(allRecipeGrid);
+}
+
+function showRecipeForm() {
+  show(addRecipeForm);
+  hide(recipeGrid);
+  hide(allRecipeGrid);
+}
+
+function showLogin() {
+  loginPopup.classList.toggle('hidden');
+}
 
 function getDirections(event){
   allRecipeGrid.classList.add('hidden');
@@ -126,24 +173,28 @@ function joinToString(array){
 
 
 function searchByTag(recipesArray, searchTags){
-  let indexMatchAllStrings
+  let indexMatchAllStrings;
+  let indexMatchAllSearchTags;
   let returnedArr = []
   let filteredArray = recipesArray.reduce((acc, recipe) => {
       let tagsString = joinToString(recipe.tags);
       let numOfTags = searchTags.length;
+      // console.log(searchTags);
       let testTags = searchTags.reduce((acc, tag) => {
         if (tagsString.includes(tag)){
           acc++;
         }
         return acc;
       }, 0)
-      console.log(testTags===numOfTags)
+      // console.log(testTags===numOfTags)
       indexMatchAllSearchTags = (numOfTags===testTags)
+      // console.log('NUMBER: ', numOfTags, 'TAGS: ', testTags)
       if (indexMatchAllSearchTags){
         returnedArr.push(recipe);
       }
 
     }, []);
+    populateCards(returnedArr);
   return returnedArr;
 };
 
@@ -176,16 +227,14 @@ function selectFavoriteRecipe() {
 
 
 
-
-
 function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);
   const user = usersData[randomUser];
-  currentUser = new UserData (user)
+  const currentUser = new UserData (user)
 
 }
 
-generateRandomUser()
+window.onload = generateRandomUser()
 
 
 // As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
