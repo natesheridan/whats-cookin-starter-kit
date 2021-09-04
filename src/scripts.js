@@ -32,7 +32,9 @@ const addRecipeForm = document.querySelector('#addRecipeForm');
 const loginPopup = document.querySelector('#loginPopup');
 const loginButton = document.querySelector('#loginButton');
 const plusButton = document.querySelector('#plusButtonContainer');
-const favoriteStar = document.querySelector('#favoriteStar')
+const homeFavoriteStar1 = document.querySelector('#favoriteStar1')
+const homeFavoriteStar2 = document.querySelector('#favoriteStar2')
+const homeFavoriteStar3 = document.querySelector('#favoriteStar3')
 var currentUser;
 // const submitRecipeButton = document.querySelector('#submitRecipe');
 
@@ -44,13 +46,15 @@ let filterSelection = [];
 // EVENT LISTENERS //
 
 searchSubmitBtn.addEventListener('click', searchByName);
-allRecipes.addEventListener('click', generateRandomUser);
+allRecipes.addEventListener('click', viewAllRecipes);
 contentContainer.addEventListener('click', getDirections);
-favoriteStar.addEventListener('click', selectFavoriteRecipe);
+homeFavoriteStar1.addEventListener('click', ()=>{selectFavoriteRecipe(1)});
+homeFavoriteStar2.addEventListener('click', ()=>{selectFavoriteRecipe(2)});
+homeFavoriteStar3.addEventListener('click', ()=>{selectFavoriteRecipe(3)});
 homeButton.addEventListener('click', showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);
-savedRecipesButton.addEventListener('click', viewAllRecipes);
+savedRecipesButton.addEventListener('click', function(){populateCards(currentUser.favoriteRecipes)});
 filters.addEventListener('click', filterRecipes);
 // plusButton.addEventListener('click', addIngredient);
 // submitRecipeButton.addEventListener('click', addNewRecipe);
@@ -71,11 +75,13 @@ function addIngredient() {
 }
 
 function viewAllRecipes() {
+
   const recipeRepo = new RecipeRepository(recipeData);
   populateCards(recipeRepo.recipeData);
 };
 
 function showHomeView() {
+
   show(recipeGrid);
   hide(addRecipeForm);
   hide(allRecipeGrid);
@@ -102,9 +108,10 @@ function addNewRecipe() {
   console.log(unitField);
 }
 
-function getDirections(event){
-  allRecipeGrid.classList.add('hidden');
-  let targetID = event.target.closest('.mini-recipe').id;
+function getDirections(targetID){
+  // allRecipeGrid.classList.add('hidden');
+
+  // let targetID = event.target.closest('.mini-recipe').id;
   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
   let selectedRecipe = new Recipe(newRecipeInfo);
 
@@ -136,6 +143,7 @@ function getDirections(event){
     <p class= "cost">${selectedRecipe.returnCostEstimation()}</p>
     <p class= "instructions">${instructions}</p>`
 
+
   return contentContainer.innerHTML = fullRecipe
 
 };
@@ -160,17 +168,26 @@ function searchByName(){
 function populateCards(arr){
   show(allRecipeGrid);
   hide(recipeGrid);
+  let recipeRepo = new RecipeRepository(recipeData);
   allRecipeGrid.innerHTML = ""
   const recipeCard = arr.reduce((acc, recipe) => {
-    acc +=
-      `<article class="mini-recipe" id="${recipe.id}">
+    allRecipeGrid.innerHTML +=
+      `<article class="mini-recipe" id="card-${recipe.id}">
        <img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>
+       <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="faveBtn-${recipe.id}"></button>
        </article>`
 
-    return acc;
-  }, []);
-  return allRecipeGrid.innerHTML = recipeCard
+      let recipeIndex = recipeRepo.recipeData.indexOf(recipe)
+      let eachCard =  document.querySelector(`#card-${recipe.id}`)
+      eachCard.addEventListener("click", ()=> getDirections(Number(recipe.id)))
+      let eachButton = document.querySelector(`#faveBtn-${recipe.id}`)
+      eachButton.addEventListener("click", ()=>{selectFavoriteRecipe(recipeIndex)})
+      return acc;
+    }, []);
+    console.log(currentUser)
+  
+
 
 }
 
@@ -217,7 +234,7 @@ function searchByTag(recipesArray, searchTags){
 };
 
 function hide(element){
-  element.classList.add('hidden')
+  element.classList.add('hidden');
 }
 function show(element){
   element.classList.remove('hidden')
@@ -236,8 +253,8 @@ function popupMessage(message, timeInMS, color = "gold"){
 }
 
 
-function selectFavoriteRecipe() {
-  currentUser.toggleItemInArray('favoriteRecipes', recipeData[0]);
+function selectFavoriteRecipe(index) {
+  currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
   console.log(currentUser.favoriteRecipes);
 };
 
