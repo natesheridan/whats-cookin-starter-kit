@@ -22,6 +22,7 @@ const searchFieldInput = document.querySelector('.search-field');
 const favoriteStar = document.querySelector('#favoriteStar')
 let currentUser;
 
+let currentUser;
 const homeButton = document.querySelector('#homeButton');
 const savedRecipesButton = document.querySelector('#savedRecipesButton');
 const addRecipeButton = document.querySelector('#addRecipeButton');
@@ -44,7 +45,7 @@ contentContainer.addEventListener('click', getDirections);
 homeButton.addEventListener('click', showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);
-savedRecipesButton.addEventListener('click', viewAllRecipes);
+savedRecipesButton.addEventListener('click', displaySavedRecipes);
 filters.addEventListener('click', filterRecipes);
 
 // MAIN FUNCTIONS //
@@ -135,6 +136,10 @@ function searchByName(){
 
 }
 
+function displaySavedRecipes() {
+  populateCards(currentUser.favoriteRecipes)
+};
+
 function populateCards(arr){
   show(allRecipeGrid);
   hide(recipeGrid);
@@ -217,16 +222,10 @@ function popupMessage(message, timeInMS, color = "gold"){
   }, timeInMS)
 }
 
-
-
-
 function selectFavoriteRecipe() {
   currentUser.toggleItemInArray('favoriteRecipes', recipeData[0]);
   console.log(currentUser.favoriteRecipes);
 };
-
-
-
 
 
 function generateRandomUser() {
@@ -234,11 +233,5 @@ function generateRandomUser() {
   const user = usersData[randomUser];
   currentUser = new UserData (user)
 
-}
 
 generateRandomUser()
-
-
-// As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
-// As a user, I should be able to filter recipes by multiple tags.
-// As a user, I should be able to search recipes by their name or ingredients.
