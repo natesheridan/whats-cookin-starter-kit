@@ -22,7 +22,8 @@ const searchFieldInput = document.querySelector('.search-field');
 const recipeFormTitle = document.querySelector('#recipeFormTitle');
 const recipeFormImage = document.querySelector('#recipeFormImage');
 const recipeFormIngredient = document.querySelector('#recipeFormIngredient');
-const unitSelection = document.querySelector('#unitSelection')
+const unitSelection = document.querySelector('#unitSelection');
+const ingredientAmount = document.querySelector('#ingredientAmount');
 
 const homeButton = document.querySelector('#homeButton');
 const savedRecipesButton = document.querySelector('#savedRecipesButton');
@@ -32,11 +33,13 @@ const loginPopup = document.querySelector('#loginPopup');
 const loginButton = document.querySelector('#loginButton');
 const plusButton = document.querySelector('#plusButtonContainer');
 const submitRecipeButton = document.querySelector('#submitRecipe');
+const addIngredientButton = document.querySelector('#addIngredientButton')
 
 // FILTER CHECKBOXES && SEARCH ARRAY //
 
 const filters = document.querySelector('#filters');
 let filterSelection = [];
+let addedIngredients = [];
 
 // EVENT LISTENERS //
 
@@ -51,6 +54,7 @@ savedRecipesButton.addEventListener('click', viewAllRecipes);
 filters.addEventListener('click', filterRecipes);
 plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
+addIngredientButton.addEventListener('click', addIngredient);
 
 // MAIN FUNCTIONS //
 
@@ -64,7 +68,10 @@ function filterRecipes() {
 }
 
 function addIngredient() {
-  console.log('Nice');
+  let ingredient = recipeFormIngredient.value;
+  let unit = unitSelect.value;
+  let unitCount =
+  addedIngredients.push(`${ingredient}: `)
 }
 
 function generateRandomNumber() {
@@ -73,18 +80,14 @@ function generateRandomNumber() {
 
 function addNewRecipe() {
   let titleField = recipeFormTitle.value;
-  console.log(titleField);
   let imageField = recipeFormImage.value;
-  console.log(imageField);
   let ingredients = recipeFormIngredient.value;
-  console.log(ingredients);
   let unitField = unitSelection.value;
-  console.log(unitField);
-  // let randomNumber = Math.floor(Math.random()*90000) + 10000;
   let newRecipe = new Recipe({id: generateRandomNumber(), name: titleField, image: imageField, ingredients: ingredients});
 
   console.log(newRecipe);
   recipeData.push(newRecipe);
+  addedIngredients = [];
 }
 
 function viewAllRecipes() {
