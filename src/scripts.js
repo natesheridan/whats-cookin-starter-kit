@@ -1,4 +1,5 @@
 import styles from './styles.css';
+import UserData from './classes/UserData.js';
 import Recipe from './classes/Recipe.js';
 import RecipeRepository from './classes/RecipeRepository.js';
 import Ingredient from './classes/Ingredient.js';
@@ -6,7 +7,7 @@ import rightArrow from './data/assets/Right-arrow.svg';
 import pancakes from './data/assets/pancakes.svg';
 import starActive from './data/assets/star-active.svg';
 import star from './data/assets/star.svg';
-import {userData} from './data/users.js';
+import {usersData} from './data/users.js';
 import {recipeData} from './data/recipes.js';
 
 // BUTTONS & SECTIONS //
@@ -18,12 +19,14 @@ const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
+
 const homeButton = document.querySelector('#homeButton');
 const savedRecipesButton = document.querySelector('#savedRecipesButton');
 const addRecipeButton = document.querySelector('#addRecipeButton');
 const addRecipeForm = document.querySelector('#addRecipeForm');
 const loginPopup = document.querySelector('#loginPopup');
 const loginButton = document.querySelector('#loginButton');
+
 
 // FILTER CHECKBOXES && SEARCH ARRAY //
 
@@ -35,6 +38,7 @@ let filterSelection = [];
 searchSubmitBtn.addEventListener('click', searchByName);
 allRecipes.addEventListener('click', viewAllRecipes);
 contentContainer.addEventListener('click', getDirections);
+
 homeButton.addEventListener('click', showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);
@@ -51,6 +55,7 @@ function filterRecipes() {
     searchByTag(recipeData, filterSelection);
   }
 }
+
 
 function viewAllRecipes() {
   const recipeRepo = new RecipeRepository(recipeData);
@@ -191,9 +196,6 @@ function searchByTag(recipesArray, searchTags){
   return returnedArr;
 };
 
-
-
-
 function hide(element){
   element.classList.add('hidden')
 }
@@ -212,3 +214,4 @@ function popupMessage(message, timeInMS, color = "gold"){
       hide(popupContainer);
   }, timeInMS)
 }
+
