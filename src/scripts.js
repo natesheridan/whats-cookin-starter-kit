@@ -19,8 +19,11 @@ const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
-const favoriteStar = document.querySelector('#favoriteStar')
-let currentUser={};
+const recipeFormTitle = document.querySelector('#recipeFormTitle');
+const recipeFormImage = document.querySelector('#recipeFormImage');
+const recipeFormIngredient = document.querySelector('#recipeFormIngredient');
+const unitSelection = document.querySelector('#unitSelection')
+
 
 const homeButton = document.querySelector('#homeButton');
 const savedRecipesButton = document.querySelector('#savedRecipesButton');
@@ -28,7 +31,10 @@ const addRecipeButton = document.querySelector('#addRecipeButton');
 const addRecipeForm = document.querySelector('#addRecipeForm');
 const loginPopup = document.querySelector('#loginPopup');
 const loginButton = document.querySelector('#loginButton');
-
+const plusButton = document.querySelector('#plusButtonContainer');
+const favoriteStar = document.querySelector('#favoriteStar')
+var currentUser;
+// const submitRecipeButton = document.querySelector('#submitRecipe');
 
 // FILTER CHECKBOXES && SEARCH ARRAY //
 
@@ -38,14 +44,16 @@ let filterSelection = [];
 // EVENT LISTENERS //
 
 searchSubmitBtn.addEventListener('click', searchByName);
-allRecipes.addEventListener('click', viewAllRecipes);
+allRecipes.addEventListener('click', generateRandomUser);
 contentContainer.addEventListener('click', getDirections);
-
+favoriteStar.addEventListener('click', selectFavoriteRecipe);
 homeButton.addEventListener('click', showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);
 savedRecipesButton.addEventListener('click', viewAllRecipes);
 filters.addEventListener('click', filterRecipes);
+// plusButton.addEventListener('click', addIngredient);
+// submitRecipeButton.addEventListener('click', addNewRecipe);
 
 // MAIN FUNCTIONS //
 
@@ -58,6 +66,9 @@ function filterRecipes() {
   }
 }
 
+function addIngredient() {
+  console.log('Nice');
+}
 
 function viewAllRecipes() {
   const recipeRepo = new RecipeRepository(recipeData);
@@ -78,6 +89,17 @@ function showRecipeForm() {
 
 function showLogin() {
   loginPopup.classList.toggle('hidden');
+}
+
+function addNewRecipe() {
+  let titleField = recipeFormTitle.value;
+  console.log(titleField);
+  let imageField = recipeFormImage.value;
+  console.log(imageField);
+  let ingredients = recipeFormIngredient.value;
+  console.log(ingredients);
+  let unitField = unitSelection.value;
+  console.log(unitField);
 }
 
 function getDirections(event){
@@ -173,28 +195,24 @@ function joinToString(array){
 
 
 function searchByTag(recipesArray, searchTags){
-  let indexMatchAllStrings;
-  let indexMatchAllSearchTags;
+  let indexMatchAllStrings
   let returnedArr = []
   let filteredArray = recipesArray.reduce((acc, recipe) => {
       let tagsString = joinToString(recipe.tags);
       let numOfTags = searchTags.length;
-      // console.log(searchTags);
       let testTags = searchTags.reduce((acc, tag) => {
         if (tagsString.includes(tag)){
           acc++;
         }
         return acc;
       }, 0)
-      // console.log(testTags===numOfTags)
+      console.log(testTags===numOfTags)
       indexMatchAllSearchTags = (numOfTags===testTags)
-      // console.log('NUMBER: ', numOfTags, 'TAGS: ', testTags)
       if (indexMatchAllSearchTags){
         returnedArr.push(recipe);
       }
 
     }, []);
-    populateCards(returnedArr);
   return returnedArr;
 };
 
@@ -218,8 +236,6 @@ function popupMessage(message, timeInMS, color = "gold"){
 }
 
 
-
-
 function selectFavoriteRecipe() {
   currentUser.toggleItemInArray('favoriteRecipes', recipeData[0]);
   console.log(currentUser.favoriteRecipes);
@@ -230,13 +246,9 @@ function selectFavoriteRecipe() {
 function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);
   const user = usersData[randomUser];
-  const currentUser = new UserData (user)
+  let userDataValue = new UserData(user)
+  currentUser = userDataValue
+  console.log(currentUser)
 
 }
-
-window.onload = generateRandomUser()
-
-
-// As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
-// As a user, I should be able to filter recipes by multiple tags.
-// As a user, I should be able to search recipes by their name or ingredients.
+generateRandomUser();
