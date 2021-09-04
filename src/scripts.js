@@ -19,6 +19,10 @@ const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
+const recipeFormTitle = document.querySelector('#recipeFormTitle');
+const recipeFormImage = document.querySelector('#recipeFormImage');
+const recipeFormIngredient = document.querySelector('#recipeFormIngredient');
+const unitSelection = document.querySelector('#unitSelection')
 
 const homeButton = document.querySelector('#homeButton');
 const savedRecipesButton = document.querySelector('#savedRecipesButton');
@@ -26,7 +30,8 @@ const addRecipeButton = document.querySelector('#addRecipeButton');
 const addRecipeForm = document.querySelector('#addRecipeForm');
 const loginPopup = document.querySelector('#loginPopup');
 const loginButton = document.querySelector('#loginButton');
-
+const plusButton = document.querySelector('#plusButtonContainer');
+const submitRecipeButton = document.querySelector('#submitRecipe');
 
 // FILTER CHECKBOXES && SEARCH ARRAY //
 
@@ -44,6 +49,8 @@ addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);
 savedRecipesButton.addEventListener('click', viewAllRecipes);
 filters.addEventListener('click', filterRecipes);
+plusButton.addEventListener('click', addIngredient);
+submitRecipeButton.addEventListener('click', addNewRecipe);
 
 // MAIN FUNCTIONS //
 
@@ -56,6 +63,29 @@ function filterRecipes() {
   }
 }
 
+function addIngredient() {
+  console.log('Nice');
+}
+
+function generateRandomNumber() {
+  return Math.floor(Math.random()*90000) + 10000;
+}
+
+function addNewRecipe() {
+  let titleField = recipeFormTitle.value;
+  console.log(titleField);
+  let imageField = recipeFormImage.value;
+  console.log(imageField);
+  let ingredients = recipeFormIngredient.value;
+  console.log(ingredients);
+  let unitField = unitSelection.value;
+  console.log(unitField);
+  // let randomNumber = Math.floor(Math.random()*90000) + 10000;
+  let newRecipe = new Recipe({id: generateRandomNumber(), name: titleField, image: imageField, ingredients: ingredients});
+
+  console.log(newRecipe);
+  recipeData.push(newRecipe);
+}
 
 function viewAllRecipes() {
   const recipeRepo = new RecipeRepository(recipeData);
@@ -214,4 +244,3 @@ function popupMessage(message, timeInMS, color = "gold"){
       hide(popupContainer);
   }, timeInMS)
 }
-
