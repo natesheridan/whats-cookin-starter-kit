@@ -19,6 +19,8 @@ const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
+const favoriteStar = document.querySelector('#favoriteStar')
+let currentUser;
 
 const homeButton = document.querySelector('#homeButton');
 const savedRecipesButton = document.querySelector('#savedRecipesButton');
@@ -215,3 +217,28 @@ function popupMessage(message, timeInMS, color = "gold"){
   }, timeInMS)
 }
 
+
+
+
+function selectFavoriteRecipe() {
+  currentUser.toggleItemInArray('favoriteRecipes', recipeData[0]);
+  console.log(currentUser.favoriteRecipes);
+};
+
+
+
+
+
+function generateRandomUser() {
+  const randomUser = Math.floor(Math.random() * usersData.length);
+  const user = usersData[randomUser];
+  currentUser = new UserData (user)
+
+}
+
+generateRandomUser()
+
+
+// As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
+// As a user, I should be able to filter recipes by multiple tags.
+// As a user, I should be able to search recipes by their name or ingredients.
