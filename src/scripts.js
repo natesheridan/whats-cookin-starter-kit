@@ -19,6 +19,8 @@ const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
+const favoriteStar = document.querySelector('#favoriteStar')
+let currentUser;
 
 let currentUser;
 const homeButton = document.querySelector('#homeButton');
@@ -225,10 +227,11 @@ function selectFavoriteRecipe() {
   console.log(currentUser.favoriteRecipes);
 };
 
+
 function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);
   const user = usersData[randomUser];
   currentUser = new UserData (user)
-}
+
 
 generateRandomUser()

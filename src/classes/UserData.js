@@ -11,22 +11,22 @@ class UserData {
   // USECASE:
   // to add recipe to an array: (UserDataVariable).toggleItemInArray(<'recipesToCook'/'favoriteRecipes'>, recipeObject)
   // to remove: repeat same invocation
-  toggleItemInArray(array, recipeID){
+  toggleItemInArray(array, recipe){
     if(array === 'recipestoCook'){
-        let recipeIndex = this.recipesToCook.map(function(e){return e.id}).indexOf(recipeID)
+        let recipeIndex = this.recipesToCook.indexOf(recipe)
         if(recipeIndex>=0) {// will be > 0 if the element is found in the array
           this.recipesToCook.splice(recipeIndex, 1);
         } else if (recipeIndex===-1) {//recipeIndex returns -1 if element is not found in the array
-          this.recipesToCook.push(recipeID)
+          this.recipesToCook.push(recipe)
         }
       }
     if(array === 'favoriteRecipes'){
-        let recipeIndices = this.favoriteRecipes.map(function(e){return e.id}).indexOf(recipeID);
+        let recipeIndices = this.favoriteRecipes.indexOf(recipe);
         console.log(recipeIndices);
         if(recipeIndices>=0) {
           this.favoriteRecipes.splice(recipeIndices, 1);
         } else if (recipeIndices===-1) {
-          this.favoriteRecipes.push(recipeID)
+          this.favoriteRecipes.push(recipe)
         }
     }
   }
