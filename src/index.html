@@ -153,14 +153,34 @@
         <section class="add-recipe hidden" id="addRecipeForm">
           <h1></h1>
           <h3>Title</h3> <br>
-          <input type="text" name="title" value="">
+          <input type="text" name="title" class="recipe-form-title" id="recipeFormTitle" value="">
           <h3>Image</h3> <br>
-          <input type="text" name="image" value="">
+          <input type="text" name="image" class="recipe-form-image" id="recipeFormImage" value="">
+          <h3>Amount</h3>
+          <input type="number" name="amount" class="ingredient-amount" id="ingredientAmount" value="">
+          <select name="units" id="unitSelection">
+              <option value="">Select a unit</option>
+              <option value="cups">cups</option>
+              <option value="tbsp">tbsp</option>
+              <option value="tsp">tsp</option>
+              <option value="oz">oz</option>
+              <option value="lb">lb</option>
+              <option value="pt">pt</option>
+              <option value="qt">qt</option>
+              <option value="gal">gal</option>
+              <option value="lb">lb</option>
+              <option value="ml">ml</option>
+              <option value="l">l</option>
+              <option value="g">g</option>
+              <option value="mg">mg</option>
+              <option value="kg">kg</option>
+          </select>
           <h3>Ingredients</h3>
-          <input type="text" name="ingredient" value="">
-          <input type="text" name="amount" value="">
-          <img src="" class="plus-arrow" alt="plus arrow">
-          <button type="button" name="submit"></button>
+          <input type="text" name="ingredient" class="recipe-form-ingredient" id="recipeFormIngredient" value="">
+          <button type="button" class="plus-button-container" id="plusButtonContainer">
+            <img src="" class="plus-button" alt="add ingredient">
+          </button><br>
+          <button type="button" name="submit-recipe" class="submit-recipe" id="submitRecipe"></button>
         </section>
       <section class="all-recipe-grid hidden" id="allRecipeGrid">
           <h2>Recipes</h2>
@@ -179,3 +199,5 @@
     <script src="domDemo.js" type="text/javascript"></script>
   </body>
 </html>
+
+<!-- Test -->

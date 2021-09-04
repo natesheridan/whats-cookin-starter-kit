@@ -338,6 +338,16 @@ aside > button {
   border-radius: 1rem;
 }
 
+.full-recipe-container {
+  justify-content: center;
+  height: auto;
+  width: 70%;
+  padding: 1rem;
+  overflow: scroll;
+  border-radius: 1rem;
+  background-color: #fff8f4;
+}
+
 .add-recipe {
   height: auto;
   width: auto;
@@ -345,6 +355,16 @@ aside > button {
   background-color: #FFF8F3;
   border: 1px solid black;
 }
+
+.add-recipe > .plus-button {
+  height: 2rem;
+  width: 2rem;
+}
+
+.add-recipe > .submit-recipe {
+  background-color: #8FB7B7;
+}
+
 #popup {
     position: fixed;
     height: 10%;
@@ -357,21 +377,26 @@ aside > button {
     transform: translate(-50%, -50%);
 
 }
+
 #popup p{
     position: relative;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 .gold-popup {
     background-color: rgba(218, 158, 29, 0.726);
 }
+
 .red-popup {
     background-color: rgba(218, 73, 29, 0.726);
 }
+
 .green-popup {
     background-color: rgba(20, 135, 43, 0.726);
 }
+
 .blue-popup {
     background-color: rgba(29, 98, 218, 0.726);
 }

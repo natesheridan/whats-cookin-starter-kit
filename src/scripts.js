@@ -24,6 +24,8 @@ const recipeFormImage = document.querySelector('#recipeFormImage');
 const recipeFormIngredient = document.querySelector('#recipeFormIngredient');
 const unitSelection = document.querySelector('#unitSelection')
 
+const unitSelection = document.querySelector('#unitSelection');
+const ingredientAmount = document.querySelector('#ingredientAmount');
 
 const homeButton = document.querySelector('#homeButton');
 const savedRecipesButton = document.querySelector('#savedRecipesButton');
@@ -37,11 +39,14 @@ const homeFavoriteStar2 = document.querySelector('#favoriteStar2')
 const homeFavoriteStar3 = document.querySelector('#favoriteStar3')
 var currentUser;
 // const submitRecipeButton = document.querySelector('#submitRecipe');
+const submitRecipeButton = document.querySelector('#submitRecipe');
+const addIngredientButton = document.querySelector('#plusButtonContainer');
 
 // FILTER CHECKBOXES && SEARCH ARRAY //
 
 const filters = document.querySelector('#filters');
 let filterSelection = [];
+let addedIngredients = [];
 
 // EVENT LISTENERS //
 
@@ -58,6 +63,9 @@ savedRecipesButton.addEventListener('click', function(){populateCards(currentUse
 filters.addEventListener('click', filterRecipes);
 // plusButton.addEventListener('click', addIngredient);
 // submitRecipeButton.addEventListener('click', addNewRecipe);
+plusButton.addEventListener('click', addIngredient);
+submitRecipeButton.addEventListener('click', addNewRecipe);
+addIngredientButton.addEventListener('click', addIngredient);
 
 // MAIN FUNCTIONS //
 
@@ -71,7 +79,30 @@ function filterRecipes() {
 }
 
 function addIngredient() {
-  console.log('Nice');
+  let ingredient = recipeFormIngredient.value;
+  let unit = unitSelection.value;
+  let unitCount = ingredientAmount.value;
+  addedIngredients.push(`${ingredient}: ${unitCount} ${unit}`);
+  recipeFormIngredient.value = null;
+  unitSelection.value = null;
+  ingredientAmount.value = null;
+}
+
+function generateRandomNumber() {
+  return Math.floor(Math.random()*90000) + 10000;
+}
+
+function addNewRecipe() {
+  let titleField = recipeFormTitle.value;
+  let imageField = recipeFormImage.value;
+  let ingredients = recipeFormIngredient.value;
+  let unitField = unitSelection.value;
+  addIngredient();
+  let newRecipe = new Recipe({id: generateRandomNumber(), name: titleField, image: imageField, ingredients: [addedIngredients]});
+
+  console.log(newRecipe);
+  recipeData.push(newRecipe);
+  addedIngredients = [];
 }
 
 function viewAllRecipes() {
@@ -137,11 +168,13 @@ function getDirections(targetID){
   }, '')
 
   let fullRecipe =
-    `<h3 class= "full-recipe"> ${selectedRecipe.name}</h3>
-    <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}">
-    <p class= "ingredients">${ingredients.split(/[ ,]+/).join(' ,')}</p>
-    <p class= "cost">${selectedRecipe.returnCostEstimation()}</p>
-    <p class= "instructions">${instructions}</p>`
+    `<section class="full-recipe-container" id="fullRecipeContainer">
+      <h3 class= "full-recipe"> ${selectedRecipe.name}</h3>
+      <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}">
+      <p class= "ingredients">${ingredients.split(/[ ,]+/).join(' ,')}</p>
+      <p class= "cost">${selectedRecipe.returnCostEstimation()}</p>
+      <p class= "instructions">${instructions}</p>
+    </section>`;
 
 
   return contentContainer.innerHTML = fullRecipe
