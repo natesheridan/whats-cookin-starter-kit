@@ -143,11 +143,13 @@ function getDirections(event){
   }, '')
 
   let fullRecipe =
-    `<h3 class= "full-recipe"> ${selectedRecipe.name}</h3>
-    <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}">
-    <p class= "ingredients">${ingredients.split(/[ ,]+/).join(' ,')}</p>
-    <p class= "cost">${selectedRecipe.returnCostEstimation()}</p>
-    <p class= "instructions">${instructions}</p>`
+    `<section class="full-recipe-container" id="fullRecipeContainer">
+      <h3 class= "full-recipe"> ${selectedRecipe.name}</h3>
+      <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}">
+      <p class= "ingredients">${ingredients.split(/[ ,]+/).join(' ,')}</p>
+      <p class= "cost">${selectedRecipe.returnCostEstimation()}</p>
+      <p class= "instructions">${instructions}</p>
+    </section>`;
 
   return contentContainer.innerHTML = fullRecipe
 

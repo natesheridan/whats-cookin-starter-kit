@@ -338,6 +338,16 @@ aside > button {
   border-radius: 1rem;
 }
 
+.full-recipe-container {
+  justify-content: center;
+  height: auto;
+  width: 70%;
+  padding: 1rem;
+  overflow: scroll;
+  border-radius: 1rem;
+  background-color: #fff8f4;
+}
+
 .add-recipe {
   height: auto;
   width: auto;
