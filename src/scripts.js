@@ -19,6 +19,7 @@ const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
 const favoriteStar = document.querySelector('#favoriteStar')
+let currentUser;
 
 
 
@@ -165,17 +166,26 @@ function popupMessage(message, timeInMS, color = "gold"){
   }, timeInMS)
 }
 
+
+
+
 function selectFavoriteRecipe() {
-  const randomUser = generateRandomUser();
-  const user = new UserData(randomUser);
-  user.toggleItemInArray('favoriteRecipes', 595736);
-  console.log(user.favoriteRecipes);
+  currentUser.toggleItemInArray('favoriteRecipes', recipeData[0]);
+  console.log(currentUser.favoriteRecipes);
 };
+
+
+
+
 
 function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);
-  return usersData[randomUser];
+  const user = usersData[randomUser];
+  currentUser = new UserData (user)
+
 }
+
+generateRandomUser()
 
 
 // As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
