@@ -110,8 +110,6 @@ function viewAllRecipes() {
   const viewAllRecipes = recipeRepo.recipeData.reduce((acc, recipe) => {
     let buttonClasses = "favorite-star"
     let idMap = currentUser.favoriteRecipes.map((faveItem) => faveItem.id)
-    console.log(idMap)
-    console.log(recipe.id)
     if (idMap.includes(recipe.id)){
       buttonClasses = "favorite-star is-favorite"
     }
@@ -129,6 +127,7 @@ function viewAllRecipes() {
 
 function showHomeView() {
   show(recipeGrid);
+  generateRandomHomeViewRecipes()
   hide(addRecipeForm);
   hide(allRecipeGrid);
   hide(searchFavesInput);
@@ -151,6 +150,9 @@ function getDirections(event){
     addToFavorites();
     return
   };
+  if(!event.target.classList.contains('mini-recipe')){
+    return
+  }
 
   allRecipeGrid.innerHTML = "";
   let targetID = event.target.closest('.mini-recipe').id;
@@ -333,4 +335,47 @@ function generateRandomUser() {
   currentUser = userDataValue
 };
 
+function generateRandomHomeViewRecipes(){
+  const recipeRepo = new RecipeRepository(recipeData);
+  let randomRecipeIndex1 = Math.floor(Math.random() * recipeRepo.recipeData.length)
+  let randomRecipeIndex2 = Math.floor(Math.random() * recipeRepo.recipeData.length)
+  let randomRecipeIndex3 = Math.floor(Math.random() * recipeRepo.recipeData.length)
+  if (randomRecipeIndex2 === randomRecipeIndex1){
+    randomRecipeIndex2 = Math.floor(Math.random() * recipeRepo.recipeData.length)
+  }
+  if (randomRecipeIndex3 === randomRecipeIndex1 || randomRecipeIndex2){
+    randomRecipeIndex3 = Math.floor(Math.random() * recipeRepo.recipeData.length)
+  }
+  recipeGrid.innerHTML = ""
+  let title = "<h1 class='home-title'>Featured Recipes</h1>"
+  recipeGrid.innerHTML = title;
+  console.log(randomRecipeIndex1, randomRecipeIndex2, randomRecipeIndex3)
+  let randomRecipesIndex = [randomRecipeIndex1, randomRecipeIndex2, randomRecipeIndex3]
+  randomRecipesIndex.forEach((randomRecipeIndex) => {
+    
+    let index = randomRecipeIndex 
+    // let buttonClasses = "favorite-star"
+    // let idMap = currentUser.favoriteRecipes.map((faveItem) => faveItem.id)
+    // if (idMap.includes(recipe.id)){
+    //   buttonClasses = "favorite-star is-favorite"
+    // }
+
+   recipeGrid.innerHTML +=
+    `<article class="recipe">
+    <div class="meal-image">
+      <img src="${recipeRepo.recipeData[index].image}" alt="meal image" class="image">
+    </div>
+    <div class="recipe-content">
+      <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar1"></button>
+      <div class="recipe-info">
+        <h2>${recipeRepo.recipeData[index].name}</h2>
+      </div>
+    </div>
+  </article>`
+
+  })
+}
+
+
 generateRandomUser()
+generateRandomHomeViewRecipes()
