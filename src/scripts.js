@@ -108,11 +108,18 @@ function viewAllRecipes() {
   let recipeRepo = new RecipeRepository(recipeData);
   allRecipeGrid.innerHTML = ""
   const viewAllRecipes = recipeRepo.recipeData.reduce((acc, recipe) => {
+    let buttonClasses = "favorite-star"
+    let idMap = currentUser.favoriteRecipes.map((faveItem) => faveItem.id)
+    console.log(idMap)
+    console.log(recipe.id)
+    if (idMap.includes(recipe.id)){
+      buttonClasses = "favorite-star is-favorite"
+    }
     allRecipeGrid.innerHTML +=
       `<article class="mini-recipe" id="${recipe.id}">
        <img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>
-       <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="faveBtn-${recipe.id}"></button>
+       <button type="favoriteStar" name="favoriteStar" class="${buttonClasses}" id="faveBtn-${recipe.id}"></button>
        </article>`
 
       return acc;
@@ -209,11 +216,15 @@ function populateCards(arr){
   let recipeRepo = new RecipeRepository(recipeData);
   allRecipeGrid.innerHTML = ""
   const recipeCard = arr.reduce((acc, recipe) => {
+    let buttonClasses = "favorite-star"
+    if (currentUser.favoriteRecipes.includes(recipe)){
+      buttonClasses = "favorite-star is-favorite"
+    }
     allRecipeGrid.innerHTML +=
       `<article class="mini-recipe" id="${recipe.id}">
        <img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>
-       <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="fave-${recipe.id}"></button>
+       <button type="favoriteStar" name="favoriteStar" class="${buttonClasses}" id="fave-${recipe.id}"></button>
        </article>`
 
       return acc;
@@ -305,11 +316,23 @@ function popupMessage(message, timeInMS, color = "gold"){
 function addToFavorites(){
   const recipeRepo = new RecipeRepository(recipeData);
   let recipeID = event.target.closest('.mini-recipe').id;
+  let recipeBtn = event.target.closest('button');
   let fullRecipe = recipeRepo.recipeData.find(recipe => recipe.id === Number(recipeID));
   let selectedRecipe = new Recipe(fullRecipe);
   let index = recipeRepo.recipeData.indexOf(fullRecipe);
+  recipeBtn.classList.toggle("is-favorite");
   currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
 }
+
+
+// each time a button is clicked we want to update the buttons class list to be relative to the current status in the array 
+
+
+function toggleFavoriteGlow(favoriteBtnID){
+  let btn = document.querySelector(`#${favoriteBtnID}`)
+  btn.classList.toggle("is-favorite")
+}
+
 
 function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);
