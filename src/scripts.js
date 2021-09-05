@@ -57,6 +57,8 @@ filters.addEventListener('click', filterRecipes);
 plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
 addIngredientButton.addEventListener('click', addIngredient);
+searchFavesBtn.addEventListener('click', searchFaves);
+
 
 // MAIN FUNCTIONS //
 
@@ -203,12 +205,30 @@ function populateCards(arr){
   }, []);
   return allRecipeGrid.innerHTML = recipeCard
 
-}
+function searchFaves(){
+  let searchInput = searchFavesInput.value.toLowerCase();
+  let allTags = [];
+  recipeData.forEach((element) => {
+    element.tags.forEach((tag) => {
+      if(!allTags.includes(tag)){
+        allTags.push(tag)
+      }
+    })
+  });
 
-function searchData(input) {
-  let searchedData = recipeData.filter(recipe => recipe[`${input}`].includes(searchFieldInput.value));
-  return searchedData
-};
+  if(allTags.includes(searchInput)){
+    let searchedData = currentUser.favoriteRecipes.filter(recipe => recipe['tags'].includes(searchInput));
+    console.log('tags',searchedData);
+    return searchedData
+  } else {
+    let lowerCasedNames = currentUser.favoriteRecipes.map((element) => {
+      element.name = element.name.toLowerCase();
+      return element
+    })
+    let searchedData = lowerCasedNames.filter(recipe => recipe['name'].includes(searchInput));
+    console.log('name',searchedData);
+    return searchedData
+  }
 
 function setUserData(){
   let user = new UserData()
