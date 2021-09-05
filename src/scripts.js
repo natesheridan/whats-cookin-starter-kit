@@ -41,6 +41,8 @@ const addIngredientButton = document.querySelector('#plusButtonContainer');
 
 ////////////////////// FILTER CHECKBOXES && SEARCH ARRAY /////////////////////
 const filters = document.querySelector('#filters');
+const searchFavesInput = document.querySelector('#searchFavesByName');
+const searchFavesBtn = document.querySelector('#searchFavesSubmitBtn');
 let filterSelection = [];
 let addedIngredients = [];
 
@@ -59,6 +61,7 @@ filters.addEventListener('click', filterRecipes);
 plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
 addIngredientButton.addEventListener('click', addIngredient);
+searchFavesBtn.addEventListener('click', searchRecipes);
 
 //////////////////// FUNCTIONS ///////////////////////////////////////
 
@@ -99,6 +102,8 @@ function viewAllRecipes() {
   hide(recipeGrid);
   hide(addRecipeForm);
   show(allRecipeGrid);
+  hide(searchFavesInput);
+  hide(searchFavesBtn);
 
   let recipeRepo = new RecipeRepository(recipeData);
   allRecipeGrid.innerHTML = ""
@@ -119,6 +124,8 @@ function showHomeView() {
   show(recipeGrid);
   hide(addRecipeForm);
   hide(allRecipeGrid);
+  hide(searchFavesInput);
+  hide(searchFavesBtn);
 };
 
 function showRecipeForm() {
@@ -193,6 +200,8 @@ function searchByName(){
 function populateCards(arr){
   show(allRecipeGrid);
   hide(recipeGrid);
+  show(searchFavesInput);
+  show(searchFavesBtn);
   let recipeRepo = new RecipeRepository(recipeData);
   allRecipeGrid.innerHTML = ""
   const recipeCard = arr.reduce((acc, recipe) => {
@@ -207,8 +216,35 @@ function populateCards(arr){
     }, []);
 };
 
+// function searchFaves(){
+//   /*an array of all tags
+//   if allTagsArray.includes(searchInput) then execute the tags function
+//   else search for the names
+//   */
+//   let searchInput = searchFavesInput.value;
+//   let searchedData = currentUser.favoriteRecipes.filter(recipe => recipe['name'].includes(searchInput));
+//
+//   return searchedData
+// };
+//
+// function searchFavesByTag(){
+//   let searchedData = currentUser.favoriteRecipes.filter(recipe => recipe['tags'].includes(searchInput));
+// };
+
+function searchRecipes() {
+  let searchInput = searchFavesInput.value;
+
+  if (currentUser.favoriteRecipes.includes('search-name')) {
+      return searchData('name')
+    } else if (currentUser.favoriteRecipes.includes('search-tag')) {
+      return searchData('tags')
+    }
+};
+
 function searchData(input) {
-  let searchedData = recipeData.filter(recipe => recipe[`${input}`].includes(searchFieldInput.value));
+  let searchInput = searchFavesInput.value;
+  let searchedData = currentUser.favoriteRecipes.filter(recipe => recipe[`${input}`].includes(searchInput));
+    console.log('searchedData: ', searchedData)
   return searchedData
 };
 
@@ -261,12 +297,6 @@ function popupMessage(message, timeInMS, color = "gold"){
       hide(popupContainer);
   }, timeInMS)
 };
-
-
-// function selectFavoriteRecipe(index) {
-//   currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
-//   console.log(currentUser.favoriteRecipes);
-// };
 
 function addToFavorites(){
   const recipeRepo = new RecipeRepository(recipeData);
