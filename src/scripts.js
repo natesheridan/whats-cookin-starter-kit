@@ -325,14 +325,6 @@ function addToFavorites(){
 }
 
 
-// each time a button is clicked we want to update the buttons class list to be relative to the current status in the array 
-
-
-function toggleFavoriteGlow(favoriteBtnID){
-  let btn = document.querySelector(`#${favoriteBtnID}`)
-  btn.classList.toggle("is-favorite")
-}
-
 
 function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);
