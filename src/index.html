@@ -71,9 +71,9 @@
         <button type="button" id="addRecipeButton" name="add a recipe"><h1>Add a Recipe</h1></button>
       </section>
       <section class="right-sidebar">
-        <!-- <article class="scroll-arrow"> -->
+        <article class="scroll-arrow">
           <img src=images/Right-arrow.svg class="right-arrow" alt="scroll arrow">
-        <!-- </article> -->
+        </article>
       </section>
     </aside>
     <section class="content-container">
@@ -180,25 +180,27 @@
           <button type="button" class="plus-button-container" id="plusButtonContainer">
             <img src="" class="plus-button" alt="add ingredient">
           </button><br>
-          <button type="button" name="submit-recipe" class="submit-recipe" id="submitRecipe"></button>
+          <button type="button" name="submit-recipe" class="submit-recipe" id="submitRecipe"><b>Add Recipe</b></button>
         </section>
-      <section class="all-recipe-grid hidden" id="allRecipeGrid">
-          <h2>Recipes</h2>
-          <input type="radio" name="favorites?" value="">
-          <aside class="all-scroll-arrow">
-            <img src="" alt="scroll arrow">
-          </aside>
+        <section class="all-recipe-container hidden" id="allRecipeContainer">
+          <section class="all-recipe-grid hidden" id="allRecipeGrid">
+              <h2>Recipes</h2>
+              <input type="radio" name="favorites?" value="">
+              <aside class="all-scroll-arrow">
+                <img src="" alt="scroll arrow">
+              </aside>
+          </section>
         </section>
-      </section>
     </section>
-    <span class="hidden" id="popup">
-      <p>POPUP</p>
-    </span>
+    <article class="popup-container">
+      <span class="hidden" id="popup">
+        <p>POPUP</p>
+      </span>
+    </article>
     <footer>
       <input type="text" placeholder= "Search favorites" name="searchFavorites" class="hidden search-field" id="searchFavesByName">
       <input name="search" type="submit" class = "hidden search-submit-btn" id="searchFavesSubmitBtn">
     </footer>
-    <script src="domDemo.js" type="text/javascript"></script>
   </body>
 </html>
 
