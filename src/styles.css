@@ -404,3 +404,13 @@ aside > button {
 .hidden {
   display: none;
 }
+
+
+
+.favorite-star{
+  background-color: #e2da65
+}
+.is-favorite{
+  background-color:rgba(20, 135, 43, 0.726)
+
+}
