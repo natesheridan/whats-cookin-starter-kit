@@ -26,6 +26,7 @@ const recipeFormIngredient = document.querySelector('#recipeFormIngredient');
 const unitSelection = document.querySelector('#unitSelection');
 ////////////////// BUTTONS & FORMS ///////////////////////////////////
 const ingredientAmount = document.querySelector('#ingredientAmount');
+let currentUser;
 const homeButton = document.querySelector('#homeButton');
 const savedRecipesButton = document.querySelector('#savedRecipesButton');
 const addRecipeButton = document.querySelector('#addRecipeButton');
@@ -197,6 +198,10 @@ function searchByName(){
   populateCards(filteredRecipes)
 };
 
+function displaySavedRecipes() {
+  populateCards(currentUser.favoriteRecipes)
+};
+
 function populateCards(arr){
   show(allRecipeGrid);
   hide(recipeGrid);
@@ -306,9 +311,6 @@ function addToFavorites(){
   let index = recipeRepo.recipeData.indexOf(fullRecipe);
   currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
 
-  console.log(currentUser.favoriteRecipes);
-};
-
 
 function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);
@@ -317,4 +319,4 @@ function generateRandomUser() {
   currentUser = userDataValue
 };
 
-generateRandomUser();
+generateRandomUser()
