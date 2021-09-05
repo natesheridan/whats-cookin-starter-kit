@@ -127,13 +127,12 @@ function showLogin() {
 
 function getDirections(event){
   if(event.target.classList.contains('favorite-star')){
-     addToFavorites();
-     return
-   };
-   if(event.target.classList.contains('content-container')){
-     return
-   };
-   
+    addToFavorites();
+    return
+  };
+  if(event.target.classList.contains('content-container')){
+    return
+  };
     allRecipeGrid.classList.add('hidden');
     let targetID = event.target.closest('.mini-recipe').id;
     let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
