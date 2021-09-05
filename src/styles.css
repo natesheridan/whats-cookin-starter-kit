@@ -130,6 +130,7 @@ aside > button {
   width: 14%;
   height: 100%;
   padding-top: 2rem;
+  z-index: 2;
 }
 
 .left-sidebar > button {
@@ -156,7 +157,8 @@ aside > button {
   right: 1rem;
   width: 10%;
   height: 100%;
-  top: 40%;
+  /* top: 40%; */
+  z-index: 2;
 }
 
 .login-button {
@@ -175,17 +177,23 @@ aside > button {
   align-items: center;
   justify-content: center;
   position: relative;
-  height: 8rem;
+  height: 5rem;
   width: 5rem;
   cursor: pointer;
   z-index: 3;
 }
 
+.right-arrow {
+  position: absolute;
+  top: 225%;
+}
+
 .content-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  position: relative;
   background-color: #8FB7B7;
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -197,12 +205,14 @@ aside > button {
   /* background-color: #588b8b; */
   /* height: 40rem;
   width: 40rem; */
+
   z-index: 0;
 }
 
 .recipe-grid {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .push-to-back {
@@ -253,7 +263,7 @@ aside > button {
   background-color: #fff8f4;
   top: 8%;
   right: 9.5%;
-  z-index: 1;
+  z-index: 2;
 }
 
 .login-form > button {
@@ -304,21 +314,33 @@ aside > button {
   cursor: pointer;
 }
 
-.all-recipe-grid {
-  position: static;
-  display: block;
-  /* flex-direction: row; */
-  justify-content: flex-start;
+.all-recipe-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  height: auto;
-  width: 75%;
-  overflow: scroll;
-  padding-left: 20rem;
-  padding-right: 20rem;
+  position: relative;
+  height: 22rem;
+  width: 60%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border: 0px;
+  border-radius: 1rem;
+  top: 0%;
+  left: 20%;
+  background-color: #f9f1ef;
+  padding: 1rem;
+}
+
+.all-recipe-grid {
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 .mini-recipe {
-  justify-content: center;
+  /* flex-direction: row; */
+  display: inline-table;
   height: 15rem;
   width: 10rem;
   padding: .5rem;
@@ -365,11 +387,16 @@ aside > button {
 }
 
 .add-recipe {
-  height: auto;
-  width: auto;
+  height: 80%;
+  width: 100%;
   padding: 2rem;
   background-color: #FFF8F3;
   border: 1px solid black;
+  bottom: 10%;
+}
+
+.add-recipe > h3 {
+  /* margin-top: .2rem; */
 }
 
 .add-recipe > .plus-button {
@@ -379,6 +406,8 @@ aside > button {
 
 .add-recipe > .submit-recipe {
   background-color: #8FB7B7;
+  color: white;
+  margin-top: .2rem;
 }
 
 .popup-container {

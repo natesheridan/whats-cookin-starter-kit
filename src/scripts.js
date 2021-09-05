@@ -14,6 +14,7 @@ import {recipeData} from './data/recipes.js';
 
 const allRecipeGrid = document.querySelector('#allRecipeGrid');
 const mainContent = document.querySelector('#mainContent');
+const allRecipeContainer = document.querySelector('#allRecipeContainer');
 const allRecipes = document.querySelector('#allRecipesButton');
 const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
@@ -96,13 +97,15 @@ function addNewRecipe() {
 }
 
 function viewAllRecipes() {
+  show(allRecipeContainer);
+  hide(addRecipeForm);
   const recipeRepo = new RecipeRepository(recipeData);
   populateCards(recipeRepo.recipeData);
 };
 
 function showHomeView() {
   hide(addRecipeForm);
-  hide(allRecipeGrid);
+  hide(allRecipeContainer);
   // contentContainer.childNode = recipeGrid;
   // fullRecipeContainer.classList.add('push-to-back');
   // contentContainer.removeChild(fullRecipeContainer);
@@ -114,7 +117,7 @@ function showHomeView() {
 function showRecipeForm() {
   show(addRecipeForm);
   hide(recipeGrid);
-  hide(allRecipeGrid);
+  hide(allRecipeContainer);
   hide(fullRecipeContainer);
 }
 
@@ -123,7 +126,13 @@ function showLogin() {
 }
 
 function getDirections(event){
-  if (event.target !== contentContainer) {
+  if(event.target.classList.contains('favorite-star')){
+    addToFavorites();
+    return
+  };
+  if(!event.target.classList.contains('mini-recipe')){
+    return
+  }
     allRecipeGrid.classList.add('hidden');
     let targetID = event.target.closest('.mini-recipe').id;
     let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
@@ -160,7 +169,6 @@ function getDirections(event){
       </section>`;
 
     return contentContainer.innerHTML = fullRecipe
-  }
 };
 
 
