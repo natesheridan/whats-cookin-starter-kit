@@ -7,6 +7,9 @@ body {
   margin: 0px;
   font-family: 'Montserrat', sans-serif;
   overflow: scroll;
+  transition-duration: .5s;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 nav {
@@ -175,6 +178,7 @@ aside > button {
   height: 8rem;
   width: 5rem;
   cursor: pointer;
+  z-index: 3;
 }
 
 .content-container {
@@ -186,17 +190,27 @@ aside > button {
   padding-top: 3rem;
   padding-bottom: 3rem;
   height: 25rem;
+  z-index: 0;
 }
 
 .main-content {
   /* background-color: #588b8b; */
   /* height: 40rem;
   width: 40rem; */
+  z-index: 0;
 }
 
 .recipe-grid {
   display: flex;
   flex-direction: row;
+}
+
+.push-to-back {
+  z-index: -1;
+}
+
+.bring-forward {
+  z-index: 0;
 }
 
 .recipe {
@@ -239,7 +253,7 @@ aside > button {
   background-color: #fff8f4;
   top: 8%;
   right: 9.5%;
-  z-index: 2;
+  z-index: 1;
 }
 
 .login-form > button {
@@ -292,13 +306,15 @@ aside > button {
 
 .all-recipe-grid {
   position: static;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  display: block;
+  /* flex-direction: row; */
+  justify-content: flex-start;
   align-items: center;
   height: auto;
-  width: auto;
-  overflow: hidden;
+  width: 75%;
+  overflow: scroll;
+  padding-left: 20rem;
+  padding-right: 20rem;
 }
 
 .mini-recipe {
@@ -365,40 +381,45 @@ aside > button {
   background-color: #8FB7B7;
 }
 
-#popup {
-    position: fixed;
-    height: 10%;
-    width: 40%;
-    border-radius: 30px;
-    text-align: center;
-    font-size: 2.2vh;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.popup-container {
+  display: block;
+}
 
+#popup {
+  position: fixed;
+  height: 10%;
+  width: 40%;
+  border-radius: 30px;
+  text-align: center;
+  font-size: 2.2vh;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
 }
 
 #popup p{
-    position: relative;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: relative;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
 }
 
 .gold-popup {
-    background-color: rgba(218, 158, 29, 0.726);
+  background-color: rgba(218, 158, 29, 0.726);
 }
 
 .red-popup {
-    background-color: rgba(218, 73, 29, 0.726);
+  background-color: rgba(218, 73, 29, 0.726);
 }
 
 .green-popup {
-    background-color: rgba(20, 135, 43, 0.726);
+  background-color: rgba(20, 135, 43, 0.726);
 }
 
 .blue-popup {
-    background-color: rgba(29, 98, 218, 0.726);
+  background-color: rgba(29, 98, 218, 0.726);
 }
 
 .hidden {
