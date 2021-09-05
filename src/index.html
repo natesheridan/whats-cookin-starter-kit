@@ -84,8 +84,27 @@
               <img src="images/pancakes.svg" alt="meal image" class="image">
             </div>
             <div class="recipe-content">
-              <div class="favorite-star"></div>
-              <img class="star" src="images/star-active.svg" alt="favorite">
+              <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar1"></button>
+              <!-- <div class="favorite-star"></div>
+              <img class="star" src="images/star-active.svg" alt="favorite"> -->
+              <div class="recipe-info">
+                <h2>Dish Name</h2>
+                <div class="ingredient-section">
+                  <h4>Ingredients</h4>
+                <section class="ingredient-info">
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="recipe">
+            <div class="meal-image">
+
+              <img src="images/pancakes.svg" alt="meal image" class="image">
+            </div>
+            <div class="recipe-content">
+              <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar2"></button>
+              <!-- <div class="favorite-star"></div>
+              <img class="star" src="images/star-active.svg" alt="favorite"> -->
               <div class="recipe-info">
                 <h2>Dish Name</h2>
                 <div class="ingredient-section">
@@ -100,23 +119,7 @@
               <img src="images/pancakes.svg" alt="meal image" class="image">
             </div>
             <div class="recipe-content">
-              <div class="favorite-star"></div>
-              <img class="star" src="images/star-active.svg" alt="favorite">
-              <div class="recipe-info">
-                <h2>Dish Name</h2>
-                <div class="ingredient-section">
-                  <h4>Ingredients</h4>
-                <section class="ingredient-info">
-                </div>
-              </div>
-            </div>
-          </article>
-          <article class="recipe">
-            <div class="meal-image">
-              <img src="images/pancakes.svg" alt="meal image" class="image">
-            </div>
-            <div class="recipe-content">
-              <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar"></button>
+              <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar3"></button>
               <!-- <div class="favorite-star" id="favoriteStar"></div>
               <img class="star" src="images/star-active.svg" alt="favorite"> -->
               <div class="recipe-info">
@@ -192,6 +195,8 @@
       <p>POPUP</p>
     </span>
     <footer>
+      <input type="text" name="searchFavorites" class="hidden search-field" id="searchFavesByName">
+      <input name="search" type="submit" class = "hidden search-submit-btn" id="searchFavesSubmitBtn">
     </footer>
     <script src="domDemo.js" type="text/javascript"></script>
   </body>

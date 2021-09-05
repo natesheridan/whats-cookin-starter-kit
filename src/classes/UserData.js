@@ -1,6 +1,6 @@
 class UserData {
   constructor(user){
-    this.username = user.username;
+    this.username = user.name;
     this.id = user.id;
     this.pantry = user.pantry;
     this.favoriteRecipes = [];
