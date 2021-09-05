@@ -412,5 +412,9 @@ aside > button {
 }
 .is-favorite{
   background-color:rgba(20, 135, 43, 0.726)
+}
 
+
+.home-title{
+  font-size: 40px;
 }
