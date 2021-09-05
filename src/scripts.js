@@ -22,9 +22,9 @@ const searchFieldInput = document.querySelector('.search-field');
 const recipeFormTitle = document.querySelector('#recipeFormTitle');
 const recipeFormImage = document.querySelector('#recipeFormImage');
 const recipeFormIngredient = document.querySelector('#recipeFormIngredient');
-const unitSelection = document.querySelector('#unitSelection')
-
 const unitSelection = document.querySelector('#unitSelection');
+
+
 const ingredientAmount = document.querySelector('#ingredientAmount');
 
 const homeButton = document.querySelector('#homeButton');
@@ -106,17 +106,32 @@ function addNewRecipe() {
 }
 
 function viewAllRecipes() {
+  hide(recipeGrid);
+  hide(addRecipeForm);
+  show(allRecipeGrid);
 
-  const recipeRepo = new RecipeRepository(recipeData);
-  populateCards(recipeRepo.recipeData);
+  let recipeRepo = new RecipeRepository(recipeData);
+  console.log(recipeRepo)
+  allRecipeGrid.innerHTML = ""
+  const viewAllRecipes = recipeRepo.recipeData.reduce((acc, recipe) => {
+    allRecipeGrid.innerHTML +=
+      `<article class="mini-recipe" id="card-${recipe.id}">
+       <img src= "${recipe.image}" alt= "${recipe.name}">
+       <p>${recipe.name}</p>
+       <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="faveBtn-${recipe.id}"></button>
+       </article>`
+
+      return acc;
+    }, []);
+    return viewAllRecipes;
 };
 
 function showHomeView() {
-
   show(recipeGrid);
   hide(addRecipeForm);
   hide(allRecipeGrid);
-}
+  // restoreDefaultContentContainer();
+};
 
 function showRecipeForm() {
   show(addRecipeForm);
@@ -128,19 +143,9 @@ function showLogin() {
   loginPopup.classList.toggle('hidden');
 }
 
-function addNewRecipe() {
-  let titleField = recipeFormTitle.value;
-  console.log(titleField);
-  let imageField = recipeFormImage.value;
-  console.log(imageField);
-  let ingredients = recipeFormIngredient.value;
-  console.log(ingredients);
-  let unitField = unitSelection.value;
-  console.log(unitField);
-}
 
 function getDirections(targetID){
-  // allRecipeGrid.classList.add('hidden');
+  allRecipeGrid.classList.add('hidden');
 
   // let targetID = event.target.closest('.mini-recipe').id;
   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
@@ -219,10 +224,7 @@ function populateCards(arr){
       return acc;
     }, []);
     console.log(currentUser)
-  
-
-
-}
+};
 
 function searchData(input) {
   let searchedData = recipeData.filter(recipe => recipe[`${input}`].includes(searchFieldInput.value));
@@ -300,5 +302,63 @@ function generateRandomUser() {
   currentUser = userDataValue
   console.log(currentUser)
 
-}
+};
+
+function restoreDefaultContentContainer(){
+  contentContainer.innerHTML = `<section class="content-container" id="contentContainer">
+    <section class="main-content" id="mainContent">
+      <section class="recipe-grid" id="recipeGrid">
+        <article class="recipe">
+          <div class="meal-image">
+            <img src="images/pancakes.svg" alt="meal image" class="image">
+          </div>
+          <div class="recipe-content">
+            <div class="favorite-star"></div>
+            <img class="star" src="images/star-active.svg" alt="favorite">
+            <div class="recipe-info">
+              <h2>Dish Name</h2>
+              <div class="ingredient-section">
+                <h4>Ingredients</h4>
+              <section class="ingredient-info"> </section>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="recipe">
+          <div class="meal-image">
+            <img src="images/pancakes.svg" alt="meal image" class="image">
+          </div>
+          <div class="recipe-content">
+            <div class="favorite-star"></div>
+            <img class="star" src="images/star-active.svg" alt="favorite">
+            <div class="recipe-info">
+              <h2>Dish Name</h2>
+              <div class="ingredient-section">
+                <h4>Ingredients</h4>
+              <section class="ingredient-info"></section>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="recipe">
+          <div class="meal-image">
+            <img src="images/pancakes.svg" alt="meal image" class="image">
+          </div>
+          <div class="recipe-content">
+            <div class="favorite-star"></div>
+            <img class="star" src="images/star-active.svg" alt="favorite">
+            <div class="recipe-info">
+              <h2>Dish Name</h2>
+              <div class="ingredient-section">
+                <h4>Ingredients</h4>
+              <section class="ingredient-info"></section>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </section>
+  </section>`
+};
+
 generateRandomUser();
