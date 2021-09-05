@@ -386,6 +386,10 @@ aside > button {
   background-color: #fff8f4;
 }
 
+.full-recipe > img {
+
+}
+
 .add-recipe {
   height: 80%;
   width: 100%;
