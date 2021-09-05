@@ -25,6 +25,8 @@ const recipeFormIngredient = document.querySelector('#recipeFormIngredient');
 const unitSelection = document.querySelector('#unitSelection');
 const ingredientAmount = document.querySelector('#ingredientAmount');
 
+
+let currentUser;
 const homeButton = document.querySelector('#homeButton');
 const savedRecipesButton = document.querySelector('#savedRecipesButton');
 const addRecipeButton = document.querySelector('#addRecipeButton');
@@ -50,7 +52,7 @@ contentContainer.addEventListener('click', getDirections);
 homeButton.addEventListener('click', showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);
-savedRecipesButton.addEventListener('click', viewAllRecipes);
+savedRecipesButton.addEventListener('click', displaySavedRecipes);
 filters.addEventListener('click', filterRecipes);
 plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
@@ -172,6 +174,10 @@ function searchByName(){
 
 }
 
+function displaySavedRecipes() {
+  populateCards(currentUser.favoriteRecipes)
+};
+
 function populateCards(arr){
   show(allRecipeGrid);
   hide(recipeGrid);
@@ -253,4 +259,17 @@ function popupMessage(message, timeInMS, color = "gold"){
       hide(popupContainer);
   }, timeInMS)
 }
-// Test //
+
+function selectFavoriteRecipe() {
+  currentUser.toggleItemInArray('favoriteRecipes', recipeData[0]);
+  console.log(currentUser.favoriteRecipes);
+};
+
+
+function generateRandomUser() {
+  const randomUser = Math.floor(Math.random() * usersData.length);
+  const user = usersData[randomUser];
+  currentUser = new UserData (user)
+
+
+generateRandomUser()
