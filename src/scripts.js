@@ -9,12 +9,7 @@ import starActive from './data/assets/star-active.svg';
 import star from './data/assets/star.svg';
 // import {usersData} from './data/users.js';
 // import {recipeData} from './data/recipes.js';
-import usersData from './apiCalls.js';
-import ingredientsData from './apiCalls.js';
-import recipeData from './apiCalls.js';
-import fetchUsersData from './apiCalls.js';
-import fetchRecipeData from './apiCalls.js';
-import fetchIngredientsData from './apiCalls.js';
+import {fetchUsersData, fetchRecipeData, fetchIngredientsData} from './apiCalls.js';
 import apiCalls from './apiCalls.js';
 
 // BUTTONS & SECTIONS //
@@ -45,10 +40,14 @@ const plusButton = document.querySelector('#plusButtonContainer');
 const submitRecipeButton = document.querySelector('#submitRecipe');
 const addIngredientButton = document.querySelector('#plusButtonContainer');
 
+
 // FILTER CHECKBOXES && SEARCH ARRAY //
 
 const filters = document.querySelector('#filters');
 let currentUser;
+let usersData = [];
+let recipeData = [];
+let ingredientsData = [];
 let filterSelection = [];
 let addedIngredients = [];
 
@@ -67,7 +66,7 @@ plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
 addIngredientButton.addEventListener('click', addIngredient);
 searchFavesSubmitBtn.addEventListener('click', searchFaves);
-window.addEventListener('load', setData);
+window.addEventListener('load', getData);
 
 // MAIN FUNCTIONS //
 //
@@ -76,43 +75,26 @@ window.addEventListener('load', setData);
 //   Promise.all([usersData, ingredientsData, recipeData]);
 // }
 
-function setData() {
-  // fetchUsersData();
-  // fetchIngredientsData();
-  // fetchRecipeData();
-  // Promise.all([usersData, ingredientsData, recipeData])
-  // .then(data => apiCalls.getData());
-  // fetchUsersData();
-  // fetchIngredientsData();
-  // fetchRecipeData();
-  apiCalls.getData()
-  .then(data => data[0].usersData = usersData)
-  console.log(usersData.usersData);
 
 
-    // .then(promise => {
-    //   let userData = promise[0]['usersData'];
-    //   let ingredientData = promise[1]['ingredientsData'];
-    //   let recipeData = promise[2]['recipeData'];
-    //   console.log(promise);
-    //   let userRepo = new UserData(userData);
-    //   let recipeRepo = new RecipeRepository(recipeData);
-    //   // currentUser = new
-    //   // console.log(userData);
-    //   // console.log(recipeRepo);
-    //   // console.log(ingredientData);
-    // })
-  // generateRandomUser();
-  // console.log(userData);
-  // console.log(recipeRepo);
-  // console.log(ingredientData);
+function parseData(data){
+  usersData = data[0].usersData;
+  ingredientsData = data[1].ingredientsData;
+  recipeData = data[2].recipeData
+  console.log(recipeData)
+
+
+  generateRandomUser()
+  generateRandomHomeViewRecipes()
 }
 
-// function getData() {
-//   fetchUsersData();
-//   fetchIngredientsData();
-//   fetchRecipeData();
-// }
+
+function getData() {
+  return Promise.all([fetchUsersData(), fetchIngredientsData(), fetchRecipeData()])
+  .then(data => parseData(data));
+}
+
+
 
 function filterRecipes() {
   // event.preventDefault();
@@ -477,6 +459,3 @@ function generateRandomHomeViewRecipes(){
 
 
 
-
-generateRandomUser()
-generateRandomHomeViewRecipes()
