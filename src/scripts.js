@@ -41,6 +41,7 @@ const addIngredientButton = document.querySelector('#plusButtonContainer');
 // FILTER CHECKBOXES && SEARCH ARRAY //
 
 const filters = document.querySelector('#filters');
+let currentUser;
 let filterSelection = [];
 let addedIngredients = [];
 
@@ -53,7 +54,7 @@ contentContainer.addEventListener('click', getDirections);
 homeButton.addEventListener('click', showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);
-savedRecipesButton.addEventListener('click', viewAllRecipes);
+savedRecipesButton.addEventListener('click', () => {populateCards(currentUser.favoriteRecipes)});
 filters.addEventListener('click', filterRecipes);
 plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
