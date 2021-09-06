@@ -1,4 +1,15 @@
-// Your fetch requests will live here!
+// https://what-s-cookin-starter-kit.herokuapp.com/api/v1/users
+
+// https://what-s-cookin-starter-kit.herokuapp.com/api/v1/ingredients
+
+// https://what-s-cookin-starter-kit.herokuapp.com/api/v1/recipes
 
 
-console.log('I will be a fetch request!')
+
+const usersData = () => {
+    fetch('https://what-s-cookin-starter-kit.herokuapp.com/api/v1/users');
+}
+const ingredientsData = () => {
+
+}
+const recipesData = require
