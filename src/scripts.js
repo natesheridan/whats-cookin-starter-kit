@@ -10,22 +10,23 @@ import star from './data/assets/star.svg';
 import {usersData} from './data/users.js';
 import {recipeData} from './data/recipes.js';
 
-////////////////// GLOBAL VARIABLES //////////////////////////////////
-var currentUser;
-////////////////// QUERY SELECTORS ///////////////////////////////////
+// BUTTONS & SECTIONS //
+
 const allRecipeGrid = document.querySelector('#allRecipeGrid');
 const mainContent = document.querySelector('#mainContent');
+const allRecipeContainer = document.querySelector('#allRecipeContainer');
 const allRecipes = document.querySelector('#allRecipesButton');
 const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
+const fullRecipe = document.querySelector('.full-recipe-container');
 const recipeFormTitle = document.querySelector('#recipeFormTitle');
 const recipeFormImage = document.querySelector('#recipeFormImage');
 const recipeFormIngredient = document.querySelector('#recipeFormIngredient');
 const unitSelection = document.querySelector('#unitSelection');
-////////////////// BUTTONS & FORMS ///////////////////////////////////
 const ingredientAmount = document.querySelector('#ingredientAmount');
+
 const homeButton = document.querySelector('#homeButton');
 const savedRecipesButton = document.querySelector('#savedRecipesButton');
 const addRecipeButton = document.querySelector('#addRecipeButton');
@@ -33,39 +34,36 @@ const addRecipeForm = document.querySelector('#addRecipeForm');
 const loginPopup = document.querySelector('#loginPopup');
 const loginButton = document.querySelector('#loginButton');
 const plusButton = document.querySelector('#plusButtonContainer');
-const homeFavoriteStar1 = document.querySelector('#favoriteStar1')
-const homeFavoriteStar2 = document.querySelector('#favoriteStar2')
-const homeFavoriteStar3 = document.querySelector('#favoriteStar3')
 const submitRecipeButton = document.querySelector('#submitRecipe');
 const addIngredientButton = document.querySelector('#plusButtonContainer');
 
-////////////////////// FILTER CHECKBOXES && SEARCH ARRAY /////////////////////
+// FILTER CHECKBOXES && SEARCH ARRAY //
+
 const filters = document.querySelector('#filters');
-const searchFavesInput = document.querySelector('#searchFavesByName');
-const searchFavesBtn = document.querySelector('#searchFavesSubmitBtn');
 let filterSelection = [];
 let addedIngredients = [];
 
-/////////////////////// EVENT LISTENERS ////////////////////////////////////////
+// EVENT LISTENERS //
+
 searchSubmitBtn.addEventListener('click', searchByName);
 allRecipes.addEventListener('click', viewAllRecipes);
 contentContainer.addEventListener('click', getDirections);
-homeFavoriteStar1.addEventListener('click', ()=>{selectFavoriteRecipe(1)});
-homeFavoriteStar2.addEventListener('click', ()=>{selectFavoriteRecipe(2)});
-homeFavoriteStar3.addEventListener('click', ()=>{selectFavoriteRecipe(3)});
+
 homeButton.addEventListener('click', showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);
-savedRecipesButton.addEventListener('click', function(){populateCards(currentUser.favoriteRecipes)});
+savedRecipesButton.addEventListener('click', viewAllRecipes);
 filters.addEventListener('click', filterRecipes);
 plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
 addIngredientButton.addEventListener('click', addIngredient);
 searchFavesBtn.addEventListener('click', searchFaves);
 
-//////////////////// FUNCTIONS ///////////////////////////////////////
+
+// MAIN FUNCTIONS //
 
 function filterRecipes() {
+  // event.preventDefault();
   if (event.target.value) {
     let value = event.target.value.toLowerCase()
     if (filterSelection.includes(value)) {
@@ -76,7 +74,7 @@ function filterRecipes() {
     filterSelection.push(value);
     searchByTag(recipeData, filterSelection);
   }
-};
+}
 
 function addIngredient() {
   let ingredient = recipeFormIngredient.value;
@@ -86,11 +84,11 @@ function addIngredient() {
   recipeFormIngredient.value = null;
   unitSelection.value = null;
   ingredientAmount.value = null;
-};
+}
 
 function generateRandomNumber() {
   return Math.floor(Math.random()*90000) + 10000;
-};
+}
 
 function addNewRecipe() {
   let titleField = recipeFormTitle.value;
@@ -99,12 +97,14 @@ function addNewRecipe() {
   let unitField = unitSelection.value;
   addIngredient();
   let newRecipe = new Recipe({id: generateRandomNumber(), name: titleField, image: imageField, ingredients: [addedIngredients]});
+
+  console.log(newRecipe);a
   recipeData.push(newRecipe);
   addedIngredients = [];
-};
+}
 
 function viewAllRecipes() {
-  hide(recipeGrid);
+  show(allRecipeContainer);
   hide(addRecipeForm);
   show(allRecipeGrid);
   hide(searchFavesInput);
@@ -134,21 +134,25 @@ function showHomeView() {
   show(recipeGrid);
   generateRandomHomeViewRecipes()
   hide(addRecipeForm);
-  hide(allRecipeGrid);
-  hide(searchFavesInput);
-  hide(searchFavesBtn);
-};
+  hide(allRecipeContainer);
+  // contentContainer.childNode = recipeGrid;
+  // fullRecipeContainer.classList.add('push-to-back');
+  // contentContainer.removeChild(fullRecipeContainer);
+  // contentContainer.innerHTML = recipeGrid.innerHTML;
+  show(recipeGrid);
+  show(mainContent);
+}
 
 function showRecipeForm() {
   show(addRecipeForm);
   hide(recipeGrid);
-  hide(allRecipeGrid);
-};
+  hide(allRecipeContainer);
+  hide(fullRecipeContainer);
+}
 
 function showLogin() {
   loginPopup.classList.toggle('hidden');
-};
-
+}
 
 function getDirections(event){
   console.log(event)
@@ -203,31 +207,26 @@ function getDirections(event){
 
 function searchByName(){
   if(searchFieldInput.value ===""){
-    popupMessage("Please enter a search term!", 1000, "red")
+    popupMessage("Please enter a search term!", 2000, "red")
     return
-  };
+  }
   let recipeRepo = new RecipeRepository(recipeData);
   let filteredRecipes = recipeRepo.filterByName(searchFieldInput.value)
   if (filteredRecipes.length === 0){
 
-    popupMessage("No results found! Sorry!", 1000, "red")
+    popupMessage("No results found! Sorry!", 2000, "red")
     return
-  };
+  }
   populateCards(filteredRecipes)
-};
 
-function displaySavedRecipes() {
-  populateCards(currentUser.favoriteRecipes)
-};
+}
 
 function populateCards(arr){
   show(allRecipeGrid);
   hide(recipeGrid);
-  show(searchFavesInput);
-  show(searchFavesBtn);
-  let recipeRepo = new RecipeRepository(recipeData);
   allRecipeGrid.innerHTML = ""
   const recipeCard = arr.reduce((acc, recipe) => {
+
     let buttonClasses = "favorite-star"
     if (currentUser.favoriteRecipes.includes(recipe)){
       buttonClasses = "favorite-star is-favorite"
@@ -287,11 +286,18 @@ function searchData(input) {
 
 function setUserData(){
   let user = new UserData()
+
+
+
+  // if the user login matches the user.name....
+  //...then the app populates with that user's info
 };
+
 
 function joinToString(array){
   return array.join(" ")
-};
+}
+
 
 function searchByTag(recipesArray, searchTags){
   let returnedArr = []
@@ -299,14 +305,17 @@ function searchByTag(recipesArray, searchTags){
     
       let tagsString = joinToString(recipe.tags);
       let numOfTags = searchTags.length;
+      // console.log(searchTags);
       let testTags = searchTags.reduce((acc, tag) => {
         if (tagsString.toLowerCase().includes(tag.toLowerCase())){
           acc++;
         }
         return acc;
       }, 0)
+
       let indexMatchAllSearchTags;
       indexMatchAllSearchTags = (numOfTags===testTags)
+      // console.log('NUMBER: ', numOfTags, 'TAGS: ', testTags)
       if (indexMatchAllSearchTags){
         returnedArr.push(recipe);
       }
@@ -314,16 +323,16 @@ function searchByTag(recipesArray, searchTags){
     }, []);
     console.log(returnedArr)
   populateCards(returnedArr)
+
   return returnedArr;
 };
 
 function hide(element){
-  element.classList.add('hidden');
-};
-
+  element.classList.add('hidden')
+}
 function show(element){
   element.classList.remove('hidden')
-};
+}
 
 function popupMessage(message, timeInMS, color = "gold"){
   let popupContainer = document.querySelector('#popup')
@@ -408,3 +417,4 @@ function generateRandomHomeViewRecipes(){
 
 generateRandomUser()
 generateRandomHomeViewRecipes()
+
