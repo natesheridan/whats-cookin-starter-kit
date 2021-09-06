@@ -67,8 +67,13 @@ searchFavesBtn.addEventListener('click', searchFaves);
 
 function filterRecipes() {
   if (event.target.value) {
-    filterSelection.push(event.target.value);
-    console.log(filterSelection);
+    let value = event.target.value.toLowerCase()
+    if (filterSelection.includes(value)) {
+      let index = filterSelection.indexOf(value)
+      filterSelection.splice(index, 1)
+      return;
+    }
+    filterSelection.push(value);
     searchByTag(recipeData, filterSelection);
   }
 };
@@ -117,7 +122,7 @@ function viewAllRecipes() {
       `<article class="mini-recipe" id="${recipe.id}">
        <img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>
-       <button type="favoriteStar" name="favoriteStar" class="${buttonClasses}" id="faveBtn-${recipe.id}"></button>
+       <button type="favoriteStar" name="favoriteStar" class="${buttonClasses}" id="faveBtn-${recipe.id}">♡</button>
        </article>`
 
       return acc;
@@ -231,7 +236,7 @@ function populateCards(arr){
       `<article class="mini-recipe" id="${recipe.id}">
        <img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>
-       <button type="favoriteStar" name="favoriteStar" class="${buttonClasses}" id="fave-${recipe.id}"></button>
+       <button type="favoriteStar" name="favoriteStar" class="${buttonClasses}" id="fave-${recipe.id}">♡</button>
        </article>`
 
       return acc;
@@ -289,24 +294,26 @@ function joinToString(array){
 };
 
 function searchByTag(recipesArray, searchTags){
-  let indexMatchAllStrings
   let returnedArr = []
-  let filteredArray = recipesArray.reduce((acc, recipe) => {
+  const filteredArray = recipesArray.reduce((acc, recipe) => {
+    
       let tagsString = joinToString(recipe.tags);
       let numOfTags = searchTags.length;
       let testTags = searchTags.reduce((acc, tag) => {
-        if (tagsString.includes(tag)){
+        if (tagsString.toLowerCase().includes(tag.toLowerCase())){
           acc++;
         }
         return acc;
       }, 0)
-      console.log(testTags===numOfTags)
+      let indexMatchAllSearchTags;
       indexMatchAllSearchTags = (numOfTags===testTags)
       if (indexMatchAllSearchTags){
         returnedArr.push(recipe);
       }
 
     }, []);
+    console.log(returnedArr)
+  populateCards(returnedArr)
   return returnedArr;
 };
 
@@ -381,7 +388,7 @@ function generateRandomHomeViewRecipes(){
       <img src="${recipeRepo.recipeData[index].image}" alt="meal image" class="image">
     </div>
     <div class="recipe-content">
-      <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar1"></button>
+      <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar1">♡</button>
       <div class="recipe-info">
         <h2>${recipeRepo.recipeData[index].name}</h2>
       </div>
@@ -390,6 +397,13 @@ function generateRandomHomeViewRecipes(){
 
   })
 }
+
+
+
+
+
+
+
 
 
 generateRandomUser()
