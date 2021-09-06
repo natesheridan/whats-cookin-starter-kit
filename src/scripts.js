@@ -15,6 +15,7 @@ import recipeData from './apiCalls.js';
 import fetchUsersData from './apiCalls.js';
 import fetchRecipeData from './apiCalls.js';
 import fetchIngredientsData from './apiCalls.js';
+import apiCalls from './apiCalls.js';
 
 // BUTTONS & SECTIONS //
 
@@ -66,14 +67,52 @@ plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
 addIngredientButton.addEventListener('click', addIngredient);
 searchFavesSubmitBtn.addEventListener('click', searchFaves);
+window.addEventListener('load', setData);
 
 // MAIN FUNCTIONS //
+//
+// window.onload = (event) => {
+//   apiCalls.getData();
+//   Promise.all([usersData, ingredientsData, recipeData]);
+// }
 
-window.onload = (event) => {
-  fetchUsersData();
-  fetchIngredientsData();
-  fetchRecipeData();
+function setData() {
+  // fetchUsersData();
+  // fetchIngredientsData();
+  // fetchRecipeData();
+  // Promise.all([usersData, ingredientsData, recipeData])
+  // .then(data => apiCalls.getData());
+  // fetchUsersData();
+  // fetchIngredientsData();
+  // fetchRecipeData();
+  apiCalls.getData()
+  .then(data => data[0].usersData = usersData)
+  console.log(usersData.usersData);
+
+
+    // .then(promise => {
+    //   let userData = promise[0]['usersData'];
+    //   let ingredientData = promise[1]['ingredientsData'];
+    //   let recipeData = promise[2]['recipeData'];
+    //   console.log(promise);
+    //   let userRepo = new UserData(userData);
+    //   let recipeRepo = new RecipeRepository(recipeData);
+    //   // currentUser = new
+    //   // console.log(userData);
+    //   // console.log(recipeRepo);
+    //   // console.log(ingredientData);
+    // })
+  // generateRandomUser();
+  // console.log(userData);
+  // console.log(recipeRepo);
+  // console.log(ingredientData);
 }
+
+// function getData() {
+//   fetchUsersData();
+//   fetchIngredientsData();
+//   fetchRecipeData();
+// }
 
 function filterRecipes() {
   // event.preventDefault();
