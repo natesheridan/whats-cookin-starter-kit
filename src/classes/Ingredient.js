@@ -1,6 +1,6 @@
 // const ingredientsData = require('../data/ingredients')
 
-import ingredientsData from './apiCalls.js';
+import ingredientsData from '../apiCalls.js';
 
 class Ingredient {
     constructor(obj) {

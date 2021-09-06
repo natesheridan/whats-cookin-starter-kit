@@ -11,7 +11,10 @@ import star from './data/assets/star.svg';
 // import {recipeData} from './data/recipes.js';
 import usersData from './apiCalls.js';
 import ingredientsData from './apiCalls.js';
-import recipeData from './apiCalls.js'
+import recipeData from './apiCalls.js';
+import fetchUsersData from './apiCalls.js';
+import fetchRecipeData from './apiCalls.js';
+import fetchIngredientsData from './apiCalls.js';
 
 // BUTTONS & SECTIONS //
 
