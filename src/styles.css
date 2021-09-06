@@ -7,6 +7,9 @@ body {
   margin: 0px;
   font-family: 'Montserrat', sans-serif;
   overflow: scroll;
+  transition-duration: .5s;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 nav {
@@ -127,6 +130,7 @@ aside > button {
   width: 14%;
   height: 100%;
   padding-top: 2rem;
+  z-index: 2;
 }
 
 .left-sidebar > button {
@@ -153,7 +157,8 @@ aside > button {
   right: 1rem;
   width: 10%;
   height: 100%;
-  top: 40%;
+  /* top: 40%; */
+  z-index: 2;
 }
 
 .login-button {
@@ -172,31 +177,50 @@ aside > button {
   align-items: center;
   justify-content: center;
   position: relative;
-  height: 8rem;
+  height: 5rem;
   width: 5rem;
   cursor: pointer;
+  z-index: 3;
+}
+
+.right-arrow {
+  position: absolute;
+  top: 225%;
 }
 
 .content-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  position: relative;
   background-color: #8FB7B7;
   padding-top: 3rem;
   padding-bottom: 3rem;
   height: 25rem;
+  z-index: 0;
 }
 
 .main-content {
   /* background-color: #588b8b; */
   /* height: 40rem;
   width: 40rem; */
+
+  z-index: 0;
 }
 
 .recipe-grid {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+}
+
+.push-to-back {
+  z-index: -1;
+}
+
+.bring-forward {
+  z-index: 0;
 }
 
 .recipe {
@@ -290,19 +314,33 @@ aside > button {
   cursor: pointer;
 }
 
-.all-recipe-grid {
-  position: static;
+.all-recipe-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: auto;
-  width: auto;
-  overflow: hidden;
+  position: relative;
+  height: 22rem;
+  width: 60%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border: 0px;
+  border-radius: 1rem;
+  top: 0%;
+  left: 20%;
+  background-color: #f9f1ef;
+  padding: 1rem;
+}
+
+.all-recipe-grid {
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 .mini-recipe {
-  justify-content: center;
+  /* flex-direction: row; */
+  display: inline-table;
   height: 15rem;
   width: 10rem;
   padding: .5rem;
@@ -348,12 +386,21 @@ aside > button {
   background-color: #fff8f4;
 }
 
+.full-recipe > img {
+
+}
+
 .add-recipe {
-  height: auto;
-  width: auto;
+  height: 80%;
+  width: 100%;
   padding: 2rem;
   background-color: #FFF8F3;
   border: 1px solid black;
+  bottom: 10%;
+}
+
+.add-recipe > h3 {
+  /* margin-top: .2rem; */
 }
 
 .add-recipe > .plus-button {
@@ -363,42 +410,49 @@ aside > button {
 
 .add-recipe > .submit-recipe {
   background-color: #8FB7B7;
+  color: white;
+  margin-top: .2rem;
+}
+
+.popup-container {
+  display: block;
 }
 
 #popup {
-    position: fixed;
-    height: 10%;
-    width: 40%;
-    border-radius: 30px;
-    text-align: center;
-    font-size: 2.2vh;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
+  position: fixed;
+  height: 10%;
+  width: 40%;
+  border-radius: 30px;
+  text-align: center;
+  font-size: 2.2vh;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
 }
 
 #popup p{
-    position: relative;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: relative;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
 }
 
 .gold-popup {
-    background-color: rgba(218, 158, 29, 0.726);
+  background-color: rgba(218, 158, 29, 0.726);
 }
 
 .red-popup {
-    background-color: rgba(218, 73, 29, 0.726);
+  background-color: rgba(218, 73, 29, 0.726);
 }
 
 .green-popup {
-    background-color: rgba(20, 135, 43, 0.726);
+  background-color: rgba(20, 135, 43, 0.726);
 }
 
 .blue-popup {
-    background-color: rgba(29, 98, 218, 0.726);
+  background-color: rgba(29, 98, 218, 0.726);
 }
 
 .hidden {

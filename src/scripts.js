@@ -61,7 +61,7 @@ filters.addEventListener('click', filterRecipes);
 plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
 addIngredientButton.addEventListener('click', addIngredient);
-searchFavesBtn.addEventListener('click', searchRecipes);
+searchFavesBtn.addEventListener('click', searchFaves);
 
 //////////////////// FUNCTIONS ///////////////////////////////////////
 
@@ -146,17 +146,22 @@ function showLogin() {
 
 
 function getDirections(event){
+  console.log(event)
   if(event.target.classList.contains('favorite-star')){
     addToFavorites();
     return
   };
-  if(!event.target.classList.contains('mini-recipe')){
+  if(event.target.classList.contains('content-container')){
+    return
+  }
+  if(event.target.classList.contains('all-recipe-grid')){
     return
   }
 
   allRecipeGrid.innerHTML = "";
   let targetID = event.target.closest('.mini-recipe').id;
   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
+  console.log(newRecipeInfo)
   let selectedRecipe = new Recipe(newRecipeInfo);
 
   selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {
@@ -233,20 +238,31 @@ function populateCards(arr){
     }, []);
 };
 
-// function searchFaves(){
-//   /*an array of all tags
-//   if allTagsArray.includes(searchInput) then execute the tags function
-//   else search for the names
-//   */
-//   let searchInput = searchFavesInput.value;
-//   let searchedData = currentUser.favoriteRecipes.filter(recipe => recipe['name'].includes(searchInput));
-//
-//   return searchedData
-// };
-//
-// function searchFavesByTag(){
-//   let searchedData = currentUser.favoriteRecipes.filter(recipe => recipe['tags'].includes(searchInput));
-// };
+function searchFaves(){
+  let searchInput = searchFavesInput.value.toLowerCase();
+  let allTags = [];
+  recipeData.forEach((element) => {
+    element.tags.forEach((tag) => {
+      if(!allTags.includes(tag)){
+        allTags.push(tag)
+      }
+    })
+  });
+
+  if(allTags.includes(searchInput)){
+    let searchedData = currentUser.favoriteRecipes.filter(recipe => recipe['tags'].includes(searchInput));
+    populateCards(searchedData)
+    return searchedData
+  } else {
+    let lowerCasedNames = currentUser.favoriteRecipes.map((element) => {
+      element.name = element.name.toLowerCase();
+      return element
+    })
+    let searchedData = lowerCasedNames.filter(recipe => recipe['name'].includes(searchInput));
+    populateCards(searchedData)
+    return searchedData
+  }
+}
 
 function searchRecipes() {
   let searchInput = searchFavesInput.value;
@@ -261,7 +277,6 @@ function searchRecipes() {
 function searchData(input) {
   let searchInput = searchFavesInput.value;
   let searchedData = currentUser.favoriteRecipes.filter(recipe => recipe[`${input}`].includes(searchInput));
-    console.log('searchedData: ', searchedData)
   return searchedData
 };
 
