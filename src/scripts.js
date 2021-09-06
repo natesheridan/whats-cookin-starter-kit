@@ -7,8 +7,11 @@ import rightArrow from './data/assets/Right-arrow.svg';
 import pancakes from './data/assets/pancakes.svg';
 import starActive from './data/assets/star-active.svg';
 import star from './data/assets/star.svg';
-import {usersData} from './data/users.js';
-import {recipeData} from './data/recipes.js';
+// import {usersData} from './data/users.js';
+// import {recipeData} from './data/recipes.js';
+import usersData from './apiCalls.js';
+import ingredientsData from './apiCalls.js';
+import recipeData from './apiCalls.js'
 
 // BUTTONS & SECTIONS //
 
@@ -62,6 +65,12 @@ addIngredientButton.addEventListener('click', addIngredient);
 searchFavesSubmitBtn.addEventListener('click', searchFaves);
 
 // MAIN FUNCTIONS //
+
+window.onload = (event) => {
+  fetchUsersData();
+  fetchIngredientsData();
+  fetchRecipeData();
+}
 
 function filterRecipes() {
   // event.preventDefault();

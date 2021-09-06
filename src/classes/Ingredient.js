@@ -1,4 +1,7 @@
-const ingredientsData = require('../data/ingredients')
+// const ingredientsData = require('../data/ingredients')
+
+import ingredientsData from './apiCalls.js';
+
 class Ingredient {
     constructor(obj) {
       this.id = obj.id;
