@@ -20,6 +20,7 @@ const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
+const searchFavesInput = document.querySelector('#searchFavesByName');
 const fullRecipe = document.querySelector('.full-recipe-container');
 const recipeFormTitle = document.querySelector('#recipeFormTitle');
 const recipeFormImage = document.querySelector('#recipeFormImage');
@@ -57,8 +58,7 @@ filters.addEventListener('click', filterRecipes);
 plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
 addIngredientButton.addEventListener('click', addIngredient);
-searchFavesBtn.addEventListener('click', searchFaves);
-
+searchFavesSubmitBtn.addEventListener('click', searchFaves);
 
 // MAIN FUNCTIONS //
 
@@ -106,9 +106,10 @@ function addNewRecipe() {
 function viewAllRecipes() {
   show(allRecipeContainer);
   hide(addRecipeForm);
+  hide(recipeGrid);
   show(allRecipeGrid);
   hide(searchFavesInput);
-  hide(searchFavesBtn);
+  hide(searchFavesSubmitBtn);
 
   let recipeRepo = new RecipeRepository(recipeData);
   allRecipeGrid.innerHTML = ""
@@ -132,14 +133,14 @@ function viewAllRecipes() {
 
 function showHomeView() {
   show(recipeGrid);
-  generateRandomHomeViewRecipes()
+  generateRandomHomeViewRecipes();
   hide(addRecipeForm);
   hide(allRecipeContainer);
+  hide(allRecipeGrid);
   // contentContainer.childNode = recipeGrid;
   // fullRecipeContainer.classList.add('push-to-back');
   // contentContainer.removeChild(fullRecipeContainer);
   // contentContainer.innerHTML = recipeGrid.innerHTML;
-  show(recipeGrid);
   show(mainContent);
 }
 
@@ -302,7 +303,7 @@ function joinToString(array){
 function searchByTag(recipesArray, searchTags){
   let returnedArr = []
   const filteredArray = recipesArray.reduce((acc, recipe) => {
-    
+
       let tagsString = joinToString(recipe.tags);
       let numOfTags = searchTags.length;
       // console.log(searchTags);
@@ -383,8 +384,8 @@ function generateRandomHomeViewRecipes(){
   console.log(randomRecipeIndex1, randomRecipeIndex2, randomRecipeIndex3)
   let randomRecipesIndex = [randomRecipeIndex1, randomRecipeIndex2, randomRecipeIndex3]
   randomRecipesIndex.forEach((randomRecipeIndex) => {
-    
-    let index = randomRecipeIndex 
+
+    let index = randomRecipeIndex
     // let buttonClasses = "favorite-star"
     // let idMap = currentUser.favoriteRecipes.map((faveItem) => faveItem.id)
     // if (idMap.includes(recipe.id)){
@@ -417,4 +418,3 @@ function generateRandomHomeViewRecipes(){
 
 generateRandomUser()
 generateRandomHomeViewRecipes()
-

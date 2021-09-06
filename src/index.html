@@ -146,8 +146,8 @@
               <label for="repeat-password"><b>Repeat Password</b></label>
               <input type="text" placeholder="Repeat password" name="password">
             </article>
-            <button type="submit" class="log-in-button">Login</button>
-            <button type="submit" class="sign-up-button" onclick="closeForm()">Sign Up</button>
+            <button type="submit" class="log-in-button disabled">Login</button>
+            <button type="submit" class="sign-up-button disabled" onclick="closeForm()">Sign Up</button>
           </form>
         </article>
         <section class="add-recipe hidden" id="addRecipeForm">
@@ -183,7 +183,7 @@
           <button type="button" name="submit-recipe" class="submit-recipe" id="submitRecipe"><b>Add Recipe</b></button>
         </section>
         <section class="all-recipe-container hidden" id="allRecipeContainer">
-          <section class="all-recipe-grid hidden" id="allRecipeGrid">
+          <section class="all-recipe-grid" id="allRecipeGrid">
               <h2>Recipes</h2>
               <input type="radio" name="favorites?" value="">
               <aside class="all-scroll-arrow">

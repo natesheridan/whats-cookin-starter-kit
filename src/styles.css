@@ -236,6 +236,7 @@ aside > button {
   padding: .8rem;
   border-radius: 1rem;
   margin: 0rem .4rem 0rem .4rem;
+  overflow: scroll;
 }
 
 .recipe-content {
