@@ -54,7 +54,7 @@ contentContainer.addEventListener('click', getDirections);
 homeButton.addEventListener('click', showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);
-savedRecipesButton.addEventListener('click', () => {populateCards(currentUser.favoriteRecipes)});
+savedRecipesButton.addEventListener('click', showSavedRecipes);
 filters.addEventListener('click', filterRecipes);
 plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
@@ -143,6 +143,8 @@ function showHomeView() {
   // contentContainer.removeChild(fullRecipeContainer);
   // contentContainer.innerHTML = recipeGrid.innerHTML;
   show(mainContent);
+  hide(searchFavesSubmitBtn);
+  hide(searchFavesByName);
 }
 
 function showRecipeForm() {
@@ -150,10 +152,18 @@ function showRecipeForm() {
   hide(recipeGrid);
   hide(allRecipeContainer);
   hide(fullRecipeContainer);
+  hide(searchFavesSubmitBtn);
+  hide(searchFavesByName);
 }
 
 function showLogin() {
   loginPopup.classList.toggle('hidden');
+}
+
+function showSavedRecipes() {
+  populateCards(currentUser.favoriteRecipes);
+  show(searchFavesSubmitBtn);
+  show(searchFavesByName);
 }
 
 function getDirections(event){
