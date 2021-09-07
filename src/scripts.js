@@ -81,8 +81,7 @@ function parseData(data){
   usersData = data[0].usersData;
   ingredientsData = data[1].ingredientsData;
   recipeData = data[2].recipeData
-  console.log(recipeData)
-
+  console.log(data)
 
   generateRandomUser()
   generateRandomHomeViewRecipes()
@@ -200,7 +199,6 @@ function showSavedRecipes() {
 }
 
 function getDirections(event){
-  console.log(event)
   if(event.target.classList.contains('favorite-star')){
     addToFavorites();
     return
@@ -211,6 +209,19 @@ function getDirections(event){
   if(event.target.classList.contains('all-recipe-grid')){
     return
   }
+
+  if(event.target.classList.contains('search-submit-btn')) {
+    return
+  }
+
+  if(event.target.classList.contains('search-field')){
+    return
+  }
+
+  if(event.target.localName === 'footer'){
+    return
+  }
+
 
   allRecipeGrid.innerHTML = "";
   let targetID = event.target.closest('.mini-recipe').id;
@@ -425,7 +436,7 @@ function generateRandomHomeViewRecipes(){
   recipeGrid.innerHTML = ""
   let title = "<h1 class='home-title'>Featured Recipes</h1>"
   recipeGrid.innerHTML = title;
-  console.log(randomRecipeIndex1, randomRecipeIndex2, randomRecipeIndex3)
+  // console.log(randomRecipeIndex1, randomRecipeIndex2, randomRecipeIndex3)
   let randomRecipesIndex = [randomRecipeIndex1, randomRecipeIndex2, randomRecipeIndex3]
   randomRecipesIndex.forEach((randomRecipeIndex) => {
 
@@ -451,11 +462,3 @@ function generateRandomHomeViewRecipes(){
 
   })
 }
-
-
-
-
-
-
-
-
