@@ -7,8 +7,10 @@ import rightArrow from './data/assets/Right-arrow.svg';
 import pancakes from './data/assets/pancakes.svg';
 import starActive from './data/assets/star-active.svg';
 import star from './data/assets/star.svg';
-import {usersData} from './data/users.js';
-import {recipeData} from './data/recipes.js';
+// import {usersData} from './data/users.js';
+// import {recipeData} from './data/recipes.js';
+import {fetchUsersData, fetchRecipeData, fetchIngredientsData} from './apiCalls.js';
+import apiCalls from './apiCalls.js';
 
 // BUTTONS & SECTIONS //
 
@@ -38,10 +40,14 @@ const plusButton = document.querySelector('#plusButtonContainer');
 const submitRecipeButton = document.querySelector('#submitRecipe');
 const addIngredientButton = document.querySelector('#plusButtonContainer');
 
+
 // FILTER CHECKBOXES && SEARCH ARRAY //
 
 const filters = document.querySelector('#filters');
 let currentUser;
+let usersData = [];
+let recipeData = [];
+let ingredientsData = [];
 let filterSelection = [];
 let addedIngredients = [];
 
@@ -60,8 +66,35 @@ plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
 addIngredientButton.addEventListener('click', addIngredient);
 searchFavesSubmitBtn.addEventListener('click', searchFaves);
+window.addEventListener('load', getData);
 
 // MAIN FUNCTIONS //
+//
+// window.onload = (event) => {
+//   apiCalls.getData();
+//   Promise.all([usersData, ingredientsData, recipeData]);
+// }
+
+
+
+function parseData(data){
+  usersData = data[0].usersData;
+  ingredientsData = data[1].ingredientsData;
+  recipeData = data[2].recipeData
+  console.log(recipeData)
+
+
+  generateRandomUser()
+  generateRandomHomeViewRecipes()
+}
+
+
+function getData() {
+  return Promise.all([fetchUsersData(), fetchIngredientsData(), fetchRecipeData()])
+  .then(data => parseData(data));
+}
+
+
 
 function filterRecipes() {
   // event.preventDefault();
@@ -426,6 +459,3 @@ function generateRandomHomeViewRecipes(){
 
 
 
-
-generateRandomUser()
-generateRandomHomeViewRecipes()
