@@ -11,11 +11,11 @@ class Ingredient {
     this.grabUniqueIngredientData()
     this.name;
     this.estimatedCostInCents;
-    
+
   }
   grabUniqueIngredientData(){
     let self = this;
-    console.log(this.ingredientsData)
+    // console.log(this.ingredientsData)
     let returnedData = this.ingredientsData.find(({id}) => id === self.id);
     this.uniqueIngredientData = returnedData;
     this.name = this.uniqueIngredientData.name;
