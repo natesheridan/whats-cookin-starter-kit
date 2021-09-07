@@ -1,9 +1,3 @@
-// https://what-s-cookin-starter-kit.herokuapp.com/api/v1/users
-
-// https://what-s-cookin-starter-kit.herokuapp.com/api/v1/ingredients
-
-// https://what-s-cookin-starter-kit.herokuapp.com/api/v1/recipes
-
 
 export function fetchUsersData() {
     return fetch('https://what-s-cookin-starter-kit.herokuapp.com/api/v1/users')
@@ -24,5 +18,3 @@ export function fetchRecipeData() {
   .then(data => data)
   // .then(data => console.log('RECIPEDATA: ', recipeData))
 }
-
-

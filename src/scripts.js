@@ -50,6 +50,7 @@ let currentUser;
 let usersData = [];
 let recipeData = [];
 let ingredientsData = [];
+export default ingredientsData;
 let filterSelection = [];
 let addedIngredients = [];
 
@@ -83,8 +84,7 @@ function parseData(data){
   usersData = data[0].usersData;
   ingredientsData = data[1].ingredientsData;
   recipeData = data[2].recipeData
-  console.log(recipeData)
-
+  console.log(data)
 
   generateRandomUser()
   generateRandomHomeViewRecipes()
@@ -132,7 +132,7 @@ function addNewRecipe() {
   let ingredients = recipeFormIngredient.value;
   let unitField = unitSelection.value;
   addIngredient();
-  let newRecipe = new Recipe({id: generateRandomNumber(), name: titleField, image: imageField, ingredients: [addedIngredients]});
+  let newRecipe = new Recipe({id: generateRandomNumber(), name: titleField, image: imageField, ingredients: [addedIngredients]}, ingredientsData);
 
   console.log(newRecipe);
   recipeData.push(newRecipe);
@@ -208,7 +208,6 @@ function showSavedRecipes() {
 }
 
 function getDirections(event){
-  console.log(event)
   if(event.target.classList.contains('favorite-star')){
     addToFavorites();
     return
@@ -220,14 +219,26 @@ function getDirections(event){
     return
   }
 
+  if(event.target.classList.contains('search-submit-btn')) {
+    return
+  }
+
+  if(event.target.classList.contains('search-field')){
+    return
+  }
+
+  if(event.target.localName === 'footer'){
+    return
+  }
+
+
   allRecipeGrid.innerHTML = "";
   let targetID = event.target.closest('.mini-recipe').id;
   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
-  console.log(newRecipeInfo)
-  let selectedRecipe = new Recipe(newRecipeInfo);
+  let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
 
   selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {
-    let ingredient = new Ingredient(element)
+    let ingredient = new Ingredient(element, ingredientsData)
     return ingredient
   })
   let instructions = selectedRecipe.instructions.map((element) => {
@@ -404,7 +415,7 @@ function addToFavorites(){
   let recipeID = event.target.closest('.mini-recipe').id;
   let recipeBtn = event.target.closest('button');
   let fullRecipe = recipeRepo.recipeData.find(recipe => recipe.id === Number(recipeID));
-  let selectedRecipe = new Recipe(fullRecipe);
+  let selectedRecipe = new Recipe(fullRecipe, ingredientsData);
   let index = recipeRepo.recipeData.indexOf(fullRecipe);
   recipeBtn.classList.toggle("is-favorite");
   currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
