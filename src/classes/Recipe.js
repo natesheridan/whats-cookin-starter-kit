@@ -1,7 +1,7 @@
 
 import Ingredient from '../classes/Ingredient';
 class Recipe {
-    constructor(recipeObj) {
+    constructor(recipeObj, ingredientsData) {
       // console.log(recipeObj)
         this.recipeObj = recipeObj;
         this.id = this.recipeObj.id;
@@ -11,6 +11,7 @@ class Recipe {
         this.name = this.recipeObj.name;
         this.tags = this.recipeObj.tags;
         this.isUpdated = false;
+        this.ingredientsData = ingredientsData;
     }
     returnIngredients() {
         this.updateIngredientData();
@@ -37,7 +38,7 @@ class Recipe {
     //helper function to grab data(name and price) from ingredients.js;
     updateIngredientData() {
         if (!this.isUpdated) {
-            let updatedIngredients = this.ingredients.map(ingredientObj => new Ingredient(ingredientObj))
+            let updatedIngredients = this.ingredients.map(ingredientObj => new Ingredient(ingredientObj, this.ingredientsData))
             this.isUpdated = true;
             this.ingredients = updatedIngredients;
             }
