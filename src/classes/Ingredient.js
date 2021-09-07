@@ -1,21 +1,25 @@
 // const ingredientsData = require('../data/ingredients')
 
-import ingredientsData from '../apiCalls.js';
+
+
 
 class Ingredient {
-    constructor(obj) {
-      this.id = obj.id;
-      this.uniqueIngredientData;
-      this.grabUniqueIngredientData()
-      this.name = this.uniqueIngredientData.name;
-      this.estimatedCostInCents = this.uniqueIngredientData.estimatedCostInCents
-      this.quantity = obj.quantity;
-    }
-    grabUniqueIngredientData(){
-      let self = this;
-      let returnedData = ingredientsData.find(({id}) => id === self.id);
-      this.uniqueIngredientData = returnedData;
-    }
-
+  constructor(obj, ingredientsData) {
+    this.id = obj.id;
+    this.quantity = obj.quantity;
+    this.ingredientsData = ingredientsData;
+    this.grabUniqueIngredientData()
+    this.name;
+    this.estimatedCostInCents;
+    
   }
-  export default Ingredient;
+  grabUniqueIngredientData(){
+    let self = this;
+    console.log(this.ingredientsData)
+    let returnedData = this.ingredientsData.find(({id}) => id === self.id);
+    this.uniqueIngredientData = returnedData;
+    this.name = this.uniqueIngredientData.name;
+    this.estimatedCostInCents = this.uniqueIngredientData.estimatedCostInCents
+  }
+}
+export default Ingredient
