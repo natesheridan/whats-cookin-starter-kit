@@ -16,6 +16,8 @@ import apiCalls from './apiCalls.js';
 
 const allRecipeGrid = document.querySelector('#allRecipeGrid');
 const mainContent = document.querySelector('#mainContent');
+const featuredRecipes = document.querySelector('#featuredRecipes');
+const homeTitle = document.querySelector('#homeTitle');
 const allRecipeContainer = document.querySelector('#allRecipeContainer');
 const allRecipes = document.querySelector('#allRecipesButton');
 const recipeGrid = document.querySelector('#recipeGrid');
@@ -132,18 +134,21 @@ function addNewRecipe() {
   addIngredient();
   let newRecipe = new Recipe({id: generateRandomNumber(), name: titleField, image: imageField, ingredients: [addedIngredients]});
 
-  console.log(newRecipe);a
+  console.log(newRecipe);
   recipeData.push(newRecipe);
   addedIngredients = [];
 }
 
 function viewAllRecipes() {
+  show(filters);
   show(allRecipeContainer);
   hide(addRecipeForm);
   hide(recipeGrid);
   show(allRecipeGrid);
   hide(searchFavesInput);
   hide(searchFavesSubmitBtn);
+  show(featuredRecipes);
+  featuredRecipes.innerHTML = `<h1>All Recipes</h1>`;
 
   let recipeRepo = new RecipeRepository(recipeData);
   allRecipeGrid.innerHTML = ""
@@ -157,7 +162,7 @@ function viewAllRecipes() {
       `<article class="mini-recipe" id="${recipe.id}">
        <img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>
-       <button type="favoriteStar" name="favoriteStar" class="${buttonClasses}" id="faveBtn-${recipe.id}">♡</button>
+       <button type="favoriteStar" name="favoriteStar" class="${buttonClasses} heart-button" id="faveBtn-${recipe.id}">♡</button>
        </article>`
 
       return acc;
@@ -171,22 +176,22 @@ function showHomeView() {
   hide(addRecipeForm);
   hide(allRecipeContainer);
   hide(allRecipeGrid);
-  // contentContainer.childNode = recipeGrid;
-  // fullRecipeContainer.classList.add('push-to-back');
-  // contentContainer.removeChild(fullRecipeContainer);
-  // contentContainer.innerHTML = recipeGrid.innerHTML;
   show(mainContent);
   hide(searchFavesSubmitBtn);
   hide(searchFavesByName);
+  hide(filters);
+  show(featuredRecipes);
+  featuredRecipes.innerHTML = `<h1>Featured Recipes</h1>`;
 }
 
 function showRecipeForm() {
   show(addRecipeForm);
   hide(recipeGrid);
   hide(allRecipeContainer);
-  hide(fullRecipeContainer);
+  hide(filters);
   hide(searchFavesSubmitBtn);
   hide(searchFavesByName);
+  featuredRecipes.innerHTML = `<h1>Add a Recipe</h1>`;
 }
 
 function showLogin() {
@@ -197,6 +202,9 @@ function showSavedRecipes() {
   populateCards(currentUser.favoriteRecipes);
   show(searchFavesSubmitBtn);
   show(searchFavesByName);
+  show(filters);
+  show(featuredRecipes);
+  featuredRecipes.innerHTML = `<h1>Saved Recipes</h1>`;
 }
 
 function getDirections(event){
@@ -412,6 +420,7 @@ function generateRandomUser() {
 };
 
 function generateRandomHomeViewRecipes(){
+  show(featuredRecipes);
   const recipeRepo = new RecipeRepository(recipeData);
   let randomRecipeIndex1 = Math.floor(Math.random() * recipeRepo.recipeData.length)
   let randomRecipeIndex2 = Math.floor(Math.random() * recipeRepo.recipeData.length)
@@ -423,8 +432,8 @@ function generateRandomHomeViewRecipes(){
     randomRecipeIndex3 = Math.floor(Math.random() * recipeRepo.recipeData.length)
   }
   recipeGrid.innerHTML = ""
-  let title = "<h1 class='home-title'>Featured Recipes</h1>"
-  recipeGrid.innerHTML = title;
+  // let title = "<h1 class='home-title' id='homeTitle'>Featured Recipes</h1><br>"
+  // recipeGrid.innerHTML = title;
   console.log(randomRecipeIndex1, randomRecipeIndex2, randomRecipeIndex3)
   let randomRecipesIndex = [randomRecipeIndex1, randomRecipeIndex2, randomRecipeIndex3]
   randomRecipesIndex.forEach((randomRecipeIndex) => {
@@ -451,11 +460,3 @@ function generateRandomHomeViewRecipes(){
 
   })
 }
-
-
-
-
-
-
-
-

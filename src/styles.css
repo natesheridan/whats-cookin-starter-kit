@@ -1,5 +1,4 @@
 body {
-  background-color: darkgrey;
   color: black;
   height: 1vh;
   width: 100%;
@@ -7,7 +6,6 @@ body {
   margin: 0px;
   font-family: 'Montserrat', sans-serif;
   overflow: scroll;
-  transition-duration: .5s;
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
@@ -33,10 +31,6 @@ nav > button:hover {
 
 nav > button:active {
   background-color: #c8553d;
-}
-
-.search-field{
-
 }
 
 button {
@@ -71,10 +65,11 @@ footer {
 }
 
 footer {
-  height: 2rem;
+  position: absolute;
+  height: 3rem;
   background-color: #c8553d;
   position: absolute;
-  bottom: 0;
+  bottom: -10%;
 }
 
 .title-container {
@@ -86,6 +81,22 @@ footer {
   border: 0px;
 }
 
+.search-field-container {
+  position: absolute;
+  left: 5%;
+  top: 2.5%;
+}
+
+.featured-recipes-title > h1 {
+  position: static;
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 0px;
+  margin-bottom: 1rem;
+  padding: 0px;
+  border: 0px;
+}
+
 .filter-select {
   display: flex;
   flex-direction: row;
@@ -93,7 +104,6 @@ footer {
   align-items: center;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  /* width: 50rem; */
   background-color: #13577f;
   color: white;
 }
@@ -109,7 +119,6 @@ footer {
 
 .sidebars {
   display: inline-flex;
-  /* position: relative; */
   background-color: #8FB7B7;
   margin: 0px;
   border: 0px;
@@ -163,12 +172,14 @@ aside > button {
 
 .login-button {
   position: absolute;
+  top: 1.5%;
   right: 5%;
   color: black;
   background-color: #FFF8F3;
   height: auto;
   width: 5rem;
   padding: .5rem 0rem .5rem 0rem;
+  cursor: default;
 }
 
 .scroll-arrow {
@@ -191,21 +202,16 @@ aside > button {
 .content-container {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   position: relative;
   background-color: #8FB7B7;
   padding-top: 3rem;
   padding-bottom: 3rem;
-  height: 25rem;
+  height: 32rem;
   z-index: 0;
 }
 
 .main-content {
-  /* background-color: #588b8b; */
-  /* height: 40rem;
-  width: 40rem; */
-
   z-index: 0;
 }
 
@@ -226,7 +232,6 @@ aside > button {
 .recipe {
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
   justify-content: center;
   text-align: center;
   position: relative;
@@ -239,6 +244,18 @@ aside > button {
   overflow: scroll;
 }
 
+.favorite-star {
+  position: absolute;
+  bottom: 8%;
+  right: 8%;
+  background-color: white;
+}
+
+.mini-recipe > .favorite-star {
+  position: static;
+  margin: 0% 4% 4% 76%;
+}
+
 .recipe-content {
   display: flex;
   flex-direction: column;
@@ -248,6 +265,11 @@ aside > button {
 .recipe-info {
   margin: 0rem .4rem 0rem .4rem;
 }
+
+.mini-recipe > button {
+  right: 0;
+}
+
 
 .login-popup {
 
@@ -262,7 +284,7 @@ aside > button {
   padding: 1rem 1.5rem 1rem 1.5rem;
   border: 1px solid black;
   background-color: #fff8f4;
-  top: 8%;
+  top: -12%;
   right: 9.5%;
   z-index: 2;
 }
@@ -271,12 +293,13 @@ aside > button {
   margin-top: 1rem;
   height: 2rem;
   width: auto;
-  background-color: #1e9692;
+  background-color: #b6b5bf;
   color: white;
+  cursor: default;
 }
 
 .login-form > .sign-up-button {
-  background-color: #C8553D;
+    background-color: #b6b5bf;
 }
 
 .login-form > .cancel-login {
@@ -293,26 +316,15 @@ aside > button {
   display: flex;
   position: relative;
   justify-content: center;
-  align-items: baseline;
+  align-items: flex-start;
   margin-top: -25%;
 }
 
 .meal-image > img {
-  height: 9rem;
-  width: 9rem;
-  padding: 0px;
-  margin: 0px;
-  /* border: 1px transparent black; */
-}
-
-.star {
-  height: 3rem;
-  width: 3rem;
-  position: absolute;
-  top: 4%;
-  right: 4%;
-  z-index: 1;
-  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  padding: 0rem;
+  margin: 0rem;
 }
 
 .all-recipe-container {
@@ -340,7 +352,6 @@ aside > button {
 }
 
 .mini-recipe {
-  /* flex-direction: row; */
   display: inline-table;
   height: 15rem;
   width: 10rem;
@@ -353,8 +364,8 @@ aside > button {
 }
 
 .mini-recipe > img {
-  height: 8rem;
-  width: 10rem;
+  height: 10rem;
+  width: auto;
   flex-flow: row wrap;
 }
 
@@ -391,26 +402,35 @@ aside > button {
 
 }
 
+.add-recipe-container {
+  position: relative;
+  width: auto;
+}
+
 .add-recipe {
   height: 80%;
   width: 100%;
   padding: 2rem;
   background-color: #FFF8F3;
   border: 1px solid black;
-  bottom: 10%;
+  bottom: 30%;
+  z-index: 1;
 }
 
 .add-recipe > h3 {
   /* margin-top: .2rem; */
 }
 
-.add-recipe > .plus-button {
+.add-recipe > .plus-button-container {
+  margin-left: .5rem;
   height: 2rem;
-  width: 2rem;
+  width: auto;
+  color: white;
+  background-color: #15c1bc;
 }
 
 .add-recipe > .submit-recipe {
-  background-color: #8FB7B7;
+  background-color: #15c1bc;
   color: white;
   margin-top: .2rem;
 }
@@ -459,8 +479,6 @@ aside > button {
 .hidden {
   display: none;
 }
-
-
 
 .favorite-star{
   background-color: #eeeeee;

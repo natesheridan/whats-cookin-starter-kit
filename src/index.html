@@ -10,19 +10,23 @@
   </head>
   <body>
     <header>
-      <article class="title-container">
-        <h1>What's Cookin'?</h1>
-      </article>
-      <input type="text" placeholder= "Search recipes by name" name="search" class="search-field">
-      <input name="search" type="submit" class = "search-submit-btn">
-      <button type="button" class="login-button" id="loginButton" name="login">Login</button>
+      <section class="header-container">
+        <article class="title-container">
+          <h1>What's Cookin'?</h1>
+        </article>
+        <section class="search-field-container">
+          <input type="text" placeholder= "Search recipes by name" name="search" class="search-field">
+          <input name="search" type="submit" class = "search-submit-btn">
+        </section>
+        <button type="button" class="login-button" id="loginButton" name="login">Login</button>
+      </section>
     </header>
     <nav>
       <button type="button" id="allRecipesButton" name="all recipes">All Recipes</button>
       <button type="button" id="homeButton" name="home">Home</button>
       <button type="button" id="savedRecipesButton" name="saved recipes">Saved Recipes</button>
     </nav>
-    <section class="filter-select" id="filters">
+    <section class="filter-select hidden" id="filters">
       <section class="meals" id="meals">
         <input type="checkbox" id="breakfast" name="Breakfast" value="Breakfast">
         <label for="breakfast">Breakfast</label><br>
@@ -71,13 +75,13 @@
         <button type="button" id="addRecipeButton" name="add a recipe"><h1>Add a Recipe</h1></button>
       </section>
       <section class="right-sidebar">
-        <article class="scroll-arrow">
-          <img src=images/Right-arrow.svg class="right-arrow" alt="scroll arrow">
-        </article>
       </section>
     </aside>
     <section class="content-container">
       <section class="main-content" id="mainContent">
+        <section class="featured-recipes-title" id="featuredRecipes">
+          <h1>Featured Recipes</h1>
+        </section>
         <section class="recipe-grid" id="recipeGrid">
           <article class="recipe">
             <div class="meal-image">
@@ -150,47 +154,47 @@
             <button type="submit" class="sign-up-button disabled" onclick="closeForm()">Sign Up</button>
           </form>
         </article>
-        <section class="add-recipe hidden" id="addRecipeForm">
-          <h1></h1>
-          <h3>Title</h3> <br>
-          <input type="text" name="title" class="recipe-form-title" id="recipeFormTitle" value="">
-          <h3>Image</h3> <br>
-          <input type="text" name="image" class="recipe-form-image" id="recipeFormImage" value="">
-          <h3>Amount</h3>
-          <input type="number" name="amount" class="ingredient-amount" id="ingredientAmount" value="">
-          <select name="units" id="unitSelection">
-              <option value="">Select a unit</option>
-              <option value="cups">cups</option>
-              <option value="tbsp">tbsp</option>
-              <option value="tsp">tsp</option>
-              <option value="oz">oz</option>
-              <option value="lb">lb</option>
-              <option value="pt">pt</option>
-              <option value="qt">qt</option>
-              <option value="gal">gal</option>
-              <option value="lb">lb</option>
-              <option value="ml">ml</option>
-              <option value="l">l</option>
-              <option value="g">g</option>
-              <option value="mg">mg</option>
-              <option value="kg">kg</option>
-          </select>
-          <h3>Ingredients</h3>
-          <input type="text" name="ingredient" class="recipe-form-ingredient" id="recipeFormIngredient" value="">
-          <button type="button" class="plus-button-container" id="plusButtonContainer">
-            <img src="" class="plus-button" alt="add ingredient">
-          </button><br>
-          <button type="button" name="submit-recipe" class="submit-recipe" id="submitRecipe"><b>Add Recipe</b></button>
-        </section>
-        <section class="all-recipe-container hidden" id="allRecipeContainer">
-          <section class="all-recipe-grid" id="allRecipeGrid">
-              <h2>Recipes</h2>
-              <input type="radio" name="favorites?" value="">
-              <aside class="all-scroll-arrow">
-                <img src="" alt="scroll arrow">
-              </aside>
+          <section class="add-recipe-container">
+            <section class="add-recipe hidden" id="addRecipeForm">
+              <h1></h1>
+              <h3>Title</h3> <br>
+              <input type="text" name="title" class="recipe-form-title" id="recipeFormTitle" value="">
+              <h3>Image</h3> <br>
+              <input type="text" name="image" class="recipe-form-image" id="recipeFormImage" value="">
+              <h3>Amount</h3>
+              <input type="number" name="amount" class="ingredient-amount" id="ingredientAmount" value="">
+              <select name="units" id="unitSelection">
+                  <option value="">Select a unit</option>
+                  <option value="cups">cups</option>
+                  <option value="tbsp">tbsp</option>
+                  <option value="tsp">tsp</option>
+                  <option value="oz">oz</option>
+                  <option value="lb">lb</option>
+                  <option value="pt">pt</option>
+                  <option value="qt">qt</option>
+                  <option value="gal">gal</option>
+                  <option value="lb">lb</option>
+                  <option value="ml">ml</option>
+                  <option value="l">l</option>
+                  <option value="g">g</option>
+                  <option value="mg">mg</option>
+                  <option value="kg">kg</option>
+              </select>
+              <h3>Ingredients</h3>
+              <input type="text" name="ingredient" class="recipe-form-ingredient" id="recipeFormIngredient" value="">
+              <button type="button" class="plus-button-container" id="plusButtonContainer"><b>+</b></button><br>
+              <button type="button" name="submit-recipe" class="submit-recipe" id="submitRecipe"><b>Add Recipe</b></button>
+            </section>
+            <section class="all-recipe-container hidden" id="allRecipeContainer">
+              <section class="all-recipe-grid" id="allRecipeGrid">
+                  <h2>Recipes</h2>
+                  <input type="radio" name="favorites?" value="">
+                  <aside class="all-scroll-arrow">
+                    <img src="" alt="scroll arrow">
+                  </aside>
+              </section>
+            </section>
           </section>
-        </section>
     </section>
     <article class="popup-container">
       <span class="hidden" id="popup">
@@ -198,8 +202,8 @@
       </span>
     </article>
     <footer>
-      <input name="search" type="submit" class = "hidden search-submit-btn" id="searchFavesSubmitBtn">
-      <input type="text" placeholder= "Search favorites" name="searchFavorites" class="hidden search-field" id="searchFavesByName">
+        <input name="search" type="submit" class = "hidden search-submit-btn" id="searchFavesSubmitBtn">
+        <input type="text" placeholder= "Search favorites" name="searchFavorites" class="hidden search-field" id="searchFavesByName">
     </footer>
   </body>
 </html>
