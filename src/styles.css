@@ -1,12 +1,13 @@
 body {
   color: black;
+  height: 1vh;
   width: 100%;
   background-color: #FFE3D6;
   margin: 0px;
-  /* margin-bottom: 1rem; */
   font-family: 'Montserrat', sans-serif;
   overflow: scroll;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 nav {
@@ -61,15 +62,14 @@ footer {
   justify-content: center;
   background-color: #c8553d;
   width: 100%;
-  
 }
 
 footer {
-  position: sticky;
+  position: absolute;
   height: 3rem;
   background-color: #c8553d;
-  position: absolute;
-  bottom: -10%;
+  bottom: -15%;
+  margin-bottom: -2rem;
 }
 
 .title-container {
@@ -84,7 +84,7 @@ footer {
 .search-field-container {
   position: absolute;
   left: 5%;
-  top: 2.5%;
+  top: 2.2%;
 }
 
 .featured-recipes-title > h1 {
@@ -102,8 +102,8 @@ footer {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
   background-color: #13577f;
   color: white;
 }
@@ -137,7 +137,7 @@ aside > button {
   position: absolute;
   left: 2rem;
   width: 14%;
-  height: 1vh;
+  height: auto;
   padding-top: 2rem;
   z-index: 2;
 }
@@ -165,8 +165,7 @@ aside > button {
   justify-content: center;
   right: 1rem;
   width: 10%;
-  height: 1vh;
-  /* top: 40%; */
+  height: auto;
   z-index: 2;
 }
 
@@ -206,8 +205,8 @@ aside > button {
   position: relative;
   background-color: #8FB7B7;
   padding-top: 1rem;
-  padding-bottom: 1rem;
-  height: 100%;
+  padding-bottom: 3rem;
+  height: 32rem;
   z-index: 0;
 }
 
@@ -270,11 +269,6 @@ aside > button {
   right: 0;
 }
 
-
-.login-popup {
-
-}
-
 .login-form {
   display: flex;
   flex-direction: column;
@@ -333,7 +327,7 @@ aside > button {
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 22rem;
+  height: 28rem;
   width: 60%;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -492,4 +486,8 @@ aside > button {
 
 .home-title{
   font-size: 40px;
+}
+
+.wrapper {
+  min-height: 100%;
 }
