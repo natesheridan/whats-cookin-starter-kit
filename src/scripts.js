@@ -200,6 +200,8 @@ function showSavedRecipes() {
 }
 
 function getDirections(event){
+  hide(allRecipeGrid);
+  show(recipeGrid)
   if(event.target.classList.contains('favorite-star')){
     addToFavorites();
     return
@@ -224,10 +226,17 @@ function getDirections(event){
   }
 
 
-  allRecipeGrid.innerHTML = "";
-  let targetID = event.target.closest('.mini-recipe').id;
+  recipeGrid.innerHTML = "";
+  let targetID = "";
+
+  if(event.target.closest('.mini-recipe')){
+    targetID = event.target.closest('.mini-recipe').id
+  } else {
+    targetID = event.target.closest('.recipe').id;
+  }
   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
   let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
+  console.log(selectedRecipe)
 
   selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {
     let ingredient = new Ingredient(element, ingredientsData)
@@ -257,7 +266,7 @@ function getDirections(event){
     <p class= "cost">${selectedRecipe.returnCostEstimation()}</p>
     <p class= "instructions">${instructions}</p>`;
 
-  allRecipeGrid.innerHTML = fullRecipe
+  recipeGrid.innerHTML = fullRecipe
 };
 
 
@@ -448,7 +457,7 @@ function generateRandomHomeViewRecipes(){
     // }
 
    recipeGrid.innerHTML +=
-    `<article class="recipe">
+    `<article class="recipe" id=${recipeRepo.recipeData[index].id}>
     <div class="meal-image">
       <img src="${recipeRepo.recipeData[index].image}" alt="meal image" class="image">
     </div>
