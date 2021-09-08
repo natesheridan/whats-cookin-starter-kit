@@ -1,22 +1,78 @@
-# What's Cookin'? Starter Kit 
 
-The details of this project are outlined in the <a href="https://frontend.turing.edu/projects/What%27sCookin-PartOne.html" target="\__blank">project spec</a>.
+# WHAT’S COOKIN’ STARTER KIT  
+Mod 2, GROUP PROJECT PART 1
+## Table of Contents  
+ - [Abstract](#abstract)  
+ - [Technologies](#technologies)  
+ - [Illustrations](#illustrations)  
+ - [Install + Setup](#set-up)  
+ - [Contributors](#contributors)  
+ - [Wins](#wins)  
+ - [Challenges + Improvements](#challenges-+-Improvements)  
+ - [Project Specs](#project-specs) 
+  
+## Abstract  
+WHAT’S COOKIN is an interactive virtual repository of recipe data and instructions that makes selecting, compiling, and preparing your favorite foods as easy as a click of the mouse or a touch of the thumb! Select from a pre-loaded collection of favorites or add your own recipes and ingredients!
+## Technologies  
+ - HTML
+ - CSS
+ - Javascript
+ - node
+ - Atom
+ - WebPack
+ - herokuapp for API data
+ - Mocha and Chai for testing
 
-## Set Up 
+## Illustrations  
+DEMO GIF
+![enter image description here](https://s9.gifyu.com/images/Kapture-2021-09-07-at-17.55.49.gif)
 
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button. 
-2. All group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` or `npm i` to install project dependencies.
-4. Run `npm start` and visit `localhost:8080`
-5. Make sure both members of your team are collaborators on the forked repo.
+Home Screen - Randomly populated recipes to try out!
+![home screen](https://i.imgur.com/3HYucZ8.png)
 
-## Testing 
+All recipes view - view all the recipes in the database and sort by filters or search by name. You can also add recipes to your favorites using the heart button on each card. 
+![all recipes demo](https://i.imgur.com/UbMf1t6.png)
 
-Mocha and chai are already set up, with a boilerplate test for you. 
+Saved Recipes 
+![enter image description here](https://i.imgur.com/G137V2y.png)
+## Install + Setup  
 
-## Linting Your Code 
+Clone down the repo![codebutton](https://i.imgur.com/j8vOD1D.png)
 
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
+CD into the directory 
 
-Your linter will look only at the JavaScript files you have within the src and the test directories.
+    cd whats-cookin-starter-kit
+
+Run NPM install  
+
+    npm install
+
+Run NPM start  
+
+    npm start
+
+Copy the local host info into your internet browser, and enjoy!
+(by default visit [here](http://localhost:8080))
+
+## Contributors:  
+
+Joshua Horner  
+William McGuire  
+Nate Sheridan  
+Renee Swick-Ziller
+
+## Wins  
+
+API and Webpack use 
+CSS and general design  
+Class data and test suites
+
+## Challenges + Improvements  
+
+Fetch Calls  
+Merge conflicts
+
+## Project Specs
+https://frontend.turing.edu/projects/whats-cookin-part-one.html
+
 
