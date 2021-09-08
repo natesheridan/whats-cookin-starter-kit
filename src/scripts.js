@@ -53,6 +53,7 @@ let ingredientsData = [];
 export default ingredientsData;
 let filterSelection = [];
 let addedIngredients = [];
+var selectedRecipeIngredients = [];
 
 // EVENT LISTENERS //
 
@@ -84,7 +85,6 @@ function parseData(data){
   usersData = data[0].usersData;
   ingredientsData = data[1].ingredientsData;
   recipeData = data[2].recipeData
-  console.log(data)
 
   generateRandomUser()
   generateRandomHomeViewRecipes()
@@ -133,8 +133,6 @@ function addNewRecipe() {
   let unitField = unitSelection.value;
   addIngredient();
   let newRecipe = new Recipe({id: generateRandomNumber(), name: titleField, image: imageField, ingredients: [addedIngredients]}, ingredientsData);
-
-  console.log(newRecipe);
   recipeData.push(newRecipe);
   addedIngredients = [];
 }
@@ -208,8 +206,12 @@ function showSavedRecipes() {
 }
 
 function getDirections(event){
-  hide(allRecipeGrid);
-  show(recipeGrid)
+
+  selectedRecipeIngredients = [];
+
+//   hide(allRecipeGrid);
+//   show(recipeGrid)
+
   if(event.target.classList.contains('favorite-star')){
     addToFavorites();
     return
@@ -231,6 +233,10 @@ function getDirections(event){
 
   if(event.target.localName === 'footer'){
     return
+  }
+
+  if(!event.target.id && !event.target.alt) {
+    return;
   }
 
 
@@ -267,16 +273,25 @@ function getDirections(event){
     return acc
   }, '')
 
+  selectedRecipe.ingredients.forEach(function(element) {
+    let currentIngredient = `${element.quantity.amount} ${element.quantity.unit} ${element.uniqueIngredientData.name}`
+    selectedRecipeIngredients.push(currentIngredient);
+    return selectedRecipeIngredients
+  });
+
   let fullRecipe =
     `<h3 class= "full-recipe"> ${selectedRecipe.name}</h3>
-    <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}">
-    <p class= "ingredients">${ingredients.split(/[ ,]+/).join(' ,')}</p>
-    <p class= "cost">${selectedRecipe.returnCostEstimation()}</p>
+    <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}"><br>
+    <br><b>Ingredients:</b><br>
+    <p class= "ingredients">${selectedRecipeIngredients.join(',<br>')}</p>
+    <p class= "cost"><b>${selectedRecipe.returnCostEstimation()}<b></p>
+    <br><b>Instructions:</b></br>
     <p class= "instructions">${instructions}</p>`;
 
   recipeGrid.innerHTML = fullRecipe
 };
 
+console.log(selectedRecipeIngredients);
 
 function searchByName(){
   if(searchFieldInput.value ===""){
@@ -378,7 +393,6 @@ function searchByTag(recipesArray, searchTags){
 
       let tagsString = joinToString(recipe.tags);
       let numOfTags = searchTags.length;
-      // console.log(searchTags);
       let testTags = searchTags.reduce((acc, tag) => {
         if (tagsString.toLowerCase().includes(tag.toLowerCase())){
           acc++;
@@ -388,13 +402,11 @@ function searchByTag(recipesArray, searchTags){
 
       let indexMatchAllSearchTags;
       indexMatchAllSearchTags = (numOfTags===testTags)
-      // console.log('NUMBER: ', numOfTags, 'TAGS: ', testTags)
       if (indexMatchAllSearchTags){
         returnedArr.push(recipe);
       }
 
     }, []);
-    console.log(returnedArr)
   populateCards(returnedArr)
 
   return returnedArr;
@@ -452,18 +464,10 @@ function generateRandomHomeViewRecipes(){
     randomRecipeIndex3 = Math.floor(Math.random() * recipeRepo.recipeData.length)
   }
   recipeGrid.innerHTML = ""
-  // let title = "<h1 class='home-title' id='homeTitle'>Featured Recipes</h1><br>"
-  // recipeGrid.innerHTML = title;
-  console.log(randomRecipeIndex1, randomRecipeIndex2, randomRecipeIndex3)
   let randomRecipesIndex = [randomRecipeIndex1, randomRecipeIndex2, randomRecipeIndex3]
   randomRecipesIndex.forEach((randomRecipeIndex) => {
 
     let index = randomRecipeIndex
-    // let buttonClasses = "favorite-star"
-    // let idMap = currentUser.favoriteRecipes.map((faveItem) => faveItem.id)
-    // if (idMap.includes(recipe.id)){
-    //   buttonClasses = "favorite-star is-favorite"
-    // }
 
    recipeGrid.innerHTML +=
     `<article class="recipe" id=${recipeRepo.recipeData[index].id}>
