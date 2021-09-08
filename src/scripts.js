@@ -208,9 +208,9 @@ function showSavedRecipes() {
 function getDirections(event){
 
   selectedRecipeIngredients = [];
-
-//   hide(allRecipeGrid);
-//   show(recipeGrid)
+  //
+  hide(allRecipeGrid);
+  show(recipeGrid)
 
   if(event.target.classList.contains('favorite-star')){
     addToFavorites();
