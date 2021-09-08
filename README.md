@@ -25,7 +25,7 @@ WHAT’S COOKIN is an interactive virtual repository of recipe data and instruct
 
 ## Illustrations  
 DEMO GIF
-![gif](https://s9.gifyu.com/images/Kapture-2021-09-07-at-17.55.49.gif)
+![gif](https://s9.gifyu.com/images/Kapture-2021-09-07-at-18.07.02.gif)
 
 Home Screen - Randomly populated recipes to try out!
 ![home screen](https://i.imgur.com/3HYucZ8.png)
