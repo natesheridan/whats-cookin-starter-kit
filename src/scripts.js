@@ -144,6 +144,7 @@ function viewAllRecipes() {
   show(allRecipeContainer);
   hide(addRecipeForm);
   hide(recipeGrid);
+  hide(recipeDirectionsContainer);
   show(allRecipeGrid);
   hide(searchFavesInput);
   hide(searchFavesSubmitBtn);
@@ -177,6 +178,7 @@ function showHomeView() {
   hide(addRecipeForm);
   hide(allRecipeContainer);
   hide(allRecipeGrid);
+  hide(recipeDirectionsContainer);
   show(mainContent);
   hide(searchFavesSubmitBtn);
   hide(searchFavesByName);
@@ -192,6 +194,7 @@ function showRecipeForm() {
   hide(filters);
   hide(searchFavesSubmitBtn);
   hide(searchFavesByName);
+  hide(recipeDirectionsContainer);
   featuredRecipes.innerHTML = `<h1>Add a Recipe</h1>`;
 }
 
@@ -201,6 +204,7 @@ function showLogin() {
 
 function showSavedRecipes() {
   populateCards(currentUser.favoriteRecipes);
+  hide(recipeDirectionsContainer);
   show(searchFavesSubmitBtn);
   show(searchFavesByName);
   show(filters);
@@ -304,7 +308,6 @@ console.log(event)
 
   recipeGrid.innerHTML = fullRecipe
 };
-
 
 function searchByName(){
   if(searchFieldInput.value ===""){
@@ -502,6 +505,5 @@ function generateRandomHomeViewRecipes(){
       </div>
     </div>
   </article>`
-
   })
 }

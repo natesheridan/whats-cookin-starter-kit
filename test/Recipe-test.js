@@ -1,14 +1,13 @@
 import { expect } from 'chai';
 import Recipe from '../src/classes/Recipe';
 import Ingredient from '../src/classes/Ingredient';
-
-
+import ingredientsData from '../src/data/ingredients';
 
 let testRecipe1;
 let testRecipe2;
 let testRecipe3;
 let testRecipes;
-describe('Recipe / Ingredient Test', () => {
+describe('Recipe', () => {
     beforeEach(function() {
         testRecipes = [
             {
@@ -145,56 +144,40 @@ describe('Recipe / Ingredient Test', () => {
               ]
             },
           ]
-
-
-        testRecipe1 = new Recipe(testRecipes[0]);
-        testRecipe2 = new Recipe(testRecipes[1]);
-        testRecipe3 = new Recipe(testRecipes[2]);
+        testRecipe1 = new Recipe(testRecipes[0], ingredientsData);
+        testRecipe2 = new Recipe(testRecipes[1], ingredientsData);
+        testRecipe3 = new Recipe(testRecipes[2], ingredientsData);
     });
     it('Should be an instance of Recipe', () => {
-
         expect(testRecipe1).to.be.instanceOf(Recipe);
         expect(testRecipe2).to.be.instanceOf(Recipe);
         expect(testRecipe3).to.be.instanceOf(Recipe);
     });
     it('Be able to store data about the recipe (id, image, etc.)', () => {
-
         expect(testRecipe1.name).to.deep.equal(testRecipes[0].name)
         expect(testRecipe1.name).to.deep.equal("TEST RECIPE 1")
-
         expect(testRecipe2.name).to.deep.equal("TEST RECIPE 2")
         expect(testRecipe3.name).to.deep.equal("TEST RECIPE 3")
     });
     it('Should be able to store the ingredients of the recipe', () => {
-
         testRecipe1.updateIngredientData()
-
         expect(testRecipe1.ingredients[1]).to.be.instanceOf(Ingredient);
         expect(testRecipe1.ingredients[0].name).to.deep.equal("mayonnaise")
         expect(testRecipe1.ingredients[1].name).to.deep.equal("farro")
         expect(testRecipe1.ingredients[2].name).to.deep.equal("cheese")
-
     });
     it('Should be able to return the ingredients of the recipe', () => {
-
         expect(testRecipe1.returnIngredients()).to.deep.equal("mayonnaise,farro,cheese 1cups,2units,3tsp")
-        //need more tests here but sample data isn't mapped correctly for ingredients
-
-
+        expect(testRecipe2.returnIngredients()).to.not.deep.equal("mayonnaise,farro,cheese 1cups,2units,3tsp")
+        expect(testRecipe3.returnIngredients()).to.deep.equal("mayonnaise,mayonnaise,mayonnaise 13-A,23-B,33-C")
     });
     it('Should be able to return the estimated cost of the recipe', () => {
-
-        expect(testRecipe1.returnCostEstimation()).to.deep.equal("3752 cents.")
-        //need more tests here too lacking bc same reason as above
-
+        expect(testRecipe1.returnCostEstimation()).to.deep.equal("$4")
+        expect(testRecipe3.returnCostEstimation()).to.deep.equal("$4")
     });
     it('Should be able to return the instructions/directions', () => {
-
-
         expect(testRecipe1.returnInstructions()).to.deep.equal(['1-INSTRUCTION1', '1-INSTRUCTION2', '1-INSTRUCTION3'])
         expect(testRecipe2.returnInstructions()).to.deep.equal(['2-INSTRUCTION1', '2-INSTRUCTION2', '2-INSTRUCTION3'])
         expect(testRecipe3.returnInstructions()).to.deep.equal(['3-INSTRUCTION1', '3-INSTRUCTION2', '3-INSTRUCTION3'])
-
-
     });
-  })
+})
