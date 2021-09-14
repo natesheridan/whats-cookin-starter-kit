@@ -316,21 +316,26 @@ aside > button {
   position: relative;
   height: 23rem;
   width: 70%;
-  background-color: #F9F1EE;
+  background-color: #FFFFFF;
   overflow: scroll;
   padding: 2rem;
-  border: 1rem solid #F9F1EE;
+  border: 1rem solid #FFFFFF;
   border-radius: .5rem;
 }
 
 .recipe-directions {
+  padding-left: 1rem;
+  padding-right: 1rem;
   padding-bottom: 1rem;
   line-height: 1.5rem;
+  background-color: #FFF8F3;
+  border: 1px solid black;
 }
 
 .recipe-directions > img {
   height: 35%;
   width: auto;
+  border: 1px solid black;
 }
 
 .full-recipe {
@@ -382,7 +387,7 @@ aside > button {
 
 .meal-image > img {
   height: 100%;
-  width: 80%;
+  width: 90%;
   padding: 0rem;
   margin: 0rem;
 }
@@ -524,19 +529,19 @@ aside > button {
 }
 
 .gold-popup {
-  background-color: rgba(218, 158, 29, 0.726);
+  background-color: rgba(218, 158, 29, 1);
 }
 
 .red-popup {
-  background-color: rgba(218, 73, 29, 0.726);
+  background-color: #a53f30;
 }
 
 .green-popup {
-  background-color: rgba(20, 135, 43, 0.726);
+  background-color: rgba(20, 135, 43, 1);
 }
 
 .blue-popup {
-  background-color: rgba(29, 98, 218, 0.726);
+  background-color: rgba(29, 98, 218, 1);
 }
 
 .hidden {
