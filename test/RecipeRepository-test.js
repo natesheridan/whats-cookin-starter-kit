@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
 import Recipe from '../src/classes/Recipe';
 
-describe('Recipe', () => {
+describe('RecipeRepository', () => {
   const recipeData = [
     {
     id: 595736,
@@ -117,17 +117,8 @@ describe('Recipe', () => {
     const recipeRepo = new RecipeRepository(recipeData);
     expect(recipeRepo.recipeData).to.equal(recipeData);
   });
-  it('Should filter recipes by various tags', () => {
-    const recipeRepo = new RecipeRepository(recipeData);
-    recipeRepo.filterByTag('lunch');
-    recipeRepo.filterByTag('snack');
-    expect(recipeRepo.filterByTag('lunch')).to.deep.equal([recipeData[0]]);
-    expect(recipeRepo.filterByTag('snack')).to.deep.equal([recipeData[0], recipeData[2]]);
-  });
   it('Should filter recipes by name', () => {
     const recipeRepo = new RecipeRepository(recipeData);
-    recipeRepo.filterByName('Chocolate');
-    recipeRepo.filterByName('Dirty Steve\s Original Wing Sauce');
     expect(recipeRepo.filterByName('Chocolate')).to.deep.equal([recipeData[0], recipeData[2]]);
     expect(recipeRepo.filterByName('Dirty Steve\s Original Wing Sauce')).to.deep.equal([recipeData[1]]);
   });
