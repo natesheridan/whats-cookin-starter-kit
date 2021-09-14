@@ -7,7 +7,7 @@ let user1;
 describe('UserData', () => {
   beforeEach(() => {
     userA = {
-      username: 'Nate',
+      name: 'Nate',
       id: 1,
       pantry: [
         {
@@ -24,7 +24,6 @@ describe('UserData', () => {
         },
       ]
     }
-
     recipeData = [
       {
       id: 595736,
@@ -131,32 +130,27 @@ describe('UserData', () => {
     ];
     user1 = new UserData(userA)
   });
-
   it('Should be a function', () => {
     expect(UserData).to.be.a('function');
   });
-
   it('Should contain a username', () => {
     expect(user1.username).to.equal('Nate');
   });
-
   it('Should have an array of favorite recipes', () => {
     expect(user1.favoriteRecipes).to.deep.equal([]);
   });
-
   it('Should have an array of recipes to cook', () => {
     expect(user1.recipesToCook).to.deep.equal([]);
   });
-
-  it('Should be able to save a favorite recipe', () => {
-    user1.toggleFavoriteRecipe(recipeData[2]);
-    expect(user1.favoriteRecipes).to.deep.equal([recipeData[2]]);
-    user1.toggleFavoriteRecipe(recipeData[2]);
+  it('Should be able to save recipes in favoriteRecipes and recipesToCook arrays', () => {
+    user1.toggleItemInArray('favoriteRecipes', recipeData[2]);
+    expect(user1.favoriteRecipes).to.include(recipeData[2]);
+    user1.toggleItemInArray('favoriteRecipes', recipeData[2]);
     expect(user1.favoriteRecipes).to.deep.equal([]);
-    user1.toggleFavoriteRecipe(recipeData[0]);
-    console.log('before: ',user1.favoriteRecipes)
-    user1.toggleFavoriteRecipe(recipeData[1]);
-    console.log('after: ',user1.favoriteRecipes)
-    expect(user1.favoriteRecipes).to.deep.equal([recipeData[0], recipeData[1]]);
+    expect(user1.recipesToCook).to.deep.equal([]);
+    user1.toggleItemInArray('recipesToCook', recipeData[2]);
+    expect(user1.recipesToCook).to.deep.equal([recipeData[2]]);
+    user1.toggleItemInArray('recipesToCook', recipeData[2]);
+    expect(user1.recipesToCook).to.deep.equal([]);
   });
 });

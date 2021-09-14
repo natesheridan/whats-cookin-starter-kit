@@ -2,10 +2,6 @@ import { expect } from 'chai';
 import Ingredient from '../src/classes/Ingredient';
 import ingredientData from '../src/data/ingredients'
 
-
-
-
-
 let testRecipeIngredients = [
         {
           "id": 20081,
@@ -71,6 +67,8 @@ describe('Ingredient Test', () => {
     })
     it('Should return an unknown name recipe if the ID is not found', () => {
         let testIngredient3 = new Ingredient(testRecipeIngredients[4], ingredientData)
+        expect(testIngredient3.name).to.deep.equal('No Ingredient Data Found')
+        expect(testIngredient3.estimatedCostInCents).to.deep.equal('No Ingredient Data Found')
         expect(testIngredient3.name).to.deep.equal('No Ingredient Data Found')
     })
 })

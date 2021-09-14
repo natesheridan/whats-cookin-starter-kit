@@ -3,8 +3,6 @@ import Recipe from '../src/classes/Recipe';
 import Ingredient from '../src/classes/Ingredient';
 import ingredientsData from '../src/data/ingredients';
 
-
-
 let testRecipe1;
 let testRecipe2;
 let testRecipe3;
@@ -146,8 +144,6 @@ describe('Recipe', () => {
               ]
             },
           ]
-
-
         testRecipe1 = new Recipe(testRecipes[0], ingredientsData);
         testRecipe2 = new Recipe(testRecipes[1], ingredientsData);
         testRecipe3 = new Recipe(testRecipes[2], ingredientsData);
@@ -169,25 +165,19 @@ describe('Recipe', () => {
         expect(testRecipe1.ingredients[0].name).to.deep.equal("mayonnaise")
         expect(testRecipe1.ingredients[1].name).to.deep.equal("farro")
         expect(testRecipe1.ingredients[2].name).to.deep.equal("cheese")
-
     });
     it('Should be able to return the ingredients of the recipe', () => {
         expect(testRecipe1.returnIngredients()).to.deep.equal("mayonnaise,farro,cheese 1cups,2units,3tsp")
         expect(testRecipe2.returnIngredients()).to.not.deep.equal("mayonnaise,farro,cheese 1cups,2units,3tsp")
         expect(testRecipe3.returnIngredients()).to.deep.equal("mayonnaise,mayonnaise,mayonnaise 13-A,23-B,33-C")
-
-
     });
     it('Should be able to return the estimated cost of the recipe', () => {
         expect(testRecipe1.returnCostEstimation()).to.deep.equal("$4")
         expect(testRecipe3.returnCostEstimation()).to.deep.equal("$4")
-
     });
     it('Should be able to return the instructions/directions', () => {
         expect(testRecipe1.returnInstructions()).to.deep.equal(['1-INSTRUCTION1', '1-INSTRUCTION2', '1-INSTRUCTION3'])
         expect(testRecipe2.returnInstructions()).to.deep.equal(['2-INSTRUCTION1', '2-INSTRUCTION2', '2-INSTRUCTION3'])
         expect(testRecipe3.returnInstructions()).to.deep.equal(['3-INSTRUCTION1', '3-INSTRUCTION2', '3-INSTRUCTION3'])
-
-
     });
 })
