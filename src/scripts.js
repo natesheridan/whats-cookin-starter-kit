@@ -43,6 +43,7 @@ const loginButton = document.querySelector('#loginButton');
 const plusButton = document.querySelector('#plusButtonContainer');
 const submitRecipeButton = document.querySelector('#submitRecipe');
 const addIngredientButton = document.querySelector('#plusButtonContainer');
+const recipesToCookButton = document.querySelector('#recipesToCook');
 
 
 // FILTER CHECKBOXES && SEARCH ARRAY //
