@@ -93,7 +93,7 @@ function parseData(data){
 
 function getData() {
   return Promise.all([fetchUsersData(), fetchIngredientsData(), fetchRecipeData()])
-  .then(data => parseData(data));
+  .then(data => parseData(data));npm
 }
 
 
@@ -161,6 +161,7 @@ function viewAllRecipes() {
        <img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>
        <button type="favoriteStar" name="favoriteStar" class="${buttonClasses} heart-button" id="faveBtn-${recipe.id}">♡</button>
+       <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
        </article>`
 
       return acc;
@@ -216,6 +217,12 @@ function getDirections(event){
     addToFavorites();
     return
   };
+
+  if(event.target.classList.contains('recipesToCook')){
+    addToFavorites();
+    return
+  }
+
   if(event.target.classList.contains('content-container')){
     return
   }
@@ -324,6 +331,7 @@ function populateCards(arr){
        <img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>
        <button type="favoriteStar" name="favoriteStar" class="${buttonClasses}" id="fave-${recipe.id}">♡</button>
+       <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
        </article>`
 
       return acc;
@@ -432,17 +440,28 @@ function popupMessage(message, timeInMS, color = "gold"){
 };
 
 function addToFavorites(){
+  console.log(event)
   const recipeRepo = new RecipeRepository(recipeData);
+  let saveRecipeBtn;
   let recipeID = event.target.closest('.mini-recipe').id;
-  let recipeBtn = event.target.closest('button');
   let fullRecipe = recipeRepo.recipeData.find(recipe => recipe.id === Number(recipeID));
   let selectedRecipe = new Recipe(fullRecipe, ingredientsData);
   let index = recipeRepo.recipeData.indexOf(fullRecipe);
-  recipeBtn.classList.toggle("is-favorite");
-  currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
+
+  if(event.target.closest('.heart-button')){
+    saveRecipeBtn = event.target.closest('.heart-button');
+    saveRecipeBtn.classList.toggle("is-favorite");
+    currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
+  }
+  if(event.target.classList.contains('recipesToCook')){
+    saveRecipeBtn = event.target.closest('.recipesToCook')
+    currentUser.toggleItemInArray('recipesToCook', recipeData[index]);
+    console.log('TO COOK: ',currentUser.recipesToCook)
+    // saveRecipeBtn.classList.toggle("is-favorite");
+  }
+
+
 }
-
-
 
 function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);
