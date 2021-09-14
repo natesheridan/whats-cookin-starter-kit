@@ -73,6 +73,7 @@ plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
 addIngredientButton.addEventListener('click', addIngredient);
 searchFavesSubmitBtn.addEventListener('click', searchFaves);
+recipesToCookButton.addEventListener('click', showRecipesToCook);
 window.addEventListener('load', getData);
 
 // MAIN FUNCTIONS //
