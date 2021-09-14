@@ -21,8 +21,6 @@ const homeTitle = document.querySelector('#homeTitle');
 const allRecipeContainer = document.querySelector('#allRecipeContainer');
 const allRecipes = document.querySelector('#allRecipesButton');
 const recipeGrid = document.querySelector('#recipeGrid');
-const recipeDirectionsContainer = document.querySelector('#recipeDirectionsContainer');
-const recipeDirections = document.querySelector('#recipeDirections');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
@@ -97,7 +95,7 @@ function parseData(data){
 
 function getData() {
   return Promise.all([fetchUsersData(), fetchIngredientsData(), fetchRecipeData()])
-  .then(data => parseData(data));
+  .then(data => parseData(data));npm
 }
 
 
@@ -165,6 +163,7 @@ function viewAllRecipes() {
        <img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>
        <button type="favoriteStar" name="favoriteStar" class="${buttonClasses} heart-button" id="faveBtn-${recipe.id}">♡</button>
+       <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
        </article>`
 
       return acc;
@@ -216,17 +215,22 @@ function showRecipesToCook() {
 };
 
 function getDirections(event){
-
+console.log(event)
   selectedRecipeIngredients = [];
-  hide(allRecipeContainer);
+  //
   hide(allRecipeGrid);
-  hide(recipeGrid);
-  show(recipeDirectionsContainer);
+  show(recipeGrid)
 
   if(event.target.classList.contains('favorite-star')){
-    addToFavorites();
+    addToLibrary();
     return
   };
+
+  if(event.target.classList.contains('recipesToCook')){
+    addToLibrary();
+    return
+  }
+
   if(event.target.classList.contains('content-container')){
     return
   }
@@ -251,7 +255,7 @@ function getDirections(event){
   }
 
 
-  // recipeGrid.innerHTML = "";
+  recipeGrid.innerHTML = "";
   let targetID = "";
 
   if(event.target.closest('.mini-recipe')){
@@ -261,7 +265,6 @@ function getDirections(event){
   }
   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
   let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
-  console.log(selectedRecipe)
 
   selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {
     let ingredient = new Ingredient(element, ingredientsData)
@@ -299,11 +302,9 @@ function getDirections(event){
     <br><b>Instructions:</b></br>
     <p class= "instructions">${instructions}</p>`;
 
-  recipeDirections.innerHTML = fullRecipe;
-  show(recipeDirections);
+  recipeGrid.innerHTML = fullRecipe
 };
 
-console.log(selectedRecipeIngredients);
 
 function searchByName(){
   if(searchFieldInput.value ===""){
@@ -329,13 +330,14 @@ function populateCards(arr){
 
     let buttonClasses = "favorite-star"
     if (currentUser.favoriteRecipes.includes(recipe)){
-      buttonClasses = "favorite-star is-favorite"
+      buttonClasses = "favorite-star is-favorite heart-button"
     }
     allRecipeGrid.innerHTML +=
       `<article class="mini-recipe" id="${recipe.id}">
        <img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>
-       <button type="favoriteStar" name="favoriteStar" class="${buttonClasses}" id="fave-${recipe.id}">♡</button>
+       <button type="favoriteStar" name="favoriteStar" class="favorite-star${buttonClasses}" id="fave-${recipe.id}">♡</button>
+       <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
        </article>`
 
       return acc;
@@ -443,18 +445,25 @@ function popupMessage(message, timeInMS, color = "gold"){
   }, timeInMS)
 };
 
-function addToFavorites(){
+function addToLibrary(){
   const recipeRepo = new RecipeRepository(recipeData);
+  let saveRecipeBtn;
   let recipeID = event.target.closest('.mini-recipe').id;
-  let recipeBtn = event.target.closest('button');
   let fullRecipe = recipeRepo.recipeData.find(recipe => recipe.id === Number(recipeID));
   let selectedRecipe = new Recipe(fullRecipe, ingredientsData);
   let index = recipeRepo.recipeData.indexOf(fullRecipe);
-  recipeBtn.classList.toggle("is-favorite");
-  currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
+
+  if(event.target.closest('.heart-button')){
+    saveRecipeBtn = event.target.closest('.heart-button');
+    saveRecipeBtn.classList.toggle("is-favorite");
+    currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
+  }
+  if(event.target.classList.contains('recipesToCook')){
+    saveRecipeBtn = event.target.closest('.recipesToCook')
+    currentUser.toggleItemInArray('recipesToCook', recipeData[index]);
+    saveRecipeBtn.classList.toggle("is-favorite");
+  }
 }
-
-
 
 function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);
