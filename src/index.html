@@ -18,7 +18,7 @@
           <input type="text" placeholder= "Search recipes by name" name="search" class="search-field">
           <input name="search" type="submit" class = "search-submit-btn">
         </section>
-        <button type="button" class="login-button" id="loginButton" name="login">Login</button>
+        <button type="button" class="login-button hidden" id="loginButton" name="login">Login</button>
       </section>
     </header>
     <nav>
@@ -34,28 +34,32 @@
         <label for="lunch">Lunch</label><br>
         <input type="checkbox" id="dinner" name="Dinner" value="dinner">
         <label for="dinner">Dinner</label><br>
+      </section><br>
+      <section class="other-options" id="otherOptions">
         <input type="checkbox" id="antipasti" name="Antipasti" value="antipasti">
         <label for="antipasti">Antipasti</label><br>
         <input type="checkbox" id="starter" name="Starter" value="starter">
         <label for="starter">Starter</label><br>
-      </section><br>
-      <section class="other-options" id="otherOptions">
         <input type="checkbox" id="snack" name="Snack" value="snack">
         <label for="snack">Snack</label><br>
+      </section>
+      <section class="other-options-2" id="otherOptions2">
         <input type="checkbox" id="appetizer" name="Appetizer" value="appetizer">
         <label for="appetizer">Appetizer</label><br>
         <input type="checkbox" id="horDeouvre" name="Hor d'oeuvre" value="hor d'oeuvre">
         <label for="hor-deouvre">Hor d'eouvre</label><br>
         <input type="checkbox" id="mainCourse" name="Main course" value="main course">
         <label for="main-course">Main course</label><br>
+      </section>
+      <section class="other-options-3" id="otherOptions3">
         <input type="checkbox" id="mainDish" name="Main Dish" value="main dish">
         <label for="main-dish">Main dish</label><br>
-      </section>
-      <section class="other-options-2" id="otherOptions2">
         <input type="checkbox" id="sauce" name="Sauce" value="sauce">
         <label for="snack">Sauce</label><br>
         <input type="checkbox" id="sideDish" name="Side dish" value="side dish">
         <label for="side-dish">Side dish</label><br>
+      </section>
+      <section class="other-options-4" id="otherOptions4">
         <input type="checkbox" id="morningMeal" name="Morning meal" value="morning meal">
         <label for="morning-meal">Morning meal</label><br>
         <input type="checkbox" id="salad" name="Salad" value="salad">
@@ -63,7 +67,7 @@
         <input type="checkbox" id="condiment" name="Condiment" value="condiment">
         <label for="condiment">Condiment</label><br>
       </section>
-      <section class="other-options-3" id="otherOptions3">
+      <section class="other-options-5" id="otherOptions5">
         <input type="checkbox" id="dip" name="Dip" value="dip">
         <label for="dip">Dip</label><br>
         <input type="checkbox" id="spread" name="Spread" value="spread">
@@ -89,8 +93,6 @@
             </div>
             <div class="recipe-content">
               <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar1"></button>
-              <!-- <div class="favorite-star"></div>
-              <img class="star" src="images/star-active.svg" alt="favorite"> -->
               <div class="recipe-info">
                 <h2>Dish Name</h2>
                 <div class="ingredient-section">
@@ -102,13 +104,10 @@
           </article>
           <article class="recipe">
             <div class="meal-image">
-
               <img src="images/pancakes.svg" alt="meal image" class="image">
             </div>
             <div class="recipe-content">
               <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar2"></button>
-              <!-- <div class="favorite-star"></div>
-              <img class="star" src="images/star-active.svg" alt="favorite"> -->
               <div class="recipe-info">
                 <h2>Dish Name</h2>
                 <div class="ingredient-section">
@@ -124,8 +123,6 @@
             </div>
             <div class="recipe-content">
               <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar3"></button>
-              <!-- <div class="favorite-star" id="favoriteStar"></div>
-              <img class="star" src="images/star-active.svg" alt="favorite"> -->
               <div class="recipe-info">
                 <h2>Dish Name</h2>
                 <div class="ingredient-section">
@@ -138,10 +135,8 @@
         </section>
         <article class="login-popup hidden" id="loginPopup">
           <form class="login-form" id="loginForm">
-
             <h1>Login</h1>
-            <!-- <button type="submit" class="cancel-login" onclick="closeForm()"><img src="" class="x-button" alt="close form"></button> -->
-              <!--Cancel button here ^^^ -->
+            <button type="submit" class="cancel-login" onclick="closeForm()"><img src="" class="x-button" alt="close form"></button>
             <label for="email"><b>Username</b></label>
             <input type="text" placeholder="Username" name="username" required>
             <label for="password"><b>Password</b></label>
