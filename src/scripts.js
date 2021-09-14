@@ -7,8 +7,6 @@ import rightArrow from './data/assets/Right-arrow.svg';
 import pancakes from './data/assets/pancakes.svg';
 import starActive from './data/assets/star-active.svg';
 import star from './data/assets/star.svg';
-// import {usersData} from './data/users.js';
-// import {recipeData} from './data/recipes.js';
 import {fetchUsersData, fetchRecipeData, fetchIngredientsData} from './apiCalls.js';
 import apiCalls from './apiCalls.js';
 
@@ -73,11 +71,7 @@ searchFavesSubmitBtn.addEventListener('click', searchFaves);
 window.addEventListener('load', getData);
 
 // MAIN FUNCTIONS //
-//
-// window.onload = (event) => {
-//   apiCalls.getData();
-//   Promise.all([usersData, ingredientsData, recipeData]);
-// }
+
 
 
 
@@ -208,37 +202,11 @@ function showSavedRecipes() {
 function getDirections(event){
 
   selectedRecipeIngredients = [];
-  //
   hide(allRecipeGrid);
-  show(recipeGrid)
+  show(recipeGrid);
+  hide(allRecipeContainer);
 
-  if(event.target.classList.contains('favorite-star')){
-    addToFavorites();
-    return
-  };
-  if(event.target.classList.contains('content-container')){
-    return
-  }
-  if(event.target.classList.contains('all-recipe-grid')){
-    return
-  }
-
-  if(event.target.classList.contains('search-submit-btn')) {
-    return
-  }
-
-  if(event.target.classList.contains('search-field')){
-    return
-  }
-
-  if(event.target.localName === 'footer'){
-    return
-  }
-
-  if(!event.target.id && !event.target.alt) {
-    return;
-  }
-
+  narrowTargeting();
 
   recipeGrid.innerHTML = "";
   let targetID = "";
@@ -248,9 +216,9 @@ function getDirections(event){
   } else {
     targetID = event.target.closest('.recipe').id;
   }
+
   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
   let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
-  console.log(selectedRecipe)
 
   selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {
     let ingredient = new Ingredient(element, ingredientsData)
@@ -288,10 +256,38 @@ function getDirections(event){
     <br><b>Instructions:</b></br>
     <p class= "instructions">${instructions}</p>`;
 
-  recipeGrid.innerHTML = fullRecipe
+  recipeGrid.innerHTML = fullRecipe;
 };
 
-console.log(selectedRecipeIngredients);
+function narrowTargeting() {
+  if(event.target.classList.contains('favorite-star')){
+    addToFavorites();
+    return
+  };
+  if(event.target.classList.contains('content-container')){
+    return
+  }
+  if(event.target.classList.contains('all-recipe-grid')){
+    return
+  }
+
+  if(event.target.classList.contains('search-submit-btn')) {
+    return
+  }
+
+  if(event.target.classList.contains('search-field')){
+    return
+  }
+
+  if(event.target.localName === 'footer'){
+    return
+  }
+
+  if(!event.target.id && !event.target.alt) {
+    return;
+  }
+
+};
 
 function searchByName(){
   if(searchFieldInput.value ===""){
@@ -374,11 +370,6 @@ function searchData(input) {
 
 function setUserData(){
   let user = new UserData()
-
-
-
-  // if the user login matches the user.name....
-  //...then the app populates with that user's info
 };
 
 
