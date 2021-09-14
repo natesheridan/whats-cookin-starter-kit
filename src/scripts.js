@@ -209,6 +209,12 @@ function showSavedRecipes() {
   featuredRecipes.innerHTML = `<h1>Saved Recipes</h1>`;
 }
 
+function showRecipesToCook() {
+  populateCards(currentUser.recipesToCook);
+  show(featuredRecipes);
+  featuredRecipes.innerHTML = `<h1>Recipes</h1>`
+};
+
 function getDirections(event){
 
   selectedRecipeIngredients = [];
