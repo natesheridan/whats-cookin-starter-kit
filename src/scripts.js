@@ -144,6 +144,7 @@ function viewAllRecipes() {
   show(allRecipeContainer);
   hide(addRecipeForm);
   hide(recipeGrid);
+  hide(recipeDirectionsContainer);
   show(allRecipeGrid);
   hide(searchFavesInput);
   hide(searchFavesSubmitBtn);
@@ -176,6 +177,7 @@ function showHomeView() {
   hide(addRecipeForm);
   hide(allRecipeContainer);
   hide(allRecipeGrid);
+  hide(recipeDirectionsContainer);
   show(mainContent);
   hide(searchFavesSubmitBtn);
   hide(searchFavesByName);
@@ -191,6 +193,7 @@ function showRecipeForm() {
   hide(filters);
   hide(searchFavesSubmitBtn);
   hide(searchFavesByName);
+  hide(recipeDirectionsContainer);
   featuredRecipes.innerHTML = `<h1>Add a Recipe</h1>`;
 }
 
@@ -200,6 +203,7 @@ function showLogin() {
 
 function showSavedRecipes() {
   populateCards(currentUser.favoriteRecipes);
+  hide(recipeDirectionsContainer);
   show(searchFavesSubmitBtn);
   show(searchFavesByName);
   show(filters);
@@ -253,7 +257,6 @@ function getDirections(event){
   }
   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
   let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
-  console.log(selectedRecipe)
 
   selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {
     let ingredient = new Ingredient(element, ingredientsData)
@@ -294,8 +297,6 @@ function getDirections(event){
   recipeDirections.innerHTML = fullRecipe;
   show(recipeDirections);
 };
-
-console.log(selectedRecipeIngredients);
 
 function searchByName(){
   if(searchFieldInput.value ===""){
@@ -485,6 +486,5 @@ function generateRandomHomeViewRecipes(){
       </div>
     </div>
   </article>`
-
   })
 }
