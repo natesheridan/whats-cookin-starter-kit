@@ -113,6 +113,12 @@ footer {
   padding: 0rem .5rem 0rem .5rem;
 }
 
+.other-options-2,
+.other-options-3,
+.other-options-4 {
+  margin-right: .8rem;
+}
+
 .meals {
   padding-right: 1rem;
   font-weight: bold;
@@ -200,7 +206,7 @@ aside > button {
 }
 
 .content-container {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
   position: relative;
@@ -216,9 +222,11 @@ aside > button {
 }
 
 .recipe-grid {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(3, 18rem);
+  grid-auto-rows: 10rem;
   justify-content: center;
+  margin-top: 1rem;
 }
 
 .push-to-back {
@@ -230,18 +238,19 @@ aside > button {
 }
 
 .recipe {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  position: relative;
   height: 22rem;
   width: 15rem;
   background-color: #ffffff;
-  padding: .8rem;
+  padding: .5rem;
   border-radius: 1rem;
   margin: 0rem .4rem 0rem .4rem;
-  overflow: scroll;
+  overflow: visible;
+  object-fit: fill;
 }
 
 .favorite-star {
@@ -263,7 +272,14 @@ aside > button {
 }
 
 .recipe-info {
-  margin: 0rem .4rem 0rem .4rem;
+  margin: 3rem .4rem 0rem .4rem;
+  position: relative;
+}
+
+.recipe-info > h2 {
+  position: static;
+  margin-top: 20%;
+  text-align: center;
 }
 
 .mini-recipe > button {
@@ -308,16 +324,18 @@ aside > button {
 }
 
 .meal-image {
-  display: flex;
-  position: relative;
+  display: block;
+  position: absolute;
   justify-content: center;
   align-items: flex-start;
-  margin-top: -25%;
+  margin-bottom: 3rem;
+  top: 5%;
+  /* object-fit: scale-down; */
 }
 
 .meal-image > img {
   height: 100%;
-  width: 100%;
+  width: 75%;
   padding: 0rem;
   margin: 0rem;
 }
@@ -326,40 +344,40 @@ aside > button {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  position: relative;
+  align-items: baseline;
+  position: absolute;
   height: 28rem;
-  width: 60%;
+  width: 55rem;
   overflow-x: hidden;
   overflow-y: scroll;
   border: 0px;
   border-radius: 1rem;
   top: 0%;
   left: 20%;
+  right: 20%;
   background-color: #f9f1ef;
-  padding: 1rem;
+  padding: .5rem;
 }
 
 .all-recipe-grid {
-  justify-content: center;
-  align-items: center;
-  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 13rem);
+  grid-auto-rows: 20rem;
 }
 
 .mini-recipe {
   display: inline-table;
-  height: 15rem;
-  width: 10rem;
+  height: 12rem;
+  width: 8rem;
   padding: .5rem;
   margin: .3rem;
   background-color: white;
   border: 1px solid grey;
   border-radius: 1rem;
-  break-after: auto;
 }
 
 .mini-recipe > img {
-  height: 10rem;
+  height: 7rem;
   width: auto;
   flex-flow: row wrap;
 }
