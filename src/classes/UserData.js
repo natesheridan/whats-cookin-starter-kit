@@ -23,6 +23,7 @@ class UserData {
     if(array === 'favoriteRecipes'){
         let recipeIndices = this.favoriteRecipes.indexOf(recipe);
         if(recipeIndices>=0) {
+          console.log(recipeIndices)
           this.favoriteRecipes.splice(recipeIndices, 1);
         } else if (recipeIndices===-1) {
           this.favoriteRecipes.push(recipe)
