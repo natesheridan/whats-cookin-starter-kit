@@ -21,6 +21,8 @@ const homeTitle = document.querySelector('#homeTitle');
 const allRecipeContainer = document.querySelector('#allRecipeContainer');
 const allRecipes = document.querySelector('#allRecipesButton');
 const recipeGrid = document.querySelector('#recipeGrid');
+const recipeDirectionsContainer = document.querySelector('#recipeDirectionsContainer');
+const recipeDirections = document.querySelector('#recipeDirections');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
@@ -208,9 +210,10 @@ function showSavedRecipes() {
 function getDirections(event){
 
   selectedRecipeIngredients = [];
-  //
+  hide(allRecipeContainer);
   hide(allRecipeGrid);
-  show(recipeGrid)
+  hide(recipeGrid);
+  show(recipeDirectionsContainer);
 
   if(event.target.classList.contains('favorite-star')){
     addToFavorites();
@@ -240,7 +243,7 @@ function getDirections(event){
   }
 
 
-  recipeGrid.innerHTML = "";
+  // recipeGrid.innerHTML = "";
   let targetID = "";
 
   if(event.target.closest('.mini-recipe')){
@@ -288,7 +291,8 @@ function getDirections(event){
     <br><b>Instructions:</b></br>
     <p class= "instructions">${instructions}</p>`;
 
-  recipeGrid.innerHTML = fullRecipe
+  recipeDirections.innerHTML = fullRecipe;
+  show(recipeDirections);
 };
 
 console.log(selectedRecipeIngredients);
