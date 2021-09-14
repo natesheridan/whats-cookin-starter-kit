@@ -1,8 +1,3 @@
-// const ingredientsData = require('../data/ingredients')
-
-
-
-
 class Ingredient {
   constructor(obj, ingredientsData) {
     this.id = obj.id;
@@ -15,8 +10,14 @@ class Ingredient {
   }
   grabUniqueIngredientData(){
     let self = this;
-    // console.log(this.ingredientsData)
     let returnedData = this.ingredientsData.find(({id}) => id === self.id);
+    if (!returnedData){
+      let errMessage = "No Ingredient Data Found"
+      this.uniqueIngredientData = errMessage;
+      this.name = errMessage;
+      this.estimatedCostInCents = errMessage;
+      return
+    }
     this.uniqueIngredientData = returnedData;
     this.name = this.uniqueIngredientData.name;
     this.estimatedCostInCents = this.uniqueIngredientData.estimatedCostInCents
