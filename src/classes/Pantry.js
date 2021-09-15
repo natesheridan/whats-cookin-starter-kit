@@ -8,7 +8,7 @@ class Pantry {
 
 
   confirmNeededIngredients(recipe) {
-
+    //We want to check the recipe ingredients object against pantry data to confirm that pantry contains all necessary ingredients in sufficient amount to complete recipe. Therefore method must accurately grab recipe ingredient and ingredient amount data and compare them to corresponding data points in pantry, under the conditional that if pantry values are greater than recipe requirement values user may proceed to cook recipe.
   }
 };
 export default Pantry;
