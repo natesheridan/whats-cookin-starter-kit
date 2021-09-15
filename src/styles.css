@@ -332,9 +332,9 @@ aside > button {
   border: 1px solid black;
 }
 
-.recipe-directions > img {
-  height: 35%;
-  width: auto;
+.recipe-directions-container > img {
+  height: auto;
+  width: 60%;
   border: 1px solid black;
 }
 

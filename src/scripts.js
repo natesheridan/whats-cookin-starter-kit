@@ -213,6 +213,7 @@ function showSavedRecipes() {
 }
 
 function showRecipesToCook() {
+  hide(recipeDirectionsContainer);
   populateCards(currentUser.recipesToCook);
   show(featuredRecipes);
   featuredRecipes.innerHTML = `<h1>Recipes</h1>`
@@ -221,9 +222,10 @@ function showRecipesToCook() {
 function getDirections(event){
 console.log(event)
   selectedRecipeIngredients = [];
-  //
+  show(recipeDirectionsContainer);
   hide(allRecipeGrid);
-  show(recipeGrid)
+  hide(allRecipeContainer);
+  show(recipeGrid);
 
   if(event.target.classList.contains('favorite-star')){
     addToLibrary();
@@ -306,7 +308,7 @@ console.log(event)
     <br><b>Instructions:</b></br>
     <p class= "instructions">${instructions}</p>`;
 
-  recipeGrid.innerHTML = fullRecipe
+  recipeDirections.innerHTML = fullRecipe
 };
 
 function searchByName(){
