@@ -209,6 +209,7 @@ function showSavedRecipes() {
   show(searchFavesSubmitBtn);
   show(searchFavesByName);
   show(filters);
+  show(allRecipeGrid);
   show(featuredRecipes);
   featuredRecipes.innerHTML = `<h1>Saved Recipes</h1>`;
 }
@@ -217,6 +218,7 @@ function showRecipesToCook() {
   hide(recipeDirectionsContainer);
   populateCards(currentUser.recipesToCook);
   show(featuredRecipes);
+  show(allRecipeGrid);
   featuredRecipes.innerHTML = `<h1>Recipes</h1>`
 };
 
