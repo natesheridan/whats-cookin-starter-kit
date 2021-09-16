@@ -60,7 +60,7 @@ var selectedRecipeIngredients = [];
 
 searchSubmitBtn.addEventListener('click', searchByName);
 allRecipes.addEventListener('click', viewAllRecipes);
-contentContainer.addEventListener('click', getDirections);
+allRecipeGrid.addEventListener('click', getDirections);
 
 homeButton.addEventListener('click', showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
@@ -95,7 +95,7 @@ function parseData(data){
 
 function getData() {
   return Promise.all([fetchUsersData(), fetchIngredientsData(), fetchRecipeData()])
-  .then(data => parseData(data));npm
+  .then(data => parseData(data));
 }
 
 
@@ -152,24 +152,25 @@ function viewAllRecipes() {
   featuredRecipes.innerHTML = `<h1>All Recipes</h1>`;
 
   let recipeRepo = new RecipeRepository(recipeData);
-  allRecipeGrid.innerHTML = ""
-  const viewAllRecipes = recipeRepo.recipeData.reduce((acc, recipe) => {
-    let buttonClasses = "favorite-star"
-    let idMap = currentUser.favoriteRecipes.map((faveItem) => faveItem.id)
-    if (idMap.includes(recipe.id)){
-      buttonClasses = "favorite-star is-favorite"
-    }
-    allRecipeGrid.innerHTML +=
-      `<article class="mini-recipe" id="${recipe.id}">
-       <img src= "${recipe.image}" alt= "${recipe.name}">
-       <p>${recipe.name}</p>
-       <button type="favoriteStar" name="favoriteStar" class="${buttonClasses} heart-button" id="faveBtn-${recipe.id}">♡</button>
-       <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
-       </article>`
+  populateCards(recipeRepo.recipeData)
+  // allRecipeGrid.innerHTML = ""
+  // const viewAllRecipes = recipeRepo.recipeData.reduce((acc, recipe) => {
+  //   let buttonClasses = "favorite-star"
+  //   let idMap = currentUser.favoriteRecipes.map((faveItem) => faveItem.id)
+  //   if (idMap.includes(recipe.id)){
+  //     buttonClasses = "favorite-star is-favorite"
+  //   }
+  //   allRecipeGrid.innerHTML +=
+  //     `<article class="mini-recipe" id="${recipe.id}">
+  //      <img src= "${recipe.image}" alt= "${recipe.name}">
+  //      <p>${recipe.name}</p>
+  //      <button type="favoriteStar" name="favoriteStar" class="${buttonClasses} heart-button" id="faveBtn-${recipe.id}">♡</button>
+  //      <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
+  //      </article>`
 
-      return acc;
-    }, []);
-    return viewAllRecipes;
+  //     return acc;
+  //   }, []);
+  //   return viewAllRecipes;
 };
 
 function showHomeView() {
@@ -208,6 +209,7 @@ function showSavedRecipes() {
   show(searchFavesSubmitBtn);
   show(searchFavesByName);
   show(filters);
+  show(allRecipeGrid);
   show(featuredRecipes);
   featuredRecipes.innerHTML = `<h1>Saved Recipes</h1>`;
 }
@@ -216,59 +218,34 @@ function showRecipesToCook() {
   hide(recipeDirectionsContainer);
   populateCards(currentUser.recipesToCook);
   show(featuredRecipes);
+  show(allRecipeGrid);
   featuredRecipes.innerHTML = `<h1>Recipes</h1>`
 };
 
 function getDirections(event){
-console.log(event)
-  selectedRecipeIngredients = [];
-  show(recipeDirectionsContainer);
-  hide(allRecipeGrid);
-  hide(allRecipeContainer);
-  show(recipeGrid);
-
+  
   if(event.target.classList.contains('favorite-star')){
     addToLibrary();
     return
   };
-
+  
   if(event.target.classList.contains('recipesToCook')){
     addToLibrary();
     return
   }
-
-  if(event.target.classList.contains('content-container')){
+  
+  if(!event.target.parentElement.classList.contains('mini-recipe')){
     return
   }
-  if(event.target.classList.contains('all-recipe-grid')){
-    return
-  }
-
-  if(event.target.classList.contains('search-submit-btn')) {
-    return
-  }
-
-  if(event.target.classList.contains('search-field')){
-    return
-  }
-
-  if(event.target.localName === 'footer'){
-    return
-  }
-
-  if(!event.target.id && !event.target.alt) {
-    return;
-  }
-
-
+  selectedRecipeIngredients = [];
+  show(recipeGrid);
+  hide(allRecipeContainer);
+  hide(allRecipeGrid);
+  show(recipeDirectionsContainer);
+    
   recipeGrid.innerHTML = "";
   let targetID = "";
-
-  if(event.target.closest('.mini-recipe')){
-    targetID = event.target.closest('.mini-recipe').id
-  } else {
-    targetID = event.target.closest('.recipe').id;
-  }
+  targetID = event.target.closest('.mini-recipe').id
   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
   let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
 
@@ -333,16 +310,20 @@ function populateCards(arr){
   allRecipeGrid.innerHTML = ""
   const recipeCard = arr.reduce((acc, recipe) => {
 
-    let buttonClasses = "favorite-star"
+    let buttonClassesFaves = "favorite-star"
     if (currentUser.favoriteRecipes.includes(recipe)){
-      buttonClasses = "favorite-star is-favorite heart-button"
+      buttonClassesFaves = "favorite-star is-favorite"
+    }
+    let buttonClassesToCook = "recipesToCook"
+    if (currentUser.recipesToCook.includes(recipe)){
+      buttonClassesToCook = "recipesToCook is-saved"
     }
     allRecipeGrid.innerHTML +=
       `<article class="mini-recipe" id="${recipe.id}">
        <img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>
-       <button type="favoriteStar" name="favoriteStar" class="favorite-star${buttonClasses}" id="fave-${recipe.id}">♡</button>
-       <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
+       <button type="favoriteStar" name="favoriteStar" class="${buttonClassesFaves}" id="fave-${recipe.id}">♡</button>
+       <button type="recipesToCook" name="recipesToCook" class="${buttonClassesToCook}" id="${recipe.id}">🗓 Cook this week!</button>
        </article>`
 
       return acc;
@@ -458,15 +439,15 @@ function addToLibrary(){
   let selectedRecipe = new Recipe(fullRecipe, ingredientsData);
   let index = recipeRepo.recipeData.indexOf(fullRecipe);
 
-  if(event.target.closest('.heart-button')){
-    saveRecipeBtn = event.target.closest('.heart-button');
+  if(event.target.closest('.favorite-star')){
+    saveRecipeBtn = event.target.closest('.favorite-star');
     saveRecipeBtn.classList.toggle("is-favorite");
     currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
   }
   if(event.target.classList.contains('recipesToCook')){
     saveRecipeBtn = event.target.closest('.recipesToCook')
     currentUser.toggleItemInArray('recipesToCook', recipeData[index]);
-    saveRecipeBtn.classList.toggle("is-favorite");
+    saveRecipeBtn.classList.toggle("is-saved");
   }
 }
 
