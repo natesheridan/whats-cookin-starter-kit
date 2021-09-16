@@ -550,11 +550,15 @@ aside > button {
 
 .favorite-star{
   background-color: #eeeeee;
-  color : rgb(247, 115, 115);
+  color : #C8553D;
 }
 .is-favorite{
-  background-color:rgb(255, 111, 111);
-  color : #acacac;
+  background-color: #C8553D;
+  color : #1f1f1f;
+}
+.is-saved{
+  background-color:rgb(126, 192, 110);
+  color : #1f1f1f;
 }
 
 

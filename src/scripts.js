@@ -338,7 +338,7 @@ function populateCards(arr){
     }
     let buttonClassesToCook = "recipesToCook"
     if (currentUser.recipesToCook.includes(recipe)){
-      buttonClassesToCook = "recipesToCook is-favorite"
+      buttonClassesToCook = "recipesToCook is-saved"
     }
     allRecipeGrid.innerHTML +=
       `<article class="mini-recipe" id="${recipe.id}">
@@ -469,7 +469,7 @@ function addToLibrary(){
   if(event.target.classList.contains('recipesToCook')){
     saveRecipeBtn = event.target.closest('.recipesToCook')
     currentUser.toggleItemInArray('recipesToCook', recipeData[index]);
-    saveRecipeBtn.classList.toggle("is-favorite");
+    saveRecipeBtn.classList.toggle("is-saved");
   }
 }
 
