@@ -60,7 +60,7 @@ var selectedRecipeIngredients = [];
 
 searchSubmitBtn.addEventListener('click', searchByName);
 allRecipes.addEventListener('click', viewAllRecipes);
-contentContainer.addEventListener('click', getDirections);
+allRecipeGrid.addEventListener('click', getDirections);
 
 homeButton.addEventListener('click', showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
@@ -95,7 +95,7 @@ function parseData(data){
 
 function getData() {
   return Promise.all([fetchUsersData(), fetchIngredientsData(), fetchRecipeData()])
-  .then(data => parseData(data));npm
+  .then(data => parseData(data));
 }
 
 
@@ -220,55 +220,54 @@ function showRecipesToCook() {
 };
 
 function getDirections(event){
-console.log(event)
+  console.log(event.target.parentElement.classList)
   selectedRecipeIngredients = [];
-  show(recipeDirectionsContainer);
-  hide(allRecipeGrid);
-  hide(allRecipeContainer);
-  show(recipeGrid);
-
+  
   if(event.target.classList.contains('favorite-star')){
     addToLibrary();
     return
   };
-
+  
   if(event.target.classList.contains('recipesToCook')){
     addToLibrary();
     return
   }
-
-  if(event.target.classList.contains('content-container')){
+  
+  if(!event.target.parentElement.classList.contains('mini-recipe')){
     return
   }
-  if(event.target.classList.contains('all-recipe-grid')){
-    return
-  }
+  show(recipeGrid);
+  hide(allRecipeContainer);
+  hide(allRecipeGrid);
 
-  if(event.target.classList.contains('search-submit-btn')) {
-    return
-  }
-
-  if(event.target.classList.contains('search-field')){
-    return
-  }
-
-  if(event.target.localName === 'footer'){
-    return
-  }
-
-  if(!event.target.id && !event.target.alt) {
-    return;
-  }
-
-
+  // if(event.target.classList.contains('content-container')){
+  //   return
+  // }
+  // if(event.target.classList.contains('all-recipe-grid')){
+  //   return
+  // }
+  
+  // if(event.target.classList.contains('search-submit-btn')) {
+  //   return
+  // }
+  
+  // if(event.target.classList.contains('search-field')){
+  //   return
+  // }
+  
+  // if(event.target.localName === 'footer'){
+  //   return
+  // }
+  
+  // if(!event.target.id && !event.target.alt) {
+  //   return;
+  // }
+  
+  show(recipeDirectionsContainer);
+    
   recipeGrid.innerHTML = "";
   let targetID = "";
-
-  if(event.target.closest('.mini-recipe')){
-    targetID = event.target.closest('.mini-recipe').id
-  } else {
-    targetID = event.target.closest('.recipe').id;
-  }
+  targetID = event.target.closest('.mini-recipe').id
   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
   let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
 
