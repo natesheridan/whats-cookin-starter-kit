@@ -220,8 +220,6 @@ function showRecipesToCook() {
 };
 
 function getDirections(event){
-  console.log(event.target.parentElement.classList)
-  selectedRecipeIngredients = [];
   
   if(event.target.classList.contains('favorite-star')){
     addToLibrary();
@@ -236,33 +234,10 @@ function getDirections(event){
   if(!event.target.parentElement.classList.contains('mini-recipe')){
     return
   }
+  selectedRecipeIngredients = [];
   show(recipeGrid);
   hide(allRecipeContainer);
   hide(allRecipeGrid);
-
-  // if(event.target.classList.contains('content-container')){
-  //   return
-  // }
-  // if(event.target.classList.contains('all-recipe-grid')){
-  //   return
-  // }
-  
-  // if(event.target.classList.contains('search-submit-btn')) {
-  //   return
-  // }
-  
-  // if(event.target.classList.contains('search-field')){
-  //   return
-  // }
-  
-  // if(event.target.localName === 'footer'){
-  //   return
-  // }
-  
-  // if(!event.target.id && !event.target.alt) {
-  //   return;
-  // }
-  
   show(recipeDirectionsContainer);
     
   recipeGrid.innerHTML = "";
