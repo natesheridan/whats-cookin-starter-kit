@@ -152,24 +152,25 @@ function viewAllRecipes() {
   featuredRecipes.innerHTML = `<h1>All Recipes</h1>`;
 
   let recipeRepo = new RecipeRepository(recipeData);
-  allRecipeGrid.innerHTML = ""
-  const viewAllRecipes = recipeRepo.recipeData.reduce((acc, recipe) => {
-    let buttonClasses = "favorite-star"
-    let idMap = currentUser.favoriteRecipes.map((faveItem) => faveItem.id)
-    if (idMap.includes(recipe.id)){
-      buttonClasses = "favorite-star is-favorite"
-    }
-    allRecipeGrid.innerHTML +=
-      `<article class="mini-recipe" id="${recipe.id}">
-       <img src= "${recipe.image}" alt= "${recipe.name}">
-       <p>${recipe.name}</p>
-       <button type="favoriteStar" name="favoriteStar" class="${buttonClasses} heart-button" id="faveBtn-${recipe.id}">♡</button>
-       <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
-       </article>`
+  populateCards(recipeRepo)
+  // allRecipeGrid.innerHTML = ""
+  // const viewAllRecipes = recipeRepo.recipeData.reduce((acc, recipe) => {
+  //   let buttonClasses = "favorite-star"
+  //   let idMap = currentUser.favoriteRecipes.map((faveItem) => faveItem.id)
+  //   if (idMap.includes(recipe.id)){
+  //     buttonClasses = "favorite-star is-favorite"
+  //   }
+  //   allRecipeGrid.innerHTML +=
+  //     `<article class="mini-recipe" id="${recipe.id}">
+  //      <img src= "${recipe.image}" alt= "${recipe.name}">
+  //      <p>${recipe.name}</p>
+  //      <button type="favoriteStar" name="favoriteStar" class="${buttonClasses} heart-button" id="faveBtn-${recipe.id}">♡</button>
+  //      <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
+  //      </article>`
 
-      return acc;
-    }, []);
-    return viewAllRecipes;
+  //     return acc;
+  //   }, []);
+  //   return viewAllRecipes;
 };
 
 function showHomeView() {
