@@ -332,16 +332,20 @@ function populateCards(arr){
   allRecipeGrid.innerHTML = ""
   const recipeCard = arr.reduce((acc, recipe) => {
 
-    let buttonClasses = "favorite-star"
+    let buttonClassesFaves = "favorite-star"
     if (currentUser.favoriteRecipes.includes(recipe)){
-      buttonClasses = "favorite-star is-favorite heart-button"
+      buttonClassesFaves = "favorite-star is-favorite"
+    }
+    let buttonClassesToCook = "recipesToCook"
+    if (currentUser.recipesToCook.includes(recipe)){
+      buttonClassesToCook = "recipesToCook is-favorite"
     }
     allRecipeGrid.innerHTML +=
       `<article class="mini-recipe" id="${recipe.id}">
        <img src= "${recipe.image}" alt= "${recipe.name}">
        <p>${recipe.name}</p>
-       <button type="favoriteStar" name="favoriteStar" class="favorite-star${buttonClasses}" id="fave-${recipe.id}">♡</button>
-       <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
+       <button type="favoriteStar" name="favoriteStar" class="${buttonClassesFaves}" id="fave-${recipe.id}">♡</button>
+       <button type="recipesToCook" name="recipesToCook" class="${buttonClassesToCook}" id="${recipe.id}">🗓 Cook this week!</button>
        </article>`
 
       return acc;
