@@ -18,7 +18,8 @@ class Pantry {
 
   calculateIngredientsNeeded(recipe) {
     let confirmation = this.confirmNeededIngredients(recipe);
-  
+    recipe.updateIngredientData();
+
     if(confirmation === 'true') {
       return 'You have enough ingedients in the pantry to cook this recipe!'
     } else {
@@ -28,7 +29,7 @@ class Pantry {
             let amount = recipeIngredient.quantity.amount - pantryItem.amount
             let units = recipeIngredient.quantity.unit
             let ingredientID = recipeIngredient.id
-            acc += `You need ${amount} more ${units} of ${ingredientID}`
+            acc += `You need ${amount} more ${units} of ${recipeIngredient.name}`
           }
         })
         return acc

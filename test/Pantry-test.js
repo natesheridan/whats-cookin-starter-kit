@@ -117,6 +117,6 @@ it('Should tell you if your pantry has enough for a recipe', () => {
 
 it('Should calculate the amount in a recipe that I need in my pantry', () => {
     expect(userPantry2.calculateIngredientsNeeded(recipeToCook)).to.equal('You have enough ingedients in the pantry to cook this recipe!');
-    expect(userPantry1.calculateIngredientsNeeded(recipeToCook)).to.equal('You need 1 more units of 10020005');
+    expect(userPantry1.calculateIngredientsNeeded(recipeToCook)).to.equal('You need 1 more units of farro');
   });
 });
