@@ -152,7 +152,7 @@ function viewAllRecipes() {
   featuredRecipes.innerHTML = `<h1>All Recipes</h1>`;
 
   let recipeRepo = new RecipeRepository(recipeData);
-  populateCards(recipeRepo)
+  populateCards(recipeRepo.recipeData)
   // allRecipeGrid.innerHTML = ""
   // const viewAllRecipes = recipeRepo.recipeData.reduce((acc, recipe) => {
   //   let buttonClasses = "favorite-star"
@@ -437,8 +437,8 @@ function addToLibrary(){
   let selectedRecipe = new Recipe(fullRecipe, ingredientsData);
   let index = recipeRepo.recipeData.indexOf(fullRecipe);
 
-  if(event.target.closest('.heart-button')){
-    saveRecipeBtn = event.target.closest('.heart-button');
+  if(event.target.closest('.favorite-star')){
+    saveRecipeBtn = event.target.closest('.favorite-star');
     saveRecipeBtn.classList.toggle("is-favorite");
     currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
   }
