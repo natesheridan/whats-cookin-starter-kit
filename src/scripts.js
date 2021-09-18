@@ -1,4 +1,4 @@
-import styles from './styles.css';
+import styles from './stylesTest.css';
 import UserData from './classes/UserData.js';
 import Recipe from './classes/Recipe.js';
 import RecipeRepository from './classes/RecipeRepository.js';
@@ -9,7 +9,11 @@ import starActive from './data/assets/star-active.svg';
 import star from './data/assets/star.svg';
 import {fetchUsersData, fetchRecipeData, fetchIngredientsData} from './apiCalls.js';
 import apiCalls from './apiCalls.js';
+
+// import "./style.scss";
+
 import domUpdates from './domUpdates.js';
+
 
 // BUTTONS & SECTIONS //
 
@@ -58,8 +62,13 @@ export let selectedRecipeIngredients = [];
 // EVENT LISTENERS //
 
 searchSubmitBtn.addEventListener('click', searchByName);
+
+// allRecipes.addEventListener('click', viewAllRecipes);
+// contentContainer.addEventListener('click', getDirections);
+
 allRecipes.addEventListener('click', domUpdates.viewAllRecipes);
 allRecipeGrid.addEventListener('click', domUpdates.getDirections);
+
 
 homeButton.addEventListener('click', domUpdates.showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
@@ -84,7 +93,7 @@ function parseData(data){
 
 function getData() {
   return Promise.all([fetchUsersData(), fetchIngredientsData(), fetchRecipeData()])
-  .then(data => parseData(data));
+  .then(data => parseData(data));npm
 }
 
 function filterRecipes() {
@@ -125,6 +134,57 @@ function addNewRecipe() {
   addedIngredients = [];
 }
 
+
+// function viewAllRecipes() {
+//   show(filters);
+//   show(allRecipeContainer);
+//   hide(addRecipeForm);
+//   hide(recipeGrid);
+//   hide(recipeDirectionsContainer);
+//   show(allRecipeGrid);
+//   hide(searchFavesInput);
+//   hide(searchFavesSubmitBtn);
+//   show(featuredRecipes);
+//   featuredRecipes.innerHTML = `<h1>All Recipes</h1>`;
+
+//   let recipeRepo = new RecipeRepository(recipeData);
+//   allRecipeGrid.innerHTML = ""
+//   const viewAllRecipes = recipeRepo.recipeData.reduce((acc, recipe) => {
+//     let buttonClasses = "favorite-star"
+//     let idMap = currentUser.favoriteRecipes.map((faveItem) => faveItem.id)
+//     if (idMap.includes(recipe.id)){
+//       buttonClasses = "favorite-star is-favorite"
+//     }
+//     allRecipeGrid.innerHTML +=
+//       `<article class="mini-recipe" id="${recipe.id}">
+//        <img src= "${recipe.image}" alt= "${recipe.name}">
+//        <p>${recipe.name}</p>
+//        <button type="favoriteStar" name="favoriteStar" class="${buttonClasses} heart-button" id="faveBtn-${recipe.id}">♡</button>
+//        <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
+//        </article>`
+
+//       return acc;
+//     }, []);
+//     return viewAllRecipes;
+// };
+
+// function showHomeView() {
+//   show(recipeGrid);
+//   generateRandomHomeViewRecipes();
+//   hide(addRecipeForm);
+//   hide(allRecipeContainer);
+//   hide(allRecipeGrid);
+//   hide(recipeDirectionsContainer);
+//   show(mainContent);
+//   hide(searchFavesSubmitBtn);
+//   hide(searchFavesByName);
+//   hide(filters);
+//   show(featuredRecipes);
+//   featuredRecipes.innerHTML = `<h1>Featured Recipes</h1>`;
+// }
+
+=======
+
 function showRecipeForm() {
   domUpdates.show(addRecipeForm);
   domUpdates.hide(recipeGrid);
@@ -139,6 +199,91 @@ function showRecipeForm() {
 function showLogin() {
   loginPopup.classList.toggle('hidden');
 }
+
+
+// function showSavedRecipes() {
+//   populateCards(currentUser.favoriteRecipes);
+//   hide(recipeDirectionsContainer);
+//   show(searchFavesSubmitBtn);
+//   show(searchFavesByName);
+//   show(filters);
+//   show(featuredRecipes);
+//   featuredRecipes.innerHTML = `<h1>Saved Recipes</h1>`;
+// }
+
+// function showRecipesToCook() {
+//   hide(recipeDirectionsContainer);
+//   populateCards(currentUser.recipesToCook);
+//   show(featuredRecipes);
+//   featuredRecipes.innerHTML = `<h1>Recipes</h1>`
+// };
+
+// function getDirections(event){
+// console.log(event)
+//   selectedRecipeIngredients = [];
+//   hide(allRecipeGrid);
+//   hide(allRecipeContainer);
+//   // show(recipeGrid);
+
+//   if(event.target.classList.contains('favorite-star')){
+//     addToLibrary();
+//     return
+//   };
+
+//   if(event.target.classList.contains('recipesToCook')){
+//     addToLibrary();
+//     return
+//   }
+
+//   if(event.target.classList.contains('content-container')){
+//     return
+//   }
+//   if(event.target.classList.contains('all-recipe-grid')){
+//     return
+//   }
+
+//   if(event.target.classList.contains('search-submit-btn')) {
+//     return
+//   }
+
+//   if(event.target.classList.contains('search-field')){
+//     return
+//   }
+
+//   if(event.target.localName === 'footer'){
+//     return
+//   }
+
+//   if(!event.target.id && !event.target.alt) {
+//     return;
+//   }
+
+//   show(recipeGrid);
+//   show(recipeDirectionsContainer);
+//   recipeGrid.innerHTML = "";
+//   let targetID = "";
+
+//   if(event.target.closest('.mini-recipe')){
+//     targetID = event.target.closest('.mini-recipe').id
+//   } else {
+//     targetID = event.target.closest('.recipe').id;
+//   }
+//   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
+//   let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
+
+//   selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {
+//     let ingredient = new Ingredient(element, ingredientsData)
+//     return ingredient
+//   })
+//   let instructions = selectedRecipe.instructions.map((element) => {
+//     return element.instruction
+//   });
+
+//   let allIngredients = selectedRecipe.ingredients.map((element) => {
+//     let name = element.name;
+//     let amount = element.quantity.amount;
+//     let unit = element.quantity.unit;
+
 
 
 
@@ -157,6 +302,30 @@ function searchByName(){
   domUpdates.populateCards(filteredRecipes)
 
 }
+
+
+// function populateCards(arr){
+//   show(allRecipeGrid);
+//   hide(recipeGrid);
+//   allRecipeGrid.innerHTML = ""
+//   const recipeCard = arr.reduce((acc, recipe) => {
+
+//     let buttonClasses = "favorite-star"
+//     if (currentUser.favoriteRecipes.includes(recipe)){
+//       buttonClasses = "favorite-star is-favorite heart-button"
+//     }
+//     allRecipeGrid.innerHTML +=
+//       `<article class="mini-recipe" id="${recipe.id}">
+//        <img src= "${recipe.image}" alt= "${recipe.name}">
+//        <p>${recipe.name}</p>
+//        <button type="favoriteStar" name="favoriteStar" class="favorite-star${buttonClasses}" id="fave-${recipe.id}">♡</button>
+//        <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
+//        </article>`
+
+//       return acc;
+//     }, []);
+// };
+
 
 function searchFaves(){
   let searchInput = searchFavesInput.value.toLowerCase();
@@ -245,15 +414,15 @@ export function addToLibrary(){
   let selectedRecipe = new Recipe(fullRecipe, ingredientsData);
   let index = recipeRepo.recipeData.indexOf(fullRecipe);
 
-  if(event.target.closest('.favorite-star')){
-    saveRecipeBtn = event.target.closest('.favorite-star');
+  if(event.target.closest('.heart-button')){
+    saveRecipeBtn = event.target.closest('.heart-button');
     saveRecipeBtn.classList.toggle("is-favorite");
     currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
   }
   if(event.target.classList.contains('recipesToCook')){
     saveRecipeBtn = event.target.closest('.recipesToCook')
     currentUser.toggleItemInArray('recipesToCook', recipeData[index]);
-    saveRecipeBtn.classList.toggle("is-saved");
+    saveRecipeBtn.classList.toggle("is-favorite");
   }
 }
 

@@ -1,0 +1,593 @@
+$primary: #c8553d; // Header - blood orange
+$secondary: #8FB7B7; // Green container
+$tertiary: #FFE2D6; // Cream background
+$offwhite: #FAF1EF; // All Recipe container
+$instruction-page: #FFF8F3; // Offwhite for instructions
+$nav-button-dark: #0B3954; // Dark navy nav buttons
+$nav-button-hover: #0668a0;
+$nav-button-active: #c8553d;
+$filters: #13577f; // Background color for recipe filters
+$add-recipe-hover: #5F9595;
+$add-recipe-active: #EFB87E;
+$form-button: #15c1bc; // Green for add recipe (not necessary)
+$ingredients: #CD523D; // Background color for ingredients
+$cost: #4ba881; // Background color for cost
+$error: #a53f30; // Background color for search error
+
+@mixin flex-row() {
+  display: flex;
+  flex-direction: row;
+}
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+@mixin centered() {
+  align-items: center;
+  justify-content: center;
+}
+@mixin vertical-padding($padding) {
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+@mixin horizontal-padding($padding) {
+  padding-left: $padding;
+  padding-right: $padding;
+}
+@mixin remove-space() {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  color: black;
+  height: 1vh;
+  width: 100%;
+  background-color: $tertiary;
+  @include remove-space();
+  font-family: 'Montserrat', sans-serif;
+  overflow: scroll;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+nav {
+  @include flex-row();
+  justify-content: space-between;
+  @include horizontal-padding(35%);
+  padding-bottom: .3rem;
+  padding-top: 1rem;
+}
+
+nav > button {
+  background-color: $nav-button-dark;
+  color: white;
+
+  &:hover {
+    background-color: $nav-button-hover;
+  }
+
+  &:active {
+    background-color: $nav-button-active;
+  }
+}
+
+button {
+  height: 2.5rem;
+  width: auto;
+  padding: 0rem 1rem 0rem 1rem;
+  border: 0px;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+h1, h3 {
+  margin-bottom: 0px;
+  padding: 0px;
+  border: 0px;
+  font-family: 'STIX Two Math', serif;
+}
+
+h4 {
+  margin: 0px;
+}
+
+header,
+footer {
+  display: inline-flex;
+  flex-direction: row;
+  @include centered();
+  background-color: $primary;
+  width: 100%;
+}
+
+footer {
+  position: absolute;
+  height: 3rem;
+  background-color: $primary;
+  bottom: -13%;
+  margin-bottom: -2rem;
+  overflow: hidden;
+}
+
+aside > button {
+  display: block;
+  @include remove-space;
+  margin-top: 2rem;
+  padding: 0px;
+  border: 0px;
+  width: 3rem;
+  height: 3rem;
+}
+
+.title-container {
+  text-align: center;
+  color: white;
+  background-color: $primary;
+  margin: 0rem;
+  padding: .1rem 0rem 1rem 0rem;
+  border: 0px;
+}
+
+.search-field-container {
+  position: absolute;
+  left: 5%;
+  top: 2.2%;
+}
+
+.featured-recipes-title {
+  h1 {
+    position: static;
+    font-size: 2.5rem;
+    text-align: center;
+    @include remove-space();
+    margin-bottom: 1rem;
+    border: 0px;
+  }
+}
+
+.filter-select {
+  @include flex-row();
+  @include centered();
+  @include vertical-padding(.5rem);
+  background-color: $filters;
+  color: white;
+
+  &:label {
+    padding: 0rem .5rem 0rem .5rem;
+    @include vertical-padding(0rem);
+    @include horizontal-padding(.5rem);
+  }
+}
+
+.other-options-2,
+.other-options-3,
+.other-options-4 {
+  margin-right: .8rem;
+}
+
+.meals {
+  padding-right: 1rem;
+  font-weight: bold;
+}
+
+.sidebars {
+  display: inline-flex;
+  background-color: $secondary;
+  @include remove-space();
+  border: 0px;
+}
+
+.left-sidebar {
+  display: inline-block;
+  position: absolute;
+  left: 2rem;
+  width: 14%;
+  height: auto;
+  padding-top: 2rem;
+  z-index: 2;
+
+  button {
+    height: 3rem;
+    flex-direction: column;
+
+    &:hover {
+      color: white;
+      background-color: $add-recipe-hover;
+    }
+
+    &:active {
+      color: white;
+      background-color: $add-recipe-active;
+    }
+  }
+}
+
+.right-sidebar {
+  display: inline-block;
+  flex-direction: column;
+  position: absolute;
+  @include centered();
+  right: 1rem;
+  width: 10%;
+  height: auto;
+  z-index: 2;
+}
+
+// .login-button {
+//   position: absolute;
+//   top: 1.5%;
+//   right: 5%;
+//   color: black;
+//   background-color: #FFF8F3;
+//   height: auto;
+//   width: 5rem;
+//   padding: .5rem 0rem .5rem 0rem;
+//   cursor: default;
+// }
+
+// .scroll-arrow {
+//   display: inline-flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   position: relative;
+//   height: 5rem;
+//   width: 5rem;
+//   cursor: pointer;
+//   z-index: 3;
+// }
+//
+// .right-arrow {
+//   position: absolute;
+//   top: 225%;
+// }
+
+.content-container {
+  flex-direction: column;
+  @include centered();
+  position: relative;
+  background-color: $secondary;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+  height: 32rem;
+  z-index: 0;
+}
+
+.main-content {
+  z-index: 0;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 18rem);
+  grid-auto-rows: 10rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.recipe {
+  @include flex-column();
+  @include centered();
+  position: relative;
+  text-align: center;
+  height: 22rem;
+  width: 15rem;
+  background-color: white;
+  padding: .3rem;
+  border-radius: 1rem;
+  margin: 0rem .4rem 0rem .4rem;
+  overflow: visible;
+  object-fit: fill;
+}
+
+.favorite-star {
+  position: absolute;
+  bottom: 8%;
+  right: 8%;
+  background-color: white;
+}
+
+.mini-recipe {
+  .favorite-star {
+    position: static;
+    margin: 0% 4% 4% 76%;
+  }
+}
+
+.recipe-content {
+  @include flex-column();
+  align-items: flex-start;
+}
+
+.recipe-info {
+  margin: 3rem .4rem 0rem .4rem;
+  position: relative;
+}
+
+.recipe-info {
+  h2 {
+    position: static;
+    margin-top: 20%;
+    text-align: center;
+  }
+}
+
+.mini-recipe {
+  button {
+    right: 0;
+  }
+}
+
+// .login-form {
+//   display: flex;
+//   flex-direction: column;
+//   position: absolute;
+//   width: 12rem;
+//   line-height: 2rem;
+//   padding: 1rem 1.5rem 1rem 1.5rem;
+//   border: 1px solid black;
+//   background-color: #fff8f4;
+//   top: -12%;
+//   right: 9.5%;
+//   z-index: 2;
+// }
+
+// .login-form > button {
+//   margin-top: 1rem;
+//   height: 2rem;
+//   width: auto;
+//   background-color: #b6b5bf;
+//   color: white;
+//   cursor: default;
+// }
+
+.recipe-directions-container {
+  @include flex-column();
+  justify-content: flex-start;
+  position: relative;
+  height: 23rem;
+  width: 70%;
+  background-color: white;
+  overflow: scroll;
+  padding: 2rem;
+  border: 1rem solid white;
+  border-radius: .5rem;
+
+  .recipe-directions {
+    @include horizontal-padding(1rem);
+    padding-bottom: 1rem;
+    line-height: 1.5rem;
+    background-color: $instruction-page;
+    border: 1px solid black;
+  }
+}
+
+.recipe-directions-container {
+  img {
+    height: auto;
+    width: 60%;
+    border: 1px solid black;
+  }
+}
+
+.full-recipe {
+  padding-bottom: 1rem;
+}
+
+.instructions {
+  padding-bottom: 3rem;
+}
+
+.ingredients {
+  color: white;
+  background-color: $ingredients;
+  padding: 1rem;
+  border-radius: .5rem;
+  width: auto;
+}
+
+.cost {
+  color: white;
+  background-color: $cost;
+  padding: .2rem;
+  padding-left: 1rem;
+  border-radius: .5rem;
+}
+
+// .login-form {
+//   .sign-up-button {
+//     background-color: #b6b5bf;
+//   }
+//
+//   .cancel-login {
+//     border: 0px;
+//     background-color: none;
+//   }
+// }
+
+// .confirm-password {
+//   @include flex-column;
+// }
+
+.meal-image {
+  display: block;
+  position: absolute;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+  top: 5%;
+
+    img {
+      height: 100%;
+      width: 90%;
+      padding: 0rem;
+      @include remove-space();
+    }
+}
+
+.all-recipe-container {
+  @include flex-row();
+  @include remove-space();
+  justify-content: center;
+  align-items: baseline;
+  position: absolute;
+  height: 28rem;
+  width: 55rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border-radius: 1rem;
+  top: 0%;
+  left: 20%;
+  right: 20%;
+  background-color: $offwhite;
+  padding: .5rem;
+}
+
+.all-recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 13rem);
+  grid-auto-rows: 20rem;
+}
+
+.mini-recipe {
+  display: inline-table;
+  height: 12rem;
+  width: 8rem;
+  padding: .5rem;
+  margin: .3rem;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 1rem;
+
+  img {
+    height: 7rem;
+    width: auto;
+    flex-flow: row wrap;
+  }
+}
+
+.filtered-recipe-grid {
+  flex-direction: row;
+  display: block;
+  align-items: center;
+  width: 70%;
+}
+
+.filtered-recipe-grid {
+  img {
+    height: 20%;
+    width: 20%;
+    padding: .5rem;
+    margin: .3rem;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 1rem;
+  }
+}
+
+.full-recipe-container {
+  @include centered();
+  height: auto;
+  width: 70%;
+  padding: 1rem;
+  overflow: scroll;
+  border-radius: 1rem;
+  background-color: $instruction-page;
+}
+
+.add-recipe-container {
+  @include flex-row();
+  justify-content: center;
+  position: relative;
+  width: auto;
+}
+
+.add-recipe {
+  position: absolute;
+  height: auto;
+  width: 70%;
+  padding: 2rem;
+  background-color: $instruction-page;
+  border: 1px solid black;
+  z-index: 1;
+
+  input {
+    width: 40%;
+  }
+
+  .plus-button-container {
+    margin-left: .5rem;
+    height: 2rem;
+    width: auto;
+    color: white;
+    background-color: $form-button;
+  }
+
+  .submit-recipe {
+    background-color: $form-button;
+    color: white;
+    margin-top: .2rem;
+  }
+}
+
+.popup-container {
+  display: block;
+}
+
+#popup {
+  position: fixed;
+  height: 10%;
+  width: 40%;
+  border-radius: 30px;
+  text-align: center;
+  font-size: 2.2vh;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+
+  p {
+    position: relative;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+}
+
+.gold-popup {
+  background-color: rgba(218, 158, 29, 1);
+}
+
+.red-popup {
+  background-color: $error;
+}
+
+.hidden {
+  display: none;
+}
+
+.favorite-star {
+  margin: 0px;
+  margin-right: 1rem;
+  @include horizontal-padding(1rem);
+  background-color: #fcebe8;
+  color : $nav-button-active;
+}
+.is-favorite{
+  background-color: $nav-button-active;
+  color : white;
+}
+.is-saved{
+  background-color: $secondary;
+  color : white;
+}
+
+.home-title{
+  font-size: 40px;
+}
+
+.wrapper {
+  min-height: 100%;
+}
