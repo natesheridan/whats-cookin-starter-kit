@@ -224,10 +224,7 @@ getDirections(event){
     return selectedRecipeIngredients
   });
 
-  let userPantry = new Pantry([{
-    "ingredient": 0,
-    "amount": 0
-  },])
+  let userPantry = new Pantry(currentUser.pantry)
 
   let fullRecipe =
     `<h3 class= "full-recipe"> ${selectedRecipe.name}</h3>
