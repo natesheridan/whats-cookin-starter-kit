@@ -79,7 +79,6 @@ myPantryButton.addEventListener('click', domUpdates.showMyPantry);
 window.addEventListener('load', getData);
 
 function parseData(data){
-  console.log(data)
   usersData = data[0];
   ingredientsData = data[1];
   recipeData = data[2];
