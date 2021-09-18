@@ -8,6 +8,8 @@ import Recipe from './classes/Recipe.js'
 import {ingredientsData} from './scripts.js'
 import Ingredient from './classes/Ingredient.js'
 import {generateRandomUser} from './scripts.js'
+import Pantry from './classes/Pantry.js'
+import {contentContainer} from './scripts.js'
 
 let domUpdates = {
     hide(element){
@@ -149,6 +151,24 @@ showSavedRecipes() {
   domUpdates.show(allRecipeGrid);
   domUpdates.show(featuredRecipes);
   domUpdates.displaySavedRecipes();
+},
+
+showMyPantry() {
+  domUpdates.show(allRecipeGrid);
+  domUpdates.show(contentContainer);
+  domUpdates.hide(recipeGrid);
+  domUpdates.show(allRecipeContainer);
+  allRecipeGrid.innerHTML = ''
+  let userPantry = new Pantry(currentUser.pantry);
+
+  let pantryIngredients = userPantry.pantry.map((ingredient) => {
+    let userIngredients = new Ingredient(ingredient, ingredientsData)
+    allRecipeGrid.innerHTML +=
+    `<article class="mini-recipe" id="${userIngredients.id}">
+     <p>${userIngredients.name}</p>
+     <p>${userIngredients.quantity}</p>
+     </article>`
+    })
 },
 
 getDirections(event){

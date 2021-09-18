@@ -20,7 +20,7 @@ const homeTitle = document.querySelector('#homeTitle');
 const allRecipeContainer = document.querySelector('#allRecipeContainer');
 const allRecipes = document.querySelector('#allRecipesButton');
 const recipeGrid = document.querySelector('#recipeGrid');
-const contentContainer = document.querySelector('.content-container');
+export const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
 export const searchFavesInput = document.querySelector('.search-favorites-field');
@@ -41,6 +41,7 @@ const plusButton = document.querySelector('#plusButtonContainer');
 const submitRecipeButton = document.querySelector('#submitRecipe');
 const addIngredientButton = document.querySelector('#plusButtonContainer');
 const recipesToCookButton = document.querySelector('#recipesToCook');
+const myPantryButton = document.querySelector('#userPantry');
 
 
 // FILTER CHECKBOXES && SEARCH ARRAY //
@@ -71,6 +72,7 @@ submitRecipeButton.addEventListener('click', addNewRecipe);
 addIngredientButton.addEventListener('click', addIngredient);
 searchFavesSubmitBtn.addEventListener('click', searchFaves);
 recipesToCookButton.addEventListener('click', domUpdates.showRecipesToCook);
+myPantryButton.addEventListener('click', domUpdates.showMyPantry);
 window.addEventListener('load', getData);
 
 function parseData(data){
