@@ -1,6 +1,13 @@
 import {currentUser} from './scripts.js'
 import RecipeRepository from './classes/RecipeRepository.js';
 import {recipeData} from './scripts.js'
+import {searchFavesInput} from './scripts.js'
+import {addToLibrary} from './scripts.js'
+import {selectedRecipeIngredients} from './scripts.js'
+import Recipe from './classes/Recipe.js'
+import {ingredientsData} from './scripts.js'
+import Ingredient from './classes/Ingredient.js'
+import {generateRandomUser} from './scripts.js'
 
 let domUpdates = {
     hide(element){
@@ -37,7 +44,7 @@ let domUpdates = {
     },
     showHomeView() {
         domUpdates.show(recipeGrid);
-        scripts.generateRandomHomeViewRecipes();
+        domUpdates.generateRandomHomeViewRecipes();
         domUpdates.hide(addRecipeForm);
         domUpdates.hide(allRecipeContainer);
         domUpdates.hide(allRecipeGrid);
@@ -130,8 +137,85 @@ randomRecipesIndex.forEach((randomRecipeIndex) => {
     </div>
   </div>
 </article>`
-})
+  })
 },
+
+showSavedRecipes() {
+  domUpdates.populateCards(currentUser.favoriteRecipes);
+  domUpdates.hide(recipeDirectionsContainer);
+  domUpdates.show(searchFavesSubmitBtn);
+  domUpdates.show(searchFavesByName);
+  domUpdates.show(filters);
+  domUpdates.show(allRecipeGrid);
+  domUpdates.show(featuredRecipes);
+  domUpdates.displaySavedRecipes();
+},
+
+getDirections(event){
+
+  if(event.target.classList.contains('favorite-star')){
+    addToLibrary();
+    return
+  };
+
+  if(event.target.classList.contains('recipesToCook')){
+    addToLibrary();
+    return
+  }
+
+  if(!event.target.parentElement.classList.contains('mini-recipe')){
+    return
+  }
+  let selectedRecipeIngredients = [];
+  domUpdates.show(recipeGrid);
+  domUpdates.hide(allRecipeContainer);
+  domUpdates.hide(allRecipeGrid);
+  domUpdates.show(recipeDirectionsContainer);
+
+  recipeGrid.innerHTML = "";
+  let targetID = "";
+  targetID = event.target.closest('.mini-recipe').id
+  let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
+  let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
+
+  selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {
+    let ingredient = new Ingredient(element, ingredientsData)
+    return ingredient
+  })
+  let instructions = selectedRecipe.instructions.map((element) => {
+    return element.instruction
+  });
+
+  let allIngredients = selectedRecipe.ingredients.map((element) => {
+    let name = element.name;
+    let amount = element.quantity.amount;
+    let unit = element.quantity.unit;
+
+    return [name, amount, unit]
+  })
+
+  let ingredients = allIngredients.reduce((acc, element) => {
+    acc += element
+    return acc
+  }, '')
+
+  selectedRecipe.ingredients.forEach(function(element) {
+    let currentIngredient = `${element.quantity.amount} ${element.quantity.unit} ${element.uniqueIngredientData.name}`
+    selectedRecipeIngredients.push(currentIngredient);
+    return selectedRecipeIngredients
+  });
+
+  let fullRecipe =
+    `<h3 class= "full-recipe"> ${selectedRecipe.name}</h3>
+    <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}"><br>
+    <br><b>Ingredients:</b><br>
+    <p class= "ingredients">${selectedRecipeIngredients.join(',<br>')}</p>
+    <p class= "cost"><b>${selectedRecipe.returnCostEstimation()}<b></p>
+    <br><b>Instructions:</b></br>
+    <p class= "instructions">${instructions}</p>`;
+
+  recipeDirections.innerHTML = fullRecipe
+}
 
 }
 
