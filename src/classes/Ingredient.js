@@ -1,7 +1,7 @@
 class Ingredient {
   constructor(obj, ingredientsData) {
-    this.id = obj.id;
-    this.quantity = obj.quantity;
+    this.id = obj.id || obj.ingredient;
+    this.quantity = obj.quantity || obj.amount;
     this.ingredientsData = ingredientsData;
     this.grabUniqueIngredientData()
     this.name;
