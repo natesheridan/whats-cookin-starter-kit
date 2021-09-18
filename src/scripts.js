@@ -46,7 +46,8 @@ const submitRecipeButton = document.querySelector('#submitRecipe');
 const addIngredientButton = document.querySelector('#plusButtonContainer');
 const recipesToCookButton = document.querySelector('#recipesToCook');
 const myPantryButton = document.querySelector('#userPantry');
-
+export const pantryContainer = document.querySelector('#pantryContainer');
+export const pantryDisplay = document.querySelector('#pantryDisplay');
 
 // FILTER CHECKBOXES && SEARCH ARRAY //
 
@@ -59,6 +60,7 @@ export default ingredientsData;
 let filterSelection = [];
 let addedIngredients = [];
 export let selectedRecipeIngredients = [];
+// export const 'pantryContainer';
 
 // EVENT LISTENERS //
 

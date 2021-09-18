@@ -291,7 +291,7 @@ aside > button {
 .mini-recipe {
   .favorite-star {
     position: static;
-    margin: 0% 4% 4% 76%;
+    margin: 0% 4% 4% 0%;
   }
 }
 
@@ -494,6 +494,45 @@ aside > button {
   overflow: scroll;
   border-radius: 1rem;
   background-color: $instruction-page;
+}
+
+.pantry-container {
+  display: flex;
+  @include centered();
+
+  .pantry-display {
+    height: 28rem;
+    width: 40%;
+    background-color: $offwhite;
+    overflow: scroll;
+    border: 1px solid black;
+
+    .pantry-quantity {
+      color: $primary;
+      font-weight: bolder;
+    }
+
+    article {
+      @include vertical-padding(.5rem);
+      padding-left: 1rem;
+
+      h3 {
+        @include remove-space();
+        color: $nav-button-dark;
+      }
+
+      p {
+        @include remove-space();
+        border: 0px;
+      }
+    }
+  }
+}
+
+.pantry-item {
+  height: 3rem;
+  width: auto;
+  border: 1px solid black;
 }
 
 .add-recipe-container {
