@@ -23,7 +23,7 @@ const recipeGrid = document.querySelector('#recipeGrid');
 const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
-const searchFavesInput = document.querySelector('.search-field');
+export const searchFavesInput = document.querySelector('.search-favorites-field');
 const fullRecipe = document.querySelector('.full-recipe-container');
 const recipeFormTitle = document.querySelector('#recipeFormTitle');
 const recipeFormImage = document.querySelector('#recipeFormImage');
@@ -49,22 +49,22 @@ const filters = document.querySelector('#filters');
 let currentUser;
 let usersData = [];
 export let recipeData = [];
-let ingredientsData = [];
+export let ingredientsData = [];
 export default ingredientsData;
 let filterSelection = [];
 let addedIngredients = [];
-var selectedRecipeIngredients = [];
+export let selectedRecipeIngredients = [];
 
 // EVENT LISTENERS //
 
 searchSubmitBtn.addEventListener('click', searchByName);
 allRecipes.addEventListener('click', domUpdates.viewAllRecipes);
-allRecipeGrid.addEventListener('click', getDirections);
+allRecipeGrid.addEventListener('click', domUpdates.getDirections);
 
 homeButton.addEventListener('click', domUpdates.showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);
-savedRecipesButton.addEventListener('click', showSavedRecipes);
+savedRecipesButton.addEventListener('click', domUpdates.showSavedRecipes);
 filters.addEventListener('click', filterRecipes);
 plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
@@ -140,82 +140,7 @@ function showLogin() {
   loginPopup.classList.toggle('hidden');
 }
 
-function showSavedRecipes() {
-  domUpdates.populateCards(currentUser.favoriteRecipes);
-  domUpdates.hide(recipeDirectionsContainer);
-  domUpdates.show(searchFavesSubmitBtn);
-  domUpdates.show(searchFavesByName);
-  domUpdates.show(filters);
-  domUpdates.show(allRecipeGrid);
-  domUpdates.show(featuredRecipes);
-  domUpdates.displaySavedRecipes();
-}
 
-function getDirections(event){
-
-  if(event.target.classList.contains('favorite-star')){
-    addToLibrary();
-    return
-  };
-
-  if(event.target.classList.contains('recipesToCook')){
-    addToLibrary();
-    return
-  }
-
-  if(!event.target.parentElement.classList.contains('mini-recipe')){
-    return
-  }
-  selectedRecipeIngredients = [];
-  domUpdates.show(recipeGrid);
-  domUpdates.hide(allRecipeContainer);
-  domUpdates.hide(allRecipeGrid);
-  domUpdates.show(recipeDirectionsContainer);
-
-  recipeGrid.innerHTML = "";
-  let targetID = "";
-  targetID = event.target.closest('.mini-recipe').id
-  let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
-  let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
-
-  selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {
-    let ingredient = new Ingredient(element, ingredientsData)
-    return ingredient
-  })
-  let instructions = selectedRecipe.instructions.map((element) => {
-    return element.instruction
-  });
-
-  let allIngredients = selectedRecipe.ingredients.map((element) => {
-    let name = element.name;
-    let amount = element.quantity.amount;
-    let unit = element.quantity.unit;
-
-    return [name, amount, unit]
-  })
-
-  let ingredients = allIngredients.reduce((acc, element) => {
-    acc += element
-    return acc
-  }, '')
-
-  selectedRecipe.ingredients.forEach(function(element) {
-    let currentIngredient = `${element.quantity.amount} ${element.quantity.unit} ${element.uniqueIngredientData.name}`
-    selectedRecipeIngredients.push(currentIngredient);
-    return selectedRecipeIngredients
-  });
-
-  let fullRecipe =
-    `<h3 class= "full-recipe"> ${selectedRecipe.name}</h3>
-    <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}"><br>
-    <br><b>Ingredients:</b><br>
-    <p class= "ingredients">${selectedRecipeIngredients.join(',<br>')}</p>
-    <p class= "cost"><b>${selectedRecipe.returnCostEstimation()}<b></p>
-    <br><b>Instructions:</b></br>
-    <p class= "instructions">${instructions}</p>`;
-
-  recipeDirections.innerHTML = fullRecipe
-};
 
 function searchByName(){
   if(searchFieldInput.value ===""){
@@ -312,7 +237,7 @@ function searchByTag(recipesArray, searchTags){
 
 domUpdates.popupMessage();
 
-function addToLibrary(){
+export function addToLibrary(){
   const recipeRepo = new RecipeRepository(recipeData);
   let saveRecipeBtn;
   let recipeID = event.target.closest('.mini-recipe').id;
@@ -332,7 +257,7 @@ function addToLibrary(){
   }
 }
 
-function generateRandomUser() {
+export function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);
   const user = usersData[randomUser];
   let userDataValue = new UserData(user)
