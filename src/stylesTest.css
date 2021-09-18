@@ -228,7 +228,7 @@ aside > button {
 
 .mini-recipe .favorite-star {
   position: static;
-  margin: 0% 4% 4% 76%;
+  margin: 0% 4% 4% 0%;
 }
 
 .recipe-content {
@@ -388,6 +388,44 @@ aside > button {
   overflow: scroll;
   border-radius: 1rem;
   background-color: #FFF8F3;
+}
+
+.pantry-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pantry-container .pantry-display {
+  height: 28rem;
+  width: 40%;
+  background-color: #FAF1EF;
+  overflow: scroll;
+  border: 1px solid black;
+}
+.pantry-container .pantry-display .pantry-quantity {
+  color: #c8553d;
+  font-weight: bolder;
+}
+.pantry-container .pantry-display article {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+}
+.pantry-container .pantry-display article h3 {
+  margin: 0px;
+  padding: 0px;
+  color: #0B3954;
+}
+.pantry-container .pantry-display article p {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+
+.pantry-item {
+  height: 3rem;
+  width: auto;
+  border: 1px solid black;
 }
 
 .add-recipe-container {

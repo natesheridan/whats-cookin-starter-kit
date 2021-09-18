@@ -10,6 +10,8 @@ import Ingredient from './classes/Ingredient.js'
 import {generateRandomUser} from './scripts.js'
 import Pantry from './classes/Pantry.js'
 import {contentContainer} from './scripts.js'
+import {pantryContainer} from './scripts.js'
+import {pantryDisplay} from './scripts.js'
 
 let domUpdates = {
     hide(element){
@@ -20,6 +22,7 @@ let domUpdates = {
     },
     showRecipesToCook() {
         domUpdates.hide(recipeDirectionsContainer);
+        domUpdates.hide(pantryContainer);
         domUpdates.populateCards(currentUser.recipesToCook);
         domUpdates.show(featuredRecipes);
         domUpdates.show(allRecipeGrid);
@@ -35,6 +38,7 @@ let domUpdates = {
         domUpdates.hide(addRecipeForm);
         domUpdates.hide(recipeGrid);
         domUpdates.hide(recipeDirectionsContainer);
+        domUpdates.hide(pantryContainer);
         domUpdates.show(allRecipeGrid);
         domUpdates.hide(searchFavesInput);
         domUpdates.hide(searchFavesSubmitBtn);
@@ -51,6 +55,7 @@ let domUpdates = {
         domUpdates.hide(allRecipeContainer);
         domUpdates.hide(allRecipeGrid);
         domUpdates.hide(recipeDirectionsContainer);
+        domUpdates.hide(pantryContainer);
         domUpdates.show(mainContent);
         domUpdates.hide(searchFavesSubmitBtn);
         domUpdates.hide(searchFavesByName);
@@ -145,6 +150,7 @@ randomRecipesIndex.forEach((randomRecipeIndex) => {
 showSavedRecipes() {
   domUpdates.populateCards(currentUser.favoriteRecipes);
   domUpdates.hide(recipeDirectionsContainer);
+  domUpdates.hide(pantryContainer);
   domUpdates.show(searchFavesSubmitBtn);
   domUpdates.show(searchFavesByName);
   domUpdates.show(filters);
@@ -157,18 +163,20 @@ showMyPantry() {
   domUpdates.show(allRecipeGrid);
   domUpdates.show(contentContainer);
   domUpdates.hide(recipeGrid);
-  domUpdates.show(allRecipeContainer);
+  domUpdates.hide(allRecipeContainer);
+  domUpdates.hide(addRecipeForm);
+  domUpdates.show(pantryContainer);
   allRecipeGrid.innerHTML = ''
   let userPantry = new Pantry(currentUser.pantry);
 
   let pantryIngredients = userPantry.pantry.map((ingredient) => {
     let userIngredients = new Ingredient(ingredient, ingredientsData)
-    allRecipeGrid.innerHTML +=
-    `<article class="mini-recipe" id="${userIngredients.id}">
-     <p>${userIngredients.name}</p>
-     <p>${userIngredients.quantity}</p>
+    pantryDisplay.innerHTML +=
+    `<article class="pantry-item" id="${userIngredients.id}">
+       <h3>${userIngredients.name}</h3>
+       <p class="pantry-quantity">${userIngredients.quantity}</p>
      </article>`
-    })
+  })
 },
 
 getDirections(event){
