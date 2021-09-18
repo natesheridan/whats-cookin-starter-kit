@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <link rel="text/css" href="styles.css">
@@ -11,24 +11,24 @@
   <body>
     <header>
       <section class="header-container">
-        <article class="title-container">
+        <article class="title-container" role="region">
           <h1>What's Cookin'?</h1>
         </article>
-        <section class="search-field-container">
-          <input type="text" placeholder= "Search recipes by name" name="search" class="search-field">
-          <input name="search" type="submit" class = "search-submit-btn">
+        <section class="search-field-container" role="search">
+          <input name="search recipes by name" type="text" placeholder= "Search recipes by name" class="search-field">
+          <input name="submit search recipes by name" type="submit" class = "search-submit-btn">
         </section>
         <button type="button" class="login-button hidden" id="loginButton" name="login">Login</button>
       </section>
     </header>
-    <nav>
-      <button type="button" id="allRecipesButton" name="all recipes">All Recipes</button>
-      <button type="button" id="homeButton" name="home">Home</button>
-      <button type="button" id="savedRecipesButton" name="saved recipes">Saved Recipes</button>
-      <button type="button" id="recipesToCook" name="recipes to cook">Recipes to Cook</button>
+    <nav id="mainSiteNavigation">
+      <button type="button" id="allRecipesButton" name="all recipes" aria-controls="mainSiteNavigation">All Recipes</button>
+      <button type="button" id="homeButton" name="home" aria-controls="mainSiteNavigation">Home</button>
+      <button type="button" id="savedRecipesButton" name="saved recipes" aria-controls="mainSiteNavigation">Saved Recipes</button>
+      <button type="button" id="recipesToCook" name="recipes to cook" aria-controls="mainSiteNavigation">Recipes to Cook</button>
     </nav>
-    <section class="filter-select hidden" id="filters">
-      <section class="meals" id="meals">
+    <section class="filter-select hidden" id="filters" aria-label="search recipes by tag">
+      <section class="meals" id="meals" aria-label="search by meal tag">
         <input type="checkbox" id="breakfast" name="Breakfast" value="Breakfast">
         <label for="breakfast">Breakfast</label><br>
         <input type="checkbox" id="lunch" name="Lunch" value="lunch">
@@ -36,7 +36,7 @@
         <input type="checkbox" id="dinner" name="Dinner" value="dinner">
         <label for="dinner">Dinner</label><br>
       </section><br>
-      <section class="other-options" id="otherOptions">
+      <section class="other-options" id="otherOptions" aria-label="search by other recipe tags">
         <input type="checkbox" id="antipasti" name="Antipasti" value="antipasti">
         <label for="antipasti">Antipasti</label><br>
         <input type="checkbox" id="starter" name="Starter" value="starter">
@@ -44,7 +44,7 @@
         <input type="checkbox" id="snack" name="Snack" value="snack">
         <label for="snack">Snack</label><br>
       </section>
-      <section class="other-options-2" id="otherOptions2">
+      <section class="other-options-2" id="otherOptions2" aria-label="search by more recipe tags">
         <input type="checkbox" id="appetizer" name="Appetizer" value="appetizer">
         <label for="appetizer">Appetizer</label><br>
         <input type="checkbox" id="horDeouvre" name="Hor d'oeuvre" value="hor d'oeuvre">
@@ -52,7 +52,7 @@
         <input type="checkbox" id="mainCourse" name="Main course" value="main course">
         <label for="main-course">Main course</label><br>
       </section>
-      <section class="other-options-3" id="otherOptions3">
+      <section class="other-options-3" id="otherOptions3" aria-label="search by more recipe tags">
         <input type="checkbox" id="mainDish" name="Main Dish" value="main dish">
         <label for="main-dish">Main dish</label><br>
         <input type="checkbox" id="sauce" name="Sauce" value="sauce">
@@ -60,7 +60,7 @@
         <input type="checkbox" id="sideDish" name="Side dish" value="side dish">
         <label for="side-dish">Side dish</label><br>
       </section>
-      <section class="other-options-4" id="otherOptions4">
+      <section class="other-options-4" id="otherOptions4" aria-label="search by more recipe tags">
         <input type="checkbox" id="morningMeal" name="Morning meal" value="morning meal">
         <label for="morning-meal">Morning meal</label><br>
         <input type="checkbox" id="salad" name="Salad" value="salad">
@@ -68,7 +68,7 @@
         <input type="checkbox" id="condiment" name="Condiment" value="condiment">
         <label for="condiment">Condiment</label><br>
       </section>
-      <section class="other-options-5" id="otherOptions5">
+      <section class="other-options-5" id="otherOptions5" aria-label="search by more recipe tags">
         <input type="checkbox" id="dip" name="Dip" value="dip">
         <label for="dip">Dip</label><br>
         <input type="checkbox" id="spread" name="Spread" value="spread">
@@ -89,14 +89,14 @@
         </section>
         <section class="recipe-grid" id="recipeGrid">
           <article class="recipe">
-            <div class="meal-image">
-              <img src="images/pancakes.svg" alt="meal image" class="image">
+            <div class="meal-image" role="img">
+              <img src="images/pancakes.svg" alt="a cartoon kid happily eating pancakes" class="image">
             </div>
-            <div class="recipe-content">
-              <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar1"></button>
+            <div class="recipe-content" role="article">
+              <button type="favoriteStar" name="add recipe to favorites" class="favorite-star" id="favoriteStar1"></button>
               <div class="recipe-info">
                 <h2>Dish Name</h2>
-                <div class="ingredient-section">
+                <div class="ingredient-section" role="region">
                   <h4>Ingredients</h4>
                 <section class="ingredient-info">
                 </div>
@@ -104,14 +104,14 @@
             </div>
           </article>
           <article class="recipe">
-            <div class="meal-image">
-              <img src="images/pancakes.svg" alt="meal image" class="image">
+            <div class="meal-image" role= "img">
+              <img src="images/pancakes.svg" alt="a cartoon kid happily eating pancakes" class="image">
             </div>
             <div class="recipe-content">
-              <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar2"></button>
+              <button type="favoriteStar" name="add to favorites" class="favorite-star" id="favoriteStar2"></button>
               <div class="recipe-info">
                 <h2>Dish Name</h2>
-                <div class="ingredient-section">
+                <div class="ingredient-section" role="region">
                   <h4>Ingredients</h4>
                 <section class="ingredient-info">
                 </div>
@@ -119,16 +119,16 @@
             </div>
           </article>
           <article class="recipe">
-            <div class="meal-image">
-              <img src="images/pancakes.svg" alt="meal image" class="image">
+            <div class="meal-image" role="img">
+              <img src="images/pancakes.svg" alt="a cartoon kid happily eating pancakes" class="image">
             </div>
             <div class="recipe-content">
-              <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar3"></button>
+              <button type="favoriteStar" name="add to favorites" class="favorite-star" id="favoriteStar3"></button>
               <div class="recipe-info">
                 <h2>Dish Name</h2>
-                <div class="ingredient-section">
+                <div class="ingredient-section" role="region">
                   <h4>Ingredients</h4>
-                <section class="ingredient-info">
+                <section class="ingredient-info" role="region">
                 </div>
               </div>
             </div>
@@ -197,11 +197,11 @@
           </section>
     </section>
     <footer>
-        <input name="search" type="submit" class = "hidden search-submit-btn" id="searchFavesSubmitBtn">
-        <input type="text" placeholder= "Search favorites" name="searchFavorites" class="hidden search-field" id="searchFavesByName">
+        <input name="search" type="submit" class="hidden search-submit-btn" id="searchFavesSubmitBtn">
+        <input type="text" role="searchbox" placeholder= "Search favorites" name="searchFavorites" class="hidden search-favorites-field" id="searchFavesByName">
     </footer>
     <article class="popup-container">
-      <span class="hidden" id="popup">
+      <span class="hidden" id="popup" aria-label="popup message">
         <p>POPUP</p>
       </span>
     </article>
