@@ -27,9 +27,9 @@ let domUpdates = {
         domUpdates.show(allRecipeGrid);
         domUpdates.hide(searchFavesInput);
         domUpdates.hide(searchFavesSubmitBtn);
-        domUpdates.show(featuredRecipes);  
+        domUpdates.show(featuredRecipes);
         featuredRecipes.innerHTML = `<h1>All Recipes</h1>`;
-      
+
         let recipeRepo = new RecipeRepository(recipeData);
         domUpdates.populateCards(recipeRepo.recipeData)
     },
@@ -52,7 +52,7 @@ let domUpdates = {
         this.hide(recipeGrid);
         allRecipeGrid.innerHTML = ""
         const recipeCard = arr.reduce((acc, recipe) => {
-      
+
           let buttonClassesFaves = "favorite-star"
           if (currentUser.favoriteRecipes.includes(recipe)){
             buttonClassesFaves = "favorite-star is-favorite"
@@ -72,11 +72,23 @@ let domUpdates = {
              <button type="favoriteStar" name="favoriteStar" class="${buttonClassesFaves}" id="fave-${recipe.id}">♡</button>
              <button type="recipesToCook" name="recipesToCook" class="${buttonClassesToCook}" id="${recipe.id}">🗓 Cook this week!</button>
              </article>`
-      
+
             return acc;
           }, []);
       },
-    
+
+      popupMessage(message, timeInMS, color = "gold") {
+        let popupContainer = document.querySelector('#popup')
+        popupContainer.classList.add(`${color}-popup`)
+        popupContainer.innerHTML=`<p>${message}</p>`
+        domUpdates.show(popupContainer)
+
+        setTimeout(function() {
+            popupContainer.classList.remove(`${color}-popup`)
+            domUpdates.hide(popupContainer);
+        }, timeInMS)
+},
+
 }
 
 

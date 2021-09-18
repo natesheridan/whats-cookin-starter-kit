@@ -149,7 +149,7 @@ function addNewRecipe() {
 //   domUpdates.show(allRecipeGrid);
 //   domUpdates.hide(searchFavesInput);
 //   domUpdates.hide(searchFavesSubmitBtn);
-//   domUpdates.show(featuredRecipes);  
+//   domUpdates.show(featuredRecipes);
 //   featuredRecipes.innerHTML = `<h1>All Recipes</h1>`;
 
 //   let recipeRepo = new RecipeRepository(recipeData);
@@ -232,17 +232,17 @@ function showSavedRecipes() {
 // };
 
 function getDirections(event){
-  
+
   if(event.target.classList.contains('favorite-star')){
     addToLibrary();
     return
   };
-  
+
   if(event.target.classList.contains('recipesToCook')){
     addToLibrary();
     return
   }
-  
+
   if(!event.target.parentElement.classList.contains('mini-recipe')){
     return
   }
@@ -251,7 +251,7 @@ function getDirections(event){
   domUpdates.hide(allRecipeContainer);
   domUpdates.hide(allRecipeGrid);
   domUpdates.show(recipeDirectionsContainer);
-    
+
   recipeGrid.innerHTML = "";
   let targetID = "";
   targetID = event.target.closest('.mini-recipe').id
@@ -299,14 +299,14 @@ function getDirections(event){
 
 function searchByName(){
   if(searchFieldInput.value ===""){
-    popupMessage("Please enter a search term!", 2000, "red")
+    domUpdates.popupMessage("Please enter a search term!", 2000, "red")
     return
   }
   let recipeRepo = new RecipeRepository(recipeData);
   let filteredRecipes = recipeRepo.filterByName(searchFieldInput.value)
   if (filteredRecipes.length === 0){
 
-    popupMessage("No results found! Sorry!", 2000, "red")
+    domUpdates.popupMessage("No results found! Sorry!", 2000, "red")
     return
   }
   domUpdates.populateCards(filteredRecipes)
@@ -421,6 +421,9 @@ function searchByTag(recipesArray, searchTags){
   return returnedArr;
 };
 
+domUpdates.popupMessage();
+
+
 // function hide(element){
 //   element.classList.add('hidden')
 // }
@@ -428,17 +431,17 @@ function searchByTag(recipesArray, searchTags){
 //   element.classList.remove('hidden')
 // }
 
-function popupMessage(message, timeInMS, color = "gold"){
-  let popupContainer = document.querySelector('#popup')
-  popupContainer.classList.add(`${color}-popup`)
-  popupContainer.innerHTML=`<p>${message}</p>`
-  domUpdates.show(popupContainer)
-
-  setTimeout(function(){
-      popupContainer.classList.remove(`${color}-popup`)
-      domUpdates.hide(popupContainer);
-  }, timeInMS)
-};
+// function popupMessage(message, timeInMS, color = "gold"){
+//   let popupContainer = document.querySelector('#popup')
+//   popupContainer.classList.add(`${color}-popup`)
+//   popupContainer.innerHTML=`<p>${message}</p>`
+//   domUpdates.show(popupContainer)
+//
+//   setTimeout(function(){
+//       popupContainer.classList.remove(`${color}-popup`)
+//       domUpdates.hide(popupContainer);
+//   }, timeInMS)
+// };
 
 function addToLibrary(){
   const recipeRepo = new RecipeRepository(recipeData);
