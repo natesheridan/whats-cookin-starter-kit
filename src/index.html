@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="text/css" href="styles.css">
+    <link rel="text/css" href="stylesTest.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=STIX+Two+Math&display=swap" rel="stylesheet">
@@ -26,6 +26,7 @@
       <button type="button" id="homeButton" name="home" aria-controls="mainSiteNavigation">Home</button>
       <button type="button" id="savedRecipesButton" name="saved recipes" aria-controls="mainSiteNavigation">Saved Recipes</button>
       <button type="button" id="recipesToCook" name="recipes to cook" aria-controls="mainSiteNavigation">Recipes to Cook</button>
+      <button type="button" id="userPantry" name="user pantry" aria-controls="mainSiteNavigation">My Pantry</button>
     </nav>
     <section class="filter-select hidden" id="filters" aria-label="search recipes by tag">
       <section class="meals" id="meals" aria-label="search by meal tag">
@@ -198,7 +199,7 @@
     </section>
     <footer>
         <input name="search" type="submit" class="hidden search-submit-btn" id="searchFavesSubmitBtn">
-        <input type="text" role="searchbox" placeholder= "Search favorites" name="searchFavorites" class="hidden search-field" id="searchFavesByName">
+        <input type="text" role="searchbox" placeholder= "Search favorites" name="searchFavorites" class="hidden search-favorites-field" id="searchFavesByName">
     </footer>
     <article class="popup-container">
       <span class="hidden" id="popup" aria-label="popup message">

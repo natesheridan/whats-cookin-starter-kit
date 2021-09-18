@@ -1,4 +1,4 @@
-import styles from './styles.css';
+import styles from './stylesTest.css';
 import UserData from './classes/UserData.js';
 import Recipe from './classes/Recipe.js';
 import RecipeRepository from './classes/RecipeRepository.js';
@@ -7,10 +7,13 @@ import rightArrow from './data/assets/Right-arrow.svg';
 import pancakes from './data/assets/pancakes.svg';
 import starActive from './data/assets/star-active.svg';
 import star from './data/assets/star.svg';
-// import {usersData} from './data/users.js';
-// import {recipeData} from './data/recipes.js';
 import {fetchUsersData, fetchRecipeData, fetchIngredientsData} from './apiCalls.js';
 import apiCalls from './apiCalls.js';
+
+// import "./style.scss";
+
+import domUpdates from './domUpdates.js';
+
 
 // BUTTONS & SECTIONS //
 
@@ -21,10 +24,10 @@ const homeTitle = document.querySelector('#homeTitle');
 const allRecipeContainer = document.querySelector('#allRecipeContainer');
 const allRecipes = document.querySelector('#allRecipesButton');
 const recipeGrid = document.querySelector('#recipeGrid');
-const contentContainer = document.querySelector('.content-container');
+export const contentContainer = document.querySelector('.content-container');
 const searchSubmitBtn = document.querySelector('.search-submit-btn');
 const searchFieldInput = document.querySelector('.search-field');
-const searchFavesInput = document.querySelector('#searchFavesByName');
+export const searchFavesInput = document.querySelector('.search-favorites-field');
 const fullRecipe = document.querySelector('.full-recipe-container');
 const recipeFormTitle = document.querySelector('#recipeFormTitle');
 const recipeFormImage = document.querySelector('#recipeFormImage');
@@ -42,6 +45,7 @@ const plusButton = document.querySelector('#plusButtonContainer');
 const submitRecipeButton = document.querySelector('#submitRecipe');
 const addIngredientButton = document.querySelector('#plusButtonContainer');
 const recipesToCookButton = document.querySelector('#recipesToCook');
+const myPantryButton = document.querySelector('#userPantry');
 
 
 // FILTER CHECKBOXES && SEARCH ARRAY //
@@ -49,39 +53,30 @@ const recipesToCookButton = document.querySelector('#recipesToCook');
 const filters = document.querySelector('#filters');
 let currentUser;
 let usersData = [];
-let recipeData = [];
-let ingredientsData = [];
+export let recipeData = [];
+export let ingredientsData = [];
 export default ingredientsData;
 let filterSelection = [];
 let addedIngredients = [];
-var selectedRecipeIngredients = [];
+export let selectedRecipeIngredients = [];
 
 // EVENT LISTENERS //
 
 searchSubmitBtn.addEventListener('click', searchByName);
-allRecipes.addEventListener('click', viewAllRecipes);
-allRecipeGrid.addEventListener('click', getDirections);
-
-homeButton.addEventListener('click', showHomeView);
+allRecipes.addEventListener('click', domUpdates.viewAllRecipes);
+allRecipeGrid.addEventListener('click', domUpdates.getDirections);
+homeButton.addEventListener('click', domUpdates.showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);
-savedRecipesButton.addEventListener('click', showSavedRecipes);
+savedRecipesButton.addEventListener('click', domUpdates.showSavedRecipes);
 filters.addEventListener('click', filterRecipes);
 plusButton.addEventListener('click', addIngredient);
 submitRecipeButton.addEventListener('click', addNewRecipe);
 addIngredientButton.addEventListener('click', addIngredient);
 searchFavesSubmitBtn.addEventListener('click', searchFaves);
-recipesToCookButton.addEventListener('click', showRecipesToCook);
+recipesToCookButton.addEventListener('click', domUpdates.showRecipesToCook);
+myPantryButton.addEventListener('click', domUpdates.showMyPantry);
 window.addEventListener('load', getData);
-
-// MAIN FUNCTIONS //
-//
-// window.onload = (event) => {
-//   apiCalls.getData();
-//   Promise.all([usersData, ingredientsData, recipeData]);
-// }
-
-
 
 function parseData(data){
   console.log(data)
@@ -90,19 +85,15 @@ function parseData(data){
   recipeData = data[2];
 
   generateRandomUser()
-  generateRandomHomeViewRecipes()
+  domUpdates.generateRandomHomeViewRecipes()
 }
-
 
 function getData() {
   return Promise.all([fetchUsersData(), fetchIngredientsData(), fetchRecipeData()])
-  .then(data => parseData(data));
+  .then(data => parseData(data));npm
 }
 
-
-
 function filterRecipes() {
-  // event.preventDefault();
   if (event.target.value) {
     let value = event.target.value.toLowerCase()
     if (filterSelection.includes(value)) {
@@ -140,196 +131,35 @@ function addNewRecipe() {
   addedIngredients = [];
 }
 
-function viewAllRecipes() {
-  show(filters);
-  show(allRecipeContainer);
-  hide(addRecipeForm);
-  hide(recipeGrid);
-  hide(recipeDirectionsContainer);
-  show(allRecipeGrid);
-  hide(searchFavesInput);
-  hide(searchFavesSubmitBtn);
-  show(featuredRecipes);
-  featuredRecipes.innerHTML = `<h1>All Recipes</h1>`;
-
-  let recipeRepo = new RecipeRepository(recipeData);
-  populateCards(recipeRepo.recipeData)
-  // allRecipeGrid.innerHTML = ""
-  // const viewAllRecipes = recipeRepo.recipeData.reduce((acc, recipe) => {
-  //   let buttonClasses = "favorite-star"
-  //   let idMap = currentUser.favoriteRecipes.map((faveItem) => faveItem.id)
-  //   if (idMap.includes(recipe.id)){
-  //     buttonClasses = "favorite-star is-favorite"
-  //   }
-  //   allRecipeGrid.innerHTML +=
-  //     `<article class="mini-recipe" id="${recipe.id}">
-  //      <img src= "${recipe.image}" alt= "${recipe.name}">
-  //      <p>${recipe.name}</p>
-  //      <button type="favoriteStar" name="favoriteStar" class="${buttonClasses} heart-button" id="faveBtn-${recipe.id}">♡</button>
-  //      <button type="recipesToCook" name="recipesToCook" class="recipesToCook" id="${recipe.id}">🗓 Cook this week!</button>
-  //      </article>`
-
-  //     return acc;
-  //   }, []);
-  //   return viewAllRecipes;
-};
-
-function showHomeView() {
-  show(recipeGrid);
-  generateRandomHomeViewRecipes();
-  hide(addRecipeForm);
-  hide(allRecipeContainer);
-  hide(allRecipeGrid);
-  hide(recipeDirectionsContainer);
-  show(mainContent);
-  hide(searchFavesSubmitBtn);
-  hide(searchFavesByName);
-  hide(filters);
-  show(featuredRecipes);
-  featuredRecipes.innerHTML = `<h1>Featured Recipes</h1>`;
-}
-
 function showRecipeForm() {
-  show(addRecipeForm);
-  hide(recipeGrid);
-  hide(allRecipeContainer);
-  hide(filters);
-  hide(searchFavesSubmitBtn);
-  hide(searchFavesByName);
-  hide(recipeDirectionsContainer);
-  featuredRecipes.innerHTML = `<h1>Add a Recipe</h1>`;
+  domUpdates.show(addRecipeForm);
+  domUpdates.hide(recipeGrid);
+  domUpdates.hide(allRecipeContainer);
+  domUpdates.hide(filters);
+  domUpdates.hide(searchFavesSubmitBtn);
+  domUpdates.hide(searchFavesByName);
+  domUpdates.hide(recipeDirectionsContainer);
+  domUpdates.displayEmptyFavorites()
 }
 
 function showLogin() {
   loginPopup.classList.toggle('hidden');
 }
 
-function showSavedRecipes() {
-  populateCards(currentUser.favoriteRecipes);
-  hide(recipeDirectionsContainer);
-  show(searchFavesSubmitBtn);
-  show(searchFavesByName);
-  show(filters);
-  show(allRecipeGrid);
-  show(featuredRecipes);
-  featuredRecipes.innerHTML = `<h1>Saved Recipes</h1>`;
-}
-
-function showRecipesToCook() {
-  hide(recipeDirectionsContainer);
-  populateCards(currentUser.recipesToCook);
-  show(featuredRecipes);
-  show(allRecipeGrid);
-  featuredRecipes.innerHTML = `<h1>Recipes</h1>`
-};
-
-function getDirections(event){
-  
-  if(event.target.classList.contains('favorite-star')){
-    addToLibrary();
-    return
-  };
-  
-  if(event.target.classList.contains('recipesToCook')){
-    addToLibrary();
-    return
-  }
-  
-  if(!event.target.parentElement.classList.contains('mini-recipe')){
-    return
-  }
-  selectedRecipeIngredients = [];
-  show(recipeGrid);
-  hide(allRecipeContainer);
-  hide(allRecipeGrid);
-  show(recipeDirectionsContainer);
-    
-  recipeGrid.innerHTML = "";
-  let targetID = "";
-  targetID = event.target.closest('.mini-recipe').id
-  let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
-  let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
-
-  selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {
-    let ingredient = new Ingredient(element, ingredientsData)
-    return ingredient
-  })
-  let instructions = selectedRecipe.instructions.map((element) => {
-    return element.instruction
-  });
-
-  let allIngredients = selectedRecipe.ingredients.map((element) => {
-    let name = element.name;
-    let amount = element.quantity.amount;
-    let unit = element.quantity.unit;
-
-    return [name, amount, unit]
-  })
-
-  let ingredients = allIngredients.reduce((acc, element) => {
-    acc += element
-    return acc
-  }, '')
-
-  selectedRecipe.ingredients.forEach(function(element) {
-    let currentIngredient = `${element.quantity.amount} ${element.quantity.unit} ${element.uniqueIngredientData.name}`
-    selectedRecipeIngredients.push(currentIngredient);
-    return selectedRecipeIngredients
-  });
-
-  let fullRecipe =
-    `<h3 class= "full-recipe"> ${selectedRecipe.name}</h3>
-    <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}"><br>
-    <br><b>Ingredients:</b><br>
-    <p class= "ingredients">${selectedRecipeIngredients.join(',<br>')}</p>
-    <p class= "cost"><b>${selectedRecipe.returnCostEstimation()}<b></p>
-    <br><b>Instructions:</b></br>
-    <p class= "instructions">${instructions}</p>`;
-
-  recipeDirections.innerHTML = fullRecipe
-};
-
 function searchByName(){
   if(searchFieldInput.value ===""){
-    popupMessage("Please enter a search term!", 2000, "red")
+    domUpdates.popupMessage("Please enter a search term!", 2000, "red")
     return
   }
   let recipeRepo = new RecipeRepository(recipeData);
   let filteredRecipes = recipeRepo.filterByName(searchFieldInput.value)
   if (filteredRecipes.length === 0){
 
-    popupMessage("No results found! Sorry!", 2000, "red")
+    domUpdates.popupMessage("No results found! Sorry!", 2000, "red")
     return
   }
-  populateCards(filteredRecipes)
-
+  domUpdates.populateCards(filteredRecipes)
 }
-
-function populateCards(arr){
-  show(allRecipeGrid);
-  hide(recipeGrid);
-  allRecipeGrid.innerHTML = ""
-  const recipeCard = arr.reduce((acc, recipe) => {
-
-    let buttonClassesFaves = "favorite-star"
-    if (currentUser.favoriteRecipes.includes(recipe)){
-      buttonClassesFaves = "favorite-star is-favorite"
-    }
-    let buttonClassesToCook = "recipesToCook"
-    if (currentUser.recipesToCook.includes(recipe)){
-      buttonClassesToCook = "recipesToCook is-saved"
-    }
-    allRecipeGrid.innerHTML +=
-      `<article class="mini-recipe" id="${recipe.id}">
-       <img src= "${recipe.image}" alt= "${recipe.name}">
-       <p>${recipe.name}</p>
-       <button type="favoriteStar" name="favoriteStar" class="${buttonClassesFaves}" id="fave-${recipe.id}">♡</button>
-       <button type="recipesToCook" name="recipesToCook" class="${buttonClassesToCook}" id="${recipe.id}">🗓 Cook this week!</button>
-       </article>`
-
-      return acc;
-    }, []);
-};
 
 function searchFaves(){
   let searchInput = searchFavesInput.value.toLowerCase();
@@ -344,7 +174,7 @@ function searchFaves(){
 
   if(allTags.includes(searchInput)){
     let searchedData = currentUser.favoriteRecipes.filter(recipe => recipe['tags'].includes(searchInput));
-    populateCards(searchedData)
+    domUpdates.populateCards(searchedData)
     return searchedData
   } else {
     let lowerCasedNames = currentUser.favoriteRecipes.map((element) => {
@@ -352,7 +182,7 @@ function searchFaves(){
       return element
     })
     let searchedData = lowerCasedNames.filter(recipe => recipe['name'].includes(searchInput));
-    populateCards(searchedData)
+    domUpdates.populateCards(searchedData)
     return searchedData
   }
 }
@@ -375,18 +205,11 @@ function searchData(input) {
 
 function setUserData(){
   let user = new UserData()
-
-
-
-  // if the user login matches the user.name....
-  //...then the app populates with that user's info
 };
-
 
 function joinToString(array){
   return array.join(" ")
 }
-
 
 function searchByTag(recipesArray, searchTags){
   let returnedArr = []
@@ -408,31 +231,14 @@ function searchByTag(recipesArray, searchTags){
       }
 
     }, []);
-  populateCards(returnedArr)
+  domUpdates.populateCards(returnedArr)
 
   return returnedArr;
 };
 
-function hide(element){
-  element.classList.add('hidden')
-}
-function show(element){
-  element.classList.remove('hidden')
-}
+domUpdates.popupMessage();
 
-function popupMessage(message, timeInMS, color = "gold"){
-  let popupContainer = document.querySelector('#popup')
-  popupContainer.classList.add(`${color}-popup`)
-  popupContainer.innerHTML=`<p>${message}</p>`
-  show(popupContainer)
-
-  setTimeout(function(){
-      popupContainer.classList.remove(`${color}-popup`)
-      hide(popupContainer);
-  }, timeInMS)
-};
-
-function addToLibrary(){
+export function addToLibrary(){
   const recipeRepo = new RecipeRepository(recipeData);
   let saveRecipeBtn;
   let recipeID = event.target.closest('.mini-recipe').id;
@@ -448,46 +254,15 @@ function addToLibrary(){
   if(event.target.classList.contains('recipesToCook')){
     saveRecipeBtn = event.target.closest('.recipesToCook')
     currentUser.toggleItemInArray('recipesToCook', recipeData[index]);
-    saveRecipeBtn.classList.toggle("is-saved");
+    saveRecipeBtn.classList.toggle("is-favorite");
   }
 }
 
-function generateRandomUser() {
+export function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);
   const user = usersData[randomUser];
   let userDataValue = new UserData(user)
   currentUser = userDataValue
 };
 
-function generateRandomHomeViewRecipes(){
-  show(featuredRecipes);
-  const recipeRepo = new RecipeRepository(recipeData);
-  let randomRecipeIndex1 = Math.floor(Math.random() * recipeRepo.recipeData.length)
-  let randomRecipeIndex2 = Math.floor(Math.random() * recipeRepo.recipeData.length)
-  let randomRecipeIndex3 = Math.floor(Math.random() * recipeRepo.recipeData.length)
-  if (randomRecipeIndex2 === randomRecipeIndex1){
-    randomRecipeIndex2 = Math.floor(Math.random() * recipeRepo.recipeData.length)
-  }
-  if (randomRecipeIndex3 === randomRecipeIndex1 || randomRecipeIndex2){
-    randomRecipeIndex3 = Math.floor(Math.random() * recipeRepo.recipeData.length)
-  }
-  recipeGrid.innerHTML = ""
-  let randomRecipesIndex = [randomRecipeIndex1, randomRecipeIndex2, randomRecipeIndex3]
-  randomRecipesIndex.forEach((randomRecipeIndex) => {
-
-    let index = randomRecipeIndex
-
-   recipeGrid.innerHTML +=
-    `<article class="recipe" id=${recipeRepo.recipeData[index].id}>
-    <div class="meal-image">
-      <img src="${recipeRepo.recipeData[index].image}" alt="meal image" class="image">
-    </div>
-    <div class="recipe-content">
-      <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar1">♡</button>
-      <div class="recipe-info">
-        <h2>${recipeRepo.recipeData[index].name}</h2>
-      </div>
-    </div>
-  </article>`
-  })
-}
+export {currentUser};
