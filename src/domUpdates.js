@@ -197,7 +197,6 @@ getDirections(event){
   targetID = event.target.closest('.mini-recipe').id
   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
   let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
-
   selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {
     let ingredient = new Ingredient(element, ingredientsData)
     return ingredient
@@ -225,11 +224,17 @@ getDirections(event){
     return selectedRecipeIngredients
   });
 
+  let userPantry = new Pantry([{
+    "ingredient": 0,
+    "amount": 0
+  },])
+
   let fullRecipe =
     `<h3 class= "full-recipe"> ${selectedRecipe.name}</h3>
     <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}"><br>
     <br><b>Ingredients:</b><br>
     <p class= "ingredients">${selectedRecipeIngredients.join(',<br>')}</p>
+    <p> ${userPantry.calculateIngredientsNeeded(selectedRecipe)}</p>
     <p class= "cost"><b>${selectedRecipe.returnCostEstimation()}<b></p>
     <br><b>Instructions:</b></br>
     <p class= "instructions">${instructions}</p>`;
