@@ -5,7 +5,6 @@ class Pantry {
 
   confirmNeededIngredients(recipe) {
     let confirmation = 'false';
-    console.log(confirmation)
     let recipeInfo = recipe.ingredients.forEach((ingredientInfo) => {
       let userPantry = this.pantry.forEach((item) => {
         if(item.ingredient === ingredientInfo.id && item.amount >= ingredientInfo.quantity.amount) {
@@ -36,7 +35,7 @@ class Pantry {
         })
         return acc
       }, '')
-      console.log(neededIngredients)
+
       return neededIngredients
     }
   }
