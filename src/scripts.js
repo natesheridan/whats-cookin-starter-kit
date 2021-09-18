@@ -84,9 +84,10 @@ window.addEventListener('load', getData);
 
 
 function parseData(data){
-  usersData = data[0].usersData;
-  ingredientsData = data[1].ingredientsData;
-  recipeData = data[2].recipeData
+  console.log(data)
+  usersData = data[0];
+  ingredientsData = data[1];
+  recipeData = data[2];
 
   generateRandomUser()
   generateRandomHomeViewRecipes()
