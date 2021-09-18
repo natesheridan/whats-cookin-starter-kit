@@ -183,7 +183,7 @@ function addNewRecipe() {
 //   featuredRecipes.innerHTML = `<h1>Featured Recipes</h1>`;
 // }
 
-=======
+
 
 function showRecipeForm() {
   domUpdates.show(addRecipeForm);
@@ -414,8 +414,8 @@ export function addToLibrary(){
   let selectedRecipe = new Recipe(fullRecipe, ingredientsData);
   let index = recipeRepo.recipeData.indexOf(fullRecipe);
 
-  if(event.target.closest('.heart-button')){
-    saveRecipeBtn = event.target.closest('.heart-button');
+  if(event.target.closest('.favorite-star')){
+    saveRecipeBtn = event.target.closest('.favorite-star');
     saveRecipeBtn.classList.toggle("is-favorite");
     currentUser.toggleItemInArray('favoriteRecipes', recipeData[index]);
   }
