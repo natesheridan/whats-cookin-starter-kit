@@ -12,6 +12,7 @@ import Pantry from './classes/Pantry.js'
 import {contentContainer} from './scripts.js'
 import {pantryContainer} from './scripts.js'
 import {pantryDisplay} from './scripts.js'
+import {getUserData} from './scripts.js'
 
 let domUpdates = {
     hide(element){
@@ -166,7 +167,7 @@ showMyPantry() {
   domUpdates.hide(allRecipeContainer);
   domUpdates.hide(addRecipeForm);
   domUpdates.show(pantryContainer);
-  allRecipeGrid.innerHTML = ''
+  pantryDisplay.innerHTML = ''
   let userPantry = new Pantry(currentUser.pantry);
 
   let pantryIngredients = userPantry.pantry.map((ingredient) => {
@@ -178,7 +179,7 @@ showMyPantry() {
      </article>`
   })
 },
-
+//
 getDirections(event){
 
   if(event.target.classList.contains('favorite-star')){
