@@ -154,6 +154,8 @@ showSavedRecipes() {
 },
 
 showMyPantry() {
+  let updatedIngredients = ingredientsData.map((element) => {return new Ingredient(element, ingredientsData)})
+  console.log(updatedIngredients)
   domUpdates.show(allRecipeGrid);
   domUpdates.show(contentContainer);
   domUpdates.hide(recipeGrid);

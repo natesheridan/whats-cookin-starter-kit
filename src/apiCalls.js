@@ -17,3 +17,17 @@ export function fetchRecipeData() {
   .then(data => data)
   // .then(data => console.log('RECIPEDATA: ', recipeData))
 }
+export function addIngredientToPantry() {
+  return fetch('https://whatscookingbe.herokuapp.com/api/v1/users',
+  {
+    method: 'POST',
+    body: JSON.stringify({userID: 2, ingredientID: 11297, ingredientModification: 100 }),
+    headers: {
+        "Content-Type":"application/json"
+    },
+  })
+.then(response => response.json())
+.then(json => console.log(json))
+.catch(error => console.warn(error))
+
+}

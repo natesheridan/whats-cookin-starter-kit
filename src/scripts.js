@@ -47,7 +47,18 @@ const addIngredientButton = document.querySelector('#plusButtonContainer');
 const recipesToCookButton = document.querySelector('#recipesToCook');
 const myPantryButton = document.querySelector('#userPantry');
 
+///
+const ingredientNameField = document.querySelector('.ingredient-name-field')
+const ingredientAmountField = document.querySelector('.ingredient-amount-field')
+const addIngredientToPantryBtn = document.querySelector('#submitNewIngredient')
 
+addIngredientToPantryBtn.addEventListener('click', addIngToPantry)
+
+function addIngToPantry(){
+  let currentID = currentUser.id;
+  
+}
+///
 // FILTER CHECKBOXES && SEARCH ARRAY //
 
 const filters = document.querySelector('#filters');
@@ -263,5 +274,8 @@ export function generateRandomUser() {
   let userDataValue = new UserData(user)
   currentUser = userDataValue
 };
+
+
+
 
 export {currentUser};
