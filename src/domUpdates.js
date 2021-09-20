@@ -172,6 +172,7 @@ showSavedRecipes() {
 
 showMyPantry() {
   domUpdates.hide(filters);
+  domUpdates.hide(recipeDirectionsContainer);
   domUpdates.hide(searchFieldContainer);
   domUpdates.show(allRecipeGrid);
   domUpdates.show(contentContainer);

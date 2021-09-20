@@ -53,6 +53,7 @@ export const searchFieldContainer = document.querySelector('#searchFieldContaine
 const ingredientNameField = document.querySelector('.ingredient-name-field')
 const ingredientAmountField = document.querySelector('.ingredient-amount-field')
 const addIngredientToPantryBtn = document.querySelector('.submit-btn')
+const recipeDirectionsContainer = document.querySelector('#recipeDirectionsContainer');
 
 
 addIngredientToPantryBtn.addEventListener('click', addIngredientToPantry)
