@@ -9,14 +9,9 @@ import starActive from './data/assets/star-active.svg';
 import star from './data/assets/star.svg';
 import {fetchUsersData, fetchRecipeData, fetchIngredientsData, postIngredient} from './apiCalls.js';
 import apiCalls from './apiCalls.js';
-
-// import "./style.scss";
-
 import domUpdates from './domUpdates.js';
 
-
 // BUTTONS & SECTIONS //
-
 const allRecipeGrid = document.querySelector('#allRecipeGrid');
 const mainContent = document.querySelector('#mainContent');
 const featuredRecipes = document.querySelector('#featuredRecipes');
@@ -34,7 +29,6 @@ const recipeFormImage = document.querySelector('#recipeFormImage');
 const recipeFormIngredient = document.querySelector('#recipeFormIngredient');
 const unitSelection = document.querySelector('#unitSelection');
 const ingredientAmount = document.querySelector('#ingredientAmount');
-
 const homeButton = document.querySelector('#homeButton');
 const savedRecipesButton = document.querySelector('#savedRecipesButton');
 const addRecipeButton = document.querySelector('#addRecipeButton');
@@ -49,36 +43,13 @@ const myPantryButton = document.querySelector('#userPantry');
 export const pantryContainer = document.querySelector('#pantryContainer');
 export const pantryDisplay = document.querySelector('#pantryDisplay');
 export const searchFieldContainer = document.querySelector('#searchFieldContainer');
-///
 const ingredientNameField = document.querySelector('.ingredient-name-field')
 const ingredientAmountField = document.querySelector('.ingredient-amount-field')
 const addIngredientToPantryBtn = document.querySelector('.submit-btn')
 const recipeDirectionsContainer = document.querySelector('#recipeDirectionsContainer');
-
-
-addIngredientToPantryBtn.addEventListener('click', addIngredientToPantry)
-
-function addIngredientToPantry(){
-  let updatedIngredients = ingredientsData.map((element) => {return new Ingredient(element, ingredientsData)})
-  // console.log(updatedIngredients)
-  let currentID = currentUser.id;
-  let ingredientNameValue = ingredientNameField.value;
-  let ingredientID = updatedIngredients.find((element) => {
-    return element.name.includes(ingredientNameValue)
-  }).id
-  console.log(ingredientID)
-  let amountValue = ingredientAmountField.value;
-
-  postIngredient(currentID, ingredientID, amountValue)
-  .then(response => {domUpdates.popupMessage(response.message, 3000)})
-  .then(() => getUserData());
-
-
-}
-///
-// FILTER CHECKBOXES && SEARCH ARRAY //
-
 const filters = document.querySelector('#filters');
+
+// GLOBAL VARIABLES //
 let currentUser;
 let usersData = [];
 export let recipeData = [];
@@ -87,10 +58,8 @@ export default ingredientsData;
 let filterSelection = [];
 let addedIngredients = [];
 export let selectedRecipeIngredients = [];
-// export const 'pantryContainer';
 
 // EVENT LISTENERS //
-
 searchSubmitBtn.addEventListener('click', searchByName);
 allRecipes.addEventListener('click', domUpdates.viewAllRecipes);
 allRecipeGrid.addEventListener('click', domUpdates.getDirections);
@@ -105,34 +74,46 @@ addIngredientButton.addEventListener('click', addIngredient);
 searchFavesSubmitBtn.addEventListener('click', searchFaves);
 recipesToCookButton.addEventListener('click', domUpdates.showRecipesToCook);
 myPantryButton.addEventListener('click', domUpdates.showMyPantry);
+addIngredientToPantryBtn.addEventListener('click', addIngredientToPantry);
 window.addEventListener('load', getData);
 
+//FUNCTIONS//
 function parseData(data){
   usersData = data[0];
   ingredientsData = data[1];
-  recipeData = data[2];//
-
+  recipeData = data[2];
   generateRandomUser()
   domUpdates.generateRandomHomeViewRecipes()
-}
+};
 
 function parseUserData(data){
   usersData = data[0];
-  console.log(currentUser.pantry)
-}
+};
 
 export function getUserData(){
   return Promise.all([fetchUsersData()])
   .then(data => parseUserData(data))
   .catch(error => {domUpdates.popupMessage(error, 3000, "red")})
-}
+};
 
 export function getData() {
   return Promise.all([fetchUsersData(), fetchIngredientsData(), fetchRecipeData()])
   .then(data => parseData(data));
-}
+};
 
-
+function addIngredientToPantry(){
+  let updatedIngredients = ingredientsData.map((element) => {return new Ingredient(element, ingredientsData)})
+  let currentID = currentUser.id;
+  let ingredientNameValue = ingredientNameField.value;
+  let ingredientID = updatedIngredients.find((element) => {
+    return element.name.includes(ingredientNameValue)
+  }).id
+  let amountValue = ingredientAmountField.value;
+  postIngredient(currentID, ingredientID, amountValue)
+  .then(response => domUpdates.popupMessage(response.message, 3000))
+  .catch(error => domUpdates.popupMessage(error, 3000))
+  .then(() => getUserData())
+};
 
 function filterRecipes() {
   if (event.target.value) {
@@ -145,7 +126,7 @@ function filterRecipes() {
     filterSelection.push(value);
     searchByTag(recipeData, filterSelection);
   }
-}
+};
 
 function addIngredient() {
   let ingredient = recipeFormIngredient.value;
@@ -155,11 +136,11 @@ function addIngredient() {
   recipeFormIngredient.value = null;
   unitSelection.value = null;
   ingredientAmount.value = null;
-}
+};
 
 function generateRandomNumber() {
   return Math.floor(Math.random()*90000) + 10000;
-}
+};
 
 function addNewRecipe() {
   let titleField = recipeFormTitle.value;
@@ -170,7 +151,7 @@ function addNewRecipe() {
   let newRecipe = new Recipe({id: generateRandomNumber(), name: titleField, image: imageField, ingredients: [addedIngredients]}, ingredientsData);
   recipeData.push(newRecipe);
   addedIngredients = [];
-}
+};
 
 function showRecipeForm() {
   domUpdates.show(addRecipeForm);
@@ -181,11 +162,11 @@ function showRecipeForm() {
   domUpdates.hide(searchFavesByName);
   domUpdates.hide(recipeDirectionsContainer);
   domUpdates.displayEmptyFavorites()
-}
+};
 
 function showLogin() {
   loginPopup.classList.toggle('hidden');
-}
+};
 
 function searchByName(){
   if(searchFieldInput.value ===""){
@@ -200,7 +181,7 @@ function searchByName(){
     return
   }
   domUpdates.populateCards(filteredRecipes)
-}
+};
 
 function searchFaves(){
   let searchInput = searchFavesInput.value.toLowerCase();
@@ -211,8 +192,7 @@ function searchFaves(){
         allTags.push(tag)
       }
     })
-  });
-
+  })
   if(allTags.includes(searchInput)){
     let searchedData = currentUser.favoriteRecipes.filter(recipe => recipe['tags'].includes(searchInput));
     domUpdates.populateCards(searchedData)
@@ -226,11 +206,10 @@ function searchFaves(){
     domUpdates.populateCards(searchedData)
     return searchedData
   }
-}
+};
 
 function searchRecipes() {
   let searchInput = searchFavesInput.value;
-
   if (currentUser.favoriteRecipes.includes('search-name')) {
       return searchData('name')
     } else if (currentUser.favoriteRecipes.includes('search-tag')) {
@@ -250,7 +229,7 @@ function setUserData(){
 
 function joinToString(array){
   return array.join(" ")
-}
+};
 
 function searchByTag(recipesArray, searchTags){
   let returnedArr = []
@@ -273,7 +252,6 @@ function searchByTag(recipesArray, searchTags){
 
     }, []);
   domUpdates.populateCards(returnedArr)
-
   return returnedArr;
 };
 
@@ -297,7 +275,7 @@ export function addToLibrary(){
     currentUser.toggleItemInArray('recipesToCook', recipeData[index]);
     saveRecipeBtn.classList.toggle("is-favorite");
   }
-}
+};
 
 export function generateRandomUser() {
   const randomUser = Math.floor(Math.random() * usersData.length);

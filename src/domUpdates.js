@@ -18,9 +18,11 @@ let domUpdates = {
     hide(element){
         element.classList.add('hidden')
     },
+
     show(element){
         element.classList.remove('hidden')
     },
+
     showRecipesToCook() {
         domUpdates.hide(filters);
         domUpdates.hide(searchFieldContainer);
@@ -35,6 +37,7 @@ let domUpdates = {
         }
         featuredRecipes.innerHTML = `<h1>Recipes</h1>`
     },
+
     viewAllRecipes() {
         domUpdates.show(filters);
         domUpdates.show(filters);
@@ -49,10 +52,10 @@ let domUpdates = {
         domUpdates.show(featuredRecipes);
         domUpdates.show(searchFieldContainer);
         featuredRecipes.innerHTML = `<h1>All Recipes</h1>`;
-
         let recipeRepo = new RecipeRepository(recipeData);
         domUpdates.populateCards(recipeRepo.recipeData)
     },
+
     showHomeView() {
         domUpdates.show(recipeGrid);
         domUpdates.hide(filters);
@@ -70,12 +73,12 @@ let domUpdates = {
         domUpdates.hide(searchFieldContainer);
         featuredRecipes.innerHTML = `<h1>Featured Recipes</h1>`;
     },
+
     populateCards(arr){
         this.show(allRecipeGrid);
         this.hide(recipeGrid);
         allRecipeGrid.innerHTML = ""
         const recipeCard = arr.reduce((acc, recipe) => {
-
           let buttonClassesFaves = "favorite-star"
           if (currentUser.favoriteRecipes.includes(recipe)){
             buttonClassesFaves = "favorite-star is-favorite"
@@ -84,7 +87,6 @@ let domUpdates = {
           if (currentUser.recipesToCook.includes(recipe)){
             buttonClassesToCook = "recipesToCook is-saved"
           }
-
           allRecipeGrid.innerHTML +=
             `<article class="mini-recipe" id="${recipe.id}">
              <img src= "${recipe.image}" alt= "${recipe.name}">
@@ -92,7 +94,6 @@ let domUpdates = {
              <button type="favoriteStar" name="favoriteStar" class="${buttonClassesFaves}" id="fave-${recipe.id}">♡</button>
              <button type="recipesToCook" name="recipesToCook" class="${buttonClassesToCook}" id="${recipe.id}">🗓 Cook this week!</button>
              </article>`
-
             return acc;
           }, []);
       },
@@ -192,19 +193,16 @@ showMyPantry() {
      </article>`
   })
 },
-//
-getDirections(event){
 
+getDirections(event){
   if(event.target.classList.contains('favorite-star')){
     addToLibrary();
     return
-  };
-
+  }
   if(event.target.classList.contains('recipesToCook')){
     addToLibrary();
     return
   }
-
   if(!event.target.parentElement.classList.contains('mini-recipe')){
     return
   }
