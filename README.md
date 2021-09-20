@@ -43,7 +43,7 @@ Run NPM start
 `npm start`
 
 Copy the local host info into your internet browser, and enjoy!
-`(by default visit [here](http://localhost:8080))`
+(by default visit [here](http://localhost:8080))
 
 ## Illustrations  
 
