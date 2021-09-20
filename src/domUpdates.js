@@ -139,7 +139,6 @@ randomRecipesIndex.forEach((randomRecipeIndex) => {
     <img src="${recipeRepo.recipeData[index].image}" alt="meal image" class="image">
   </div>
   <div class="recipe-content">
-    <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar1">♡</button>
     <div class="recipe-info">
       <h2>${recipeRepo.recipeData[index].name}</h2>
     </div>
