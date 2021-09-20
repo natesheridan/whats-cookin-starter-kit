@@ -27,6 +27,7 @@ WHAT’S COOKIN is an interactive virtual repository of recipe data and instruct
  - WebPack
  - node
  - Atom
+ - Loom 
 
 ## Install + Setup 
 
