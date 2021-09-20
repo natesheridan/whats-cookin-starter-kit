@@ -327,17 +327,17 @@ aside > button {
   padding: 0px;
   justify-content: center;
   align-items: baseline;
-  position: absolute;
+  position: static;
   height: 28rem;
   width: 55rem;
   overflow-x: hidden;
   overflow-y: scroll;
+  border: 0.5rem solid #FAF1EF;
   border-radius: 1rem;
   top: 0%;
   left: 20%;
   right: 20%;
   background-color: #FAF1EF;
-  padding: 0.5rem;
 }
 
 .all-recipe-grid {
