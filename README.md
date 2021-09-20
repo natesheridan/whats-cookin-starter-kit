@@ -76,6 +76,6 @@ Fetch Calls
 Merge conflicts
 
 ## Project Specs
-https://frontend.turing.edu/projects/whats-cookin-part-one.html
+Turing Project Specs can be found [HERE](https://frontend.turing.edu/projects/whats-cookin-part-one.html)
 
 
