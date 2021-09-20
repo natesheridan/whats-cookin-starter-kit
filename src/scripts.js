@@ -48,11 +48,12 @@ const recipesToCookButton = document.querySelector('#recipesToCook');
 const myPantryButton = document.querySelector('#userPantry');
 export const pantryContainer = document.querySelector('#pantryContainer');
 export const pantryDisplay = document.querySelector('#pantryDisplay');
-
+export const searchFieldContainer = document.querySelector('#searchFieldContainer');
 ///
 const ingredientNameField = document.querySelector('.ingredient-name-field')
 const ingredientAmountField = document.querySelector('.ingredient-amount-field')
 const addIngredientToPantryBtn = document.querySelector('.submit-btn')
+
 
 addIngredientToPantryBtn.addEventListener('click', addIngredientToPantry)
 

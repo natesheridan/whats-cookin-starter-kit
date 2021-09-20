@@ -22,6 +22,7 @@ let domUpdates = {
         element.classList.remove('hidden')
     },
     showRecipesToCook() {
+        domUpdates.hide(searchFieldContainer);
         domUpdates.hide(recipeDirectionsContainer);
         domUpdates.hide(pantryContainer);
         domUpdates.populateCards(currentUser.recipesToCook);
@@ -44,6 +45,7 @@ let domUpdates = {
         domUpdates.hide(searchFavesInput);
         domUpdates.hide(searchFavesSubmitBtn);
         domUpdates.show(featuredRecipes);
+        domUpdates.show(searchFieldContainer);
         featuredRecipes.innerHTML = `<h1>All Recipes</h1>`;
 
         let recipeRepo = new RecipeRepository(recipeData);
@@ -62,6 +64,7 @@ let domUpdates = {
         domUpdates.hide(searchFavesByName);
         domUpdates.hide(filters);
         domUpdates.show(featuredRecipes);
+        domUpdates.hide(searchFieldContainer);
         featuredRecipes.innerHTML = `<h1>Featured Recipes</h1>`;
     },
     populateCards(arr){
@@ -108,6 +111,7 @@ let domUpdates = {
 },
 
 displaySavedRecipes() {
+  domUpdates.hide(searchFieldContainer);
   if(currentUser.favoriteRecipes.length===0){
     allRecipeGrid.innerHTML = `<h1>No recipes found!</h1>`
     return
@@ -117,6 +121,7 @@ displaySavedRecipes() {
 
 generateRandomHomeViewRecipes(){
 domUpdates.show(featuredRecipes);
+domUpdates.hide(searchFieldContainer);
 let recipeRepo = new RecipeRepository(recipeData);
 let randomRecipeIndex1 = Math.floor(Math.random() * recipeRepo.recipeData.length)
 let randomRecipeIndex2 = Math.floor(Math.random() * recipeRepo.recipeData.length)
@@ -149,6 +154,7 @@ randomRecipesIndex.forEach((randomRecipeIndex) => {
 },
 
 showSavedRecipes() {
+  domUpdates.hide(searchFieldContainer);
   domUpdates.populateCards(currentUser.favoriteRecipes);
   domUpdates.hide(recipeDirectionsContainer);
   domUpdates.hide(pantryContainer);
@@ -161,6 +167,7 @@ showSavedRecipes() {
 },
 
 showMyPantry() {
+  domUpdates.hide(searchFieldContainer);
   domUpdates.show(allRecipeGrid);
   domUpdates.show(contentContainer);
   domUpdates.hide(recipeGrid);
@@ -200,6 +207,7 @@ getDirections(event){
   domUpdates.hide(allRecipeContainer);
   domUpdates.hide(allRecipeGrid);
   domUpdates.show(recipeDirectionsContainer);
+  domUpdates.hide(searchFieldContainer);
 
   recipeGrid.innerHTML = "";
   let targetID = "";
