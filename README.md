@@ -68,18 +68,18 @@ Saved Recipes
 
 ## Wins  
 
--Organizing DOM updates into their own file 
--Github Project Board
--SCSS and Grid display
--The pantry display's ability to be scrollable
--Heroku for the deployed API
--Successful GET and POST fetch requests
+ -Organizing DOM updates into their own file 
+ -Github Project Board
+ -SCSS and Grid display
+ -The pantry display's ability to be scrollable
+ -Heroku for the deployed API
+ -Successful GET and POST fetch requests
 
 ## Challenges + Improvements  
 
--Correctly importing and exporting files 
--While the POST request was sending a successful responsive, we were not seeing the update in the datao n the back-end. After consulting with another developer, we found the data being sent was a string rather than a number which resolved the issue. In future iterations, we would want to update the DOM to display the pantry with that updated information.
--Group morale was under an incredible amount of stress with balancing final assessments, new lesson material, and completing project. This lead to some shortcuts in code and some user stories not being fulfilled. 
+ -Correctly importing and exporting files 
+ -While the POST request was sending a successful responsive, we were not seeing the update in the datao n the back-end. After consulting with another developer, we   found the data being sent was a string rather than a number which resolved the issue. In future iterations, we would want to update the DOM to display the pantry   with that updated information.
+ -Group morale was under an incredible amount of stress with balancing final assessments, new lesson material, and completing project. This lead to some shortcuts     in code and some user stories not being fulfilled. 
 
 ## Project Specs
 Turing Project Specs can be found [HERE](https://frontend.turing.edu/projects/whats-cookin-part-one.html)
