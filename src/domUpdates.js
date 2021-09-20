@@ -145,13 +145,12 @@ randomRecipesIndex.forEach((randomRecipeIndex) => {
 
  recipeGrid.innerHTML +=
   `<article class="recipe" id=${recipeRepo.recipeData[index].id}>
-  <div class="meal-image">
-    <img src="${recipeRepo.recipeData[index].image}" alt="meal image" class="image">
+  <div class="meal-image" id=${recipeRepo.recipeData[index].id}>
+    <img src="${recipeRepo.recipeData[index].image}" alt="meal image" class="image" id=${recipeRepo.recipeData[index].id}>
   </div>
-  <div class="recipe-content">
-    <button type="favoriteStar" name="favoriteStar" class="favorite-star" id="favoriteStar1">♡</button>
-    <div class="recipe-info">
-      <h2>${recipeRepo.recipeData[index].name}</h2>
+  <div class="recipe-content" id=${recipeRepo.recipeData[index].id}>
+    <div class="recipe-info" id=${recipeRepo.recipeData[index].id}>
+      <h2 id=${recipeRepo.recipeData[index].id}>${recipeRepo.recipeData[index].name}</h2>
     </div>
   </div>
 </article>`
@@ -203,7 +202,14 @@ getDirections(event){
     addToLibrary();
     return
   }
-  if(!event.target.parentElement.classList.contains('mini-recipe')){
+  let flag1 = event.target.parentElement.classList.contains('mini-recipe')
+  console.log(flag1)
+  let flag2 = event.target.parentElement.classList.contains('recipe-grid')
+  console.log(flag2)
+  let flag3 = event.target.parentElement.parentElement.parentElement.classList.contains('recipe-grid')
+  console.log(flag3)
+  if(!flag1 && !flag2 && !flag3){
+    console.log("error!")
     return
   }
   let selectedRecipeIngredients = [];
@@ -215,8 +221,17 @@ getDirections(event){
   domUpdates.hide(filters);
 
   recipeGrid.innerHTML = "";
+  
   let targetID = "";
-  targetID = event.target.closest('.mini-recipe').id
+  if (flag1){
+    targetID = event.target.closest('.mini-recipe').id
+
+  }
+  else if (flag2||flag3){
+    targetID = event.target.closest('.recipe').id
+  }
+
+
   let newRecipeInfo = recipeData.find(recipe => recipe.id === Number(targetID));
   let selectedRecipe = new Recipe(newRecipeInfo, ingredientsData);
   selectedRecipe.ingredients = selectedRecipe.ingredients.map((element) => {

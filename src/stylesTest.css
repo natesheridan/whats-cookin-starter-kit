@@ -188,7 +188,7 @@ aside > button {
 .recipe-grid {
   display: grid;
   grid-template-columns: repeat(3, 18rem);
-  grid-auto-rows: 10rem;
+  grid-auto-rows: auto;
   justify-content: center;
   margin-top: 1rem;
 }
