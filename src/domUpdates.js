@@ -255,7 +255,7 @@ getDirections(event){
     <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}"><br>
     <br><b>Ingredients:</b><br>
     <p class= "ingredients">${selectedRecipeIngredients.join(',<br>')}</p>
-    <p> ${userPantry.calculateIngredientsNeeded(selectedRecipe)}</p>
+    <p> ${userPantry.calculateIngredientsNeeded(selectedRecipe).split('You').join('<br> You')}</p>
     <p class= "cost"><b>${selectedRecipe.returnCostEstimation()}<b></p>
     <br><b>Instructions:</b></br>
     <p class= "instructions">${instructions}</p>`;
