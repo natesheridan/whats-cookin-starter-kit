@@ -18,9 +18,9 @@ WHAT’S COOKIN is an interactive virtual repository of recipe data and instruct
  
 ## Technologies  
 
- - HTML
- - CSS/SCSS
  - Javascript
+ - CSS/SCSS
+ - HTML
  - Herokuapp for API data
  - Mocha and Chai for testing
  - WebPack
