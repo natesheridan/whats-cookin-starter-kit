@@ -6,8 +6,8 @@ class Ingredient {
     this.grabUniqueIngredientData()
     this.name;
     this.estimatedCostInCents;
-
   }
+  
   grabUniqueIngredientData(){
     let self = this;
     let returnedData = this.ingredientsData.find(({id}) => id === self.id);

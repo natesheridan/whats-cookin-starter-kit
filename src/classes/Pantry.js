@@ -20,7 +20,6 @@ class Pantry {
   calculateIngredientsNeeded(recipe) {
     let confirmation = this.confirmNeededIngredients(recipe);
     recipe.updateIngredientData();
-
     if(confirmation === 'true') {
       return 'You have enough ingedients in the pantry to cook this recipe!'
     } else {
@@ -35,7 +34,6 @@ class Pantry {
         })
         return acc
       }, '')
-
       return neededIngredients
     }
   }
