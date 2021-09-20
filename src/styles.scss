@@ -150,18 +150,7 @@ aside > button {
   z-index: 2;
 
   button {
-    height: 3rem;
-    flex-direction: column;
-
-    &:hover {
-      color: white;
-      background-color: $add-recipe-hover;
-    }
-
-    &:active {
-      color: white;
-      background-color: $add-recipe-active;
-    }
+    cursor: default;
   }
 }
 
@@ -527,6 +516,10 @@ aside > button {
 
 .hidden {
   display: none;
+}
+
+.invisible {
+  opacity: 0%;
 }
 
 .favorite-star {

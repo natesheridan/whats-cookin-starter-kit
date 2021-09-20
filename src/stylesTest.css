@@ -154,16 +154,7 @@ aside > button {
   z-index: 2;
 }
 .left-sidebar button {
-  height: 3rem;
-  flex-direction: column;
-}
-.left-sidebar button:hover {
-  color: white;
-  background-color: #5F9595;
-}
-.left-sidebar button:active {
-  color: white;
-  background-color: #EFB87E;
+  cursor: default;
 }
 
 .right-sidebar {
@@ -522,6 +513,10 @@ aside > button {
 
 .hidden {
   display: none;
+}
+
+.invisible {
+  opacity: 0%;
 }
 
 .favorite-star {
