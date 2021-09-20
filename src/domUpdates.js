@@ -18,10 +18,14 @@ let domUpdates = {
     hide(element){
         element.classList.add('hidden')
     },
+
     show(element){
         element.classList.remove('hidden')
     },
+
     showRecipesToCook() {
+        domUpdates.hide(filters);
+        domUpdates.hide(searchFieldContainer);
         domUpdates.hide(recipeDirectionsContainer);
         domUpdates.hide(pantryContainer);
         domUpdates.populateCards(currentUser.recipesToCook);
@@ -33,7 +37,9 @@ let domUpdates = {
         }
         featuredRecipes.innerHTML = `<h1>Recipes</h1>`
     },
+
     viewAllRecipes() {
+        domUpdates.show(filters);
         domUpdates.show(filters);
         domUpdates.show(allRecipeContainer);
         domUpdates.hide(addRecipeForm);
@@ -44,13 +50,15 @@ let domUpdates = {
         domUpdates.hide(searchFavesInput);
         domUpdates.hide(searchFavesSubmitBtn);
         domUpdates.show(featuredRecipes);
+        domUpdates.show(searchFieldContainer);
         featuredRecipes.innerHTML = `<h1>All Recipes</h1>`;
-
         let recipeRepo = new RecipeRepository(recipeData);
         domUpdates.populateCards(recipeRepo.recipeData)
     },
+
     showHomeView() {
         domUpdates.show(recipeGrid);
+        domUpdates.hide(filters);
         domUpdates.generateRandomHomeViewRecipes();
         domUpdates.hide(addRecipeForm);
         domUpdates.hide(allRecipeContainer);
@@ -62,14 +70,15 @@ let domUpdates = {
         domUpdates.hide(searchFavesByName);
         domUpdates.hide(filters);
         domUpdates.show(featuredRecipes);
+        domUpdates.hide(searchFieldContainer);
         featuredRecipes.innerHTML = `<h1>Featured Recipes</h1>`;
     },
+
     populateCards(arr){
         this.show(allRecipeGrid);
         this.hide(recipeGrid);
         allRecipeGrid.innerHTML = ""
         const recipeCard = arr.reduce((acc, recipe) => {
-
           let buttonClassesFaves = "favorite-star"
           if (currentUser.favoriteRecipes.includes(recipe)){
             buttonClassesFaves = "favorite-star is-favorite"
@@ -78,7 +87,6 @@ let domUpdates = {
           if (currentUser.recipesToCook.includes(recipe)){
             buttonClassesToCook = "recipesToCook is-saved"
           }
-
           allRecipeGrid.innerHTML +=
             `<article class="mini-recipe" id="${recipe.id}">
              <img src= "${recipe.image}" alt= "${recipe.name}">
@@ -86,7 +94,6 @@ let domUpdates = {
              <button type="favoriteStar" name="favoriteStar" class="${buttonClassesFaves}" id="fave-${recipe.id}">♡</button>
              <button type="recipesToCook" name="recipesToCook" class="${buttonClassesToCook}" id="${recipe.id}">🗓 Cook this week!</button>
              </article>`
-
             return acc;
           }, []);
       },
@@ -108,6 +115,8 @@ let domUpdates = {
 },
 
 displaySavedRecipes() {
+  domUpdates.hide(searchFieldContainer);
+  domUpdates.hide(filters);
   if(currentUser.favoriteRecipes.length===0){
     allRecipeGrid.innerHTML = `<h1>No recipes found!</h1>`
     return
@@ -117,6 +126,7 @@ displaySavedRecipes() {
 
 generateRandomHomeViewRecipes(){
 domUpdates.show(featuredRecipes);
+domUpdates.hide(searchFieldContainer);
 let recipeRepo = new RecipeRepository(recipeData);
 let randomRecipeIndex1 = Math.floor(Math.random() * recipeRepo.recipeData.length)
 let randomRecipeIndex2 = Math.floor(Math.random() * recipeRepo.recipeData.length)
@@ -149,6 +159,7 @@ randomRecipesIndex.forEach((randomRecipeIndex) => {
 },
 
 showSavedRecipes() {
+  domUpdates.hide(searchFieldContainer);
   domUpdates.populateCards(currentUser.favoriteRecipes);
   domUpdates.hide(recipeDirectionsContainer);
   domUpdates.hide(pantryContainer);
@@ -161,6 +172,9 @@ showSavedRecipes() {
 },
 
 showMyPantry() {
+  domUpdates.hide(filters);
+  domUpdates.hide(recipeDirectionsContainer);
+  domUpdates.hide(searchFieldContainer);
   domUpdates.show(allRecipeGrid);
   domUpdates.show(contentContainer);
   domUpdates.hide(recipeGrid);
@@ -179,19 +193,16 @@ showMyPantry() {
      </article>`
   })
 },
-//
-getDirections(event){
 
+getDirections(event){
   if(event.target.classList.contains('favorite-star')){
     addToLibrary();
     return
-  };
-
+  }
   if(event.target.classList.contains('recipesToCook')){
     addToLibrary();
     return
   }
-
   if(!event.target.parentElement.classList.contains('mini-recipe')){
     return
   }
@@ -200,6 +211,8 @@ getDirections(event){
   domUpdates.hide(allRecipeContainer);
   domUpdates.hide(allRecipeGrid);
   domUpdates.show(recipeDirectionsContainer);
+  domUpdates.hide(searchFieldContainer);
+  domUpdates.hide(filters);
 
   recipeGrid.innerHTML = "";
   let targetID = "";
@@ -240,7 +253,7 @@ getDirections(event){
     <img src= "${selectedRecipe.image}" alt="${selectedRecipe.name}"><br>
     <br><b>Ingredients:</b><br>
     <p class= "ingredients">${selectedRecipeIngredients.join(',<br>')}</p>
-    <p> ${userPantry.calculateIngredientsNeeded(selectedRecipe)}</p>
+    <p> ${userPantry.calculateIngredientsNeeded(selectedRecipe).split('You').join('<br> You')}</p>
     <p class= "cost"><b>${selectedRecipe.returnCostEstimation()}<b></p>
     <br><b>Instructions:</b></br>
     <p class= "instructions">${instructions}</p>`;
