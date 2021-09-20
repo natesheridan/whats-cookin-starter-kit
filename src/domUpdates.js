@@ -22,6 +22,7 @@ let domUpdates = {
         element.classList.remove('hidden')
     },
     showRecipesToCook() {
+        domUpdates.hide(filters);
         domUpdates.hide(searchFieldContainer);
         domUpdates.hide(recipeDirectionsContainer);
         domUpdates.hide(pantryContainer);
@@ -35,6 +36,7 @@ let domUpdates = {
         featuredRecipes.innerHTML = `<h1>Recipes</h1>`
     },
     viewAllRecipes() {
+        domUpdates.show(filters);
         domUpdates.show(filters);
         domUpdates.show(allRecipeContainer);
         domUpdates.hide(addRecipeForm);
@@ -53,6 +55,7 @@ let domUpdates = {
     },
     showHomeView() {
         domUpdates.show(recipeGrid);
+        domUpdates.hide(filters);
         domUpdates.generateRandomHomeViewRecipes();
         domUpdates.hide(addRecipeForm);
         domUpdates.hide(allRecipeContainer);
@@ -112,6 +115,7 @@ let domUpdates = {
 
 displaySavedRecipes() {
   domUpdates.hide(searchFieldContainer);
+  domUpdates.hide(filters);
   if(currentUser.favoriteRecipes.length===0){
     allRecipeGrid.innerHTML = `<h1>No recipes found!</h1>`
     return
@@ -167,6 +171,7 @@ showSavedRecipes() {
 },
 
 showMyPantry() {
+  domUpdates.hide(filters);
   domUpdates.hide(searchFieldContainer);
   domUpdates.show(allRecipeGrid);
   domUpdates.show(contentContainer);
@@ -208,6 +213,7 @@ getDirections(event){
   domUpdates.hide(allRecipeGrid);
   domUpdates.show(recipeDirectionsContainer);
   domUpdates.hide(searchFieldContainer);
+  domUpdates.hide(filters);
 
   recipeGrid.innerHTML = "";
   let targetID = "";
