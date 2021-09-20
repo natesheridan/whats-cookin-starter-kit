@@ -63,6 +63,7 @@ export let selectedRecipeIngredients = [];
 searchSubmitBtn.addEventListener('click', searchByName);
 allRecipes.addEventListener('click', domUpdates.viewAllRecipes);
 allRecipeGrid.addEventListener('click', domUpdates.getDirections);
+recipeGrid.addEventListener('click', domUpdates.getDirections);
 homeButton.addEventListener('click', domUpdates.showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);
@@ -108,7 +109,7 @@ function addIngredientToPantry(){
   let ingredientID = updatedIngredients.find((element) => {
     return element.name.includes(ingredientNameValue)
   }).id
-  let amountValue = ingredientAmountField.value;
+  let amountValue = parseInt(ingredientAmountField.value);
   postIngredient(currentID, ingredientID, amountValue)
   .then(response => domUpdates.popupMessage(response.message, 3000))
   .catch(error => domUpdates.popupMessage(error, 3000))
