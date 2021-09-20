@@ -92,6 +92,7 @@ export let selectedRecipeIngredients = [];
 searchSubmitBtn.addEventListener('click', searchByName);
 allRecipes.addEventListener('click', domUpdates.viewAllRecipes);
 allRecipeGrid.addEventListener('click', domUpdates.getDirections);
+recipeGrid.addEventListener('click', domUpdates.getDirections);
 homeButton.addEventListener('click', domUpdates.showHomeView);
 addRecipeButton.addEventListener('click', showRecipeForm);
 loginButton.addEventListener('click', showLogin);

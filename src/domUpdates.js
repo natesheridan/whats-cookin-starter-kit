@@ -143,6 +143,7 @@ randomRecipesIndex.forEach((randomRecipeIndex) => {
       <h2>${recipeRepo.recipeData[index].name}</h2>
     </div>
   </div>
+  <button type="button" class="button" id=${recipeRepo.recipeData[index].id} name="View Full Recipe"> View Full Recipe </button>
 </article>`
   })
 },
@@ -180,6 +181,7 @@ showMyPantry() {
 },
 //
 getDirections(event){
+  console.log("test");
 
   if(event.target.classList.contains('favorite-star')){
     addToLibrary();
@@ -191,14 +193,17 @@ getDirections(event){
     return
   }
 
-  if(!event.target.parentElement.classList.contains('mini-recipe')){
+  if(!event.target.parentElement.classList.contains('mini-recipe')) {
     return
   }
+
+
   let selectedRecipeIngredients = [];
   domUpdates.show(recipeGrid);
   domUpdates.hide(allRecipeContainer);
   domUpdates.hide(allRecipeGrid);
   domUpdates.show(recipeDirectionsContainer);
+  domUpdates.hide(featuredRecipes);
 
   recipeGrid.innerHTML = "";
   let targetID = "";
