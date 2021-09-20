@@ -23,6 +23,7 @@ WHAT’S COOKIN is an interactive virtual repository of recipe data and instruct
  - HTML
  - Herokuapp for API data
  - Mocha and Chai for testing
+ - WAI-ARIA
  - WebPack
  - node
  - Atom
