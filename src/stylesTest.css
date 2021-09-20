@@ -328,6 +328,7 @@ aside > button {
   justify-content: center;
   align-items: baseline;
   position: static;
+  background-color: #FAF1EF;
   height: 28rem;
   width: 55rem;
   overflow-x: hidden;
@@ -337,7 +338,6 @@ aside > button {
   top: 0%;
   left: 20%;
   right: 20%;
-  background-color: #FAF1EF;
 }
 
 .all-recipe-grid {
@@ -395,12 +395,39 @@ aside > button {
   align-items: center;
   justify-content: center;
 }
+.pantry-container .add-pantry-ingredient {
+  display: flex;
+  flex-direction: column;
+  height: 28rem;
+  background-color: #FAF1EF;
+  border: 2px solid black;
+  border-right: 0px;
+}
+.pantry-container .add-pantry-ingredient input {
+  margin: 1rem;
+  height: 2rem;
+}
+.pantry-container .add-pantry-ingredient .submit-btn {
+  color: white;
+  background-color: #5C9695;
+  border: 0px;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  height: 2rem;
+  cursor: pointer;
+}
+.pantry-container .add-pantry-ingredient .submit-btn:active {
+  background-color: #c8553d;
+}
+.pantry-container .add-pantry-ingredient .ingredient-name-field {
+  margin-top: 2rem;
+}
 .pantry-container .pantry-display {
   height: 28rem;
-  width: 40%;
   background-color: #FAF1EF;
+  border: 2px solid black;
+  width: 40%;
   overflow: scroll;
-  border: 1px solid black;
 }
 .pantry-container .pantry-display .pantry-quantity {
   color: #c8553d;
@@ -425,7 +452,7 @@ aside > button {
 .pantry-item {
   height: 3rem;
   width: auto;
-  border: 1px solid black;
+  border-bottom: 1px solid gray;
 }
 
 .add-recipe-container {
