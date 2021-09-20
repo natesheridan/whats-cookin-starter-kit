@@ -7,7 +7,7 @@ import rightArrow from './data/assets/Right-arrow.svg';
 import pancakes from './data/assets/pancakes.svg';
 import starActive from './data/assets/star-active.svg';
 import star from './data/assets/star.svg';
-import {fetchUsersData, fetchRecipeData, fetchIngredientsData} from './apiCalls.js';
+import {fetchUsersData, fetchRecipeData, fetchIngredientsData, postIngredient} from './apiCalls.js';
 import apiCalls from './apiCalls.js';
 
 // import "./style.scss";
@@ -49,6 +49,31 @@ const myPantryButton = document.querySelector('#userPantry');
 export const pantryContainer = document.querySelector('#pantryContainer');
 export const pantryDisplay = document.querySelector('#pantryDisplay');
 
+///
+const ingredientNameField = document.querySelector('.ingredient-name-field')
+const ingredientAmountField = document.querySelector('.ingredient-amount-field')
+const addIngredientToPantryBtn = document.querySelector('.submit-btn')
+
+addIngredientToPantryBtn.addEventListener('click', addIngredientToPantry)
+
+function addIngredientToPantry(){
+  let updatedIngredients = ingredientsData.map((element) => {return new Ingredient(element, ingredientsData)})
+  // console.log(updatedIngredients)
+  let currentID = currentUser.id;
+  let ingredientNameValue = ingredientNameField.value;
+  let ingredientID = updatedIngredients.find((element) => {
+    return element.name.includes(ingredientNameValue)
+  }).id
+  console.log(ingredientID)
+  let amountValue = ingredientAmountField.value;
+
+  postIngredient(currentID, ingredientID, amountValue)
+  .then(response => {domUpdates.popupMessage(response.message, 3000)})
+  .then(() => getUserData());
+
+
+}
+///
 // FILTER CHECKBOXES && SEARCH ARRAY //
 
 const filters = document.querySelector('#filters');
@@ -81,18 +106,31 @@ myPantryButton.addEventListener('click', domUpdates.showMyPantry);
 window.addEventListener('load', getData);
 
 function parseData(data){
-  usersData = data[0].usersData;
-  ingredientsData = data[1].ingredientsData;
-  recipeData = data[2].recipeData
+  usersData = data[0];
+  ingredientsData = data[1];
+  recipeData = data[2];//
 
   generateRandomUser()
   domUpdates.generateRandomHomeViewRecipes()
 }
 
-function getData() {
-  return Promise.all([fetchUsersData(), fetchIngredientsData(), fetchRecipeData()])
-  .then(data => parseData(data));npm
+function parseUserData(data){
+  usersData = data[0];
+  console.log(currentUser.pantry)
 }
+
+export function getUserData(){
+  return Promise.all([fetchUsersData()])
+  .then(data => parseUserData(data))
+  .catch(error => {domUpdates.popupMessage(error, 3000, "red")})
+}
+
+export function getData() {
+  return Promise.all([fetchUsersData(), fetchIngredientsData(), fetchRecipeData()])
+  .then(data => parseData(data));
+}
+
+
 
 function filterRecipes() {
   if (event.target.value) {
@@ -265,5 +303,8 @@ export function generateRandomUser() {
   let userDataValue = new UserData(user)
   currentUser = userDataValue
 };
+
+
+
 
 export {currentUser};
