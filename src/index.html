@@ -79,7 +79,7 @@
     </section>
     <aside class="sidebars">
       <section class="left-sidebar">
-        <button type="button" id="addRecipeButton" name="add a recipe"><h1>Add a Recipe</h1></button>
+        <button type="button" disabled class="invisible" id="addRecipeButton" name="add a recipe"><h1>Add a Recipe</h1></button>
       </section>
       <section class="right-sidebar">
       </section>
@@ -136,22 +136,6 @@
             </div>
           </article>
         </section>
-        <article class="login-popup hidden" id="loginPopup">
-          <form class="login-form" id="loginForm">
-            <h1>Login</h1>
-            <button type="submit" class="cancel-login" onclick="closeForm()"><img src="" class="x-button" alt="close form"></button>
-            <label for="email"><b>Username</b></label>
-            <input type="text" placeholder="Username" name="username" required>
-            <label for="password"><b>Password</b></label>
-            <input type="password" placeholder="Password" name="password" required>
-            <article class="confirm-password">
-              <label for="repeat-password"><b>Repeat Password</b></label>
-              <input type="text" placeholder="Repeat password" name="password">
-            </article>
-            <button type="submit" class="log-in-button disabled">Login</button>
-            <button type="submit" class="sign-up-button disabled" onclick="closeForm()">Sign Up</button>
-          </form>
-        </article>
           <section class="add-recipe-container">
             <section class="add-recipe hidden" id="addRecipeForm">
               <h1></h1>
@@ -195,9 +179,11 @@
             </section>
           </section>
       <section class="pantry-container hidden" id="pantryContainer">
-        <input placeholder="enter ingredient name" type="text" name="addIngredientPantry" class="ingredient-name-field">
-        <input placeholder="enter amount added" type="text" name="addIngredientPantry" class="ingredient-amount-field">
-        <input type="submit" class="submit-btn" id ="submitNewIngredient"></input>
+        <form class="add-pantry-ingredient">
+          <input placeholder=" enter ingredient name" type="text" name="addIngredientPantry" class="ingredient-name-field">
+          <input placeholder=" enter amount added" type="text" name="addIngredientPantry" class="ingredient-amount-field">
+          <input type="submit" class="submit-btn" id ="submitNewIngredient"></input>
+        </form>
         <section class="pantry-display" id="pantryDisplay">
         </section>
       </section>
@@ -213,3 +199,4 @@
     </article>
   </body>
 </html>
+<!-- hi -->

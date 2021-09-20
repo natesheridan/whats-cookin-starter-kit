@@ -150,18 +150,7 @@ aside > button {
   z-index: 2;
 
   button {
-    height: 3rem;
-    flex-direction: column;
-
-    &:hover {
-      color: white;
-      background-color: $add-recipe-hover;
-    }
-
-    &:active {
-      color: white;
-      background-color: $add-recipe-active;
-    }
+    cursor: default;
   }
 }
 
@@ -175,35 +164,6 @@ aside > button {
   height: auto;
   z-index: 2;
 }
-
-// .login-button {
-//   position: absolute;
-//   top: 1.5%;
-//   right: 5%;
-//   color: black;
-//   background-color: #FFF8F3;
-//   height: auto;
-//   width: 5rem;
-//   padding: .5rem 0rem .5rem 0rem;
-//   cursor: default;
-// }
-
-// .scroll-arrow {
-//   display: inline-flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   position: relative;
-//   height: 5rem;
-//   width: 5rem;
-//   cursor: pointer;
-//   z-index: 3;
-// }
-//
-// .right-arrow {
-//   position: absolute;
-//   top: 225%;
-// }
 
 .content-container {
   flex-direction: column;
@@ -281,29 +241,6 @@ aside > button {
   }
 }
 
-// .login-form {
-//   display: flex;
-//   flex-direction: column;
-//   position: absolute;
-//   width: 12rem;
-//   line-height: 2rem;
-//   padding: 1rem 1.5rem 1rem 1.5rem;
-//   border: 1px solid black;
-//   background-color: #fff8f4;
-//   top: -12%;
-//   right: 9.5%;
-//   z-index: 2;
-// }
-
-// .login-form > button {
-//   margin-top: 1rem;
-//   height: 2rem;
-//   width: auto;
-//   background-color: #b6b5bf;
-//   color: white;
-//   cursor: default;
-// }
-
 .recipe-directions-container {
   @include flex-column();
   justify-content: flex-start;
@@ -357,21 +294,6 @@ aside > button {
   border-radius: .5rem;
 }
 
-// .login-form {
-//   .sign-up-button {
-//     background-color: #b6b5bf;
-//   }
-//
-//   .cancel-login {
-//     border: 0px;
-//     background-color: none;
-//   }
-// }
-
-// .confirm-password {
-//   @include flex-column;
-// }
-
 .meal-image {
   display: block;
   position: absolute;
@@ -393,17 +315,17 @@ aside > button {
   @include remove-space();
   justify-content: center;
   align-items: baseline;
-  position: absolute;
+  position: static;
+  background-color: $offwhite;
   height: 28rem;
   width: 55rem;
   overflow-x: hidden;
   overflow-y: scroll;
+  border: .5rem solid $offwhite;
   border-radius: 1rem;
   top: 0%;
   left: 20%;
   right: 20%;
-  background-color: $offwhite;
-  padding: .5rem;
 }
 
 .all-recipe-grid {
@@ -462,12 +384,39 @@ aside > button {
   display: flex;
   @include centered();
 
+  .add-pantry-ingredient {
+    @include flex-column();
+    @include pantry-styles();
+
+    border-right: 0px;
+
+    input {
+      margin: 1rem;
+      height: 2rem;
+    }
+
+    .submit-btn {
+      color: white;
+      background-color: #5C9695;
+      border: 0px;
+      @include vertical-padding(.3rem);
+      height: 2rem;
+      cursor: pointer;
+
+        &:active {
+          background-color: $primary;
+        }
+    }
+
+    .ingredient-name-field {
+      margin-top: 2rem;
+    }
+  }
+
   .pantry-display {
-    height: 28rem;
+    @include pantry-styles();
     width: 40%;
-    background-color: $offwhite;
     overflow: scroll;
-    border: 1px solid black;
 
     .pantry-quantity {
       color: $primary;
@@ -494,7 +443,7 @@ aside > button {
 .pantry-item {
   height: 3rem;
   width: auto;
-  border: 1px solid black;
+  border-bottom: 1px solid gray;
 }
 
 .add-recipe-container {
@@ -567,6 +516,10 @@ aside > button {
 
 .hidden {
   display: none;
+}
+
+.invisible {
+  opacity: 0%;
 }
 
 .favorite-star {

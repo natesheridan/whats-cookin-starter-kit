@@ -2,23 +2,34 @@
   display: flex;
   flex-direction: row;
 }
+
 @mixin flex-column() {
   display: flex;
   flex-direction: column;
 }
+
 @mixin centered() {
   align-items: center;
   justify-content: center;
 }
+
 @mixin vertical-padding($padding) {
   padding-top: $padding;
   padding-bottom: $padding;
 }
+
 @mixin horizontal-padding($padding) {
   padding-left: $padding;
   padding-right: $padding;
 }
+
 @mixin remove-space() {
   margin: 0px;
   padding: 0px;
+}
+
+@mixin pantry-styles() {
+  height: 28rem;
+  background-color: $offwhite;
+  border: 2px solid black;
 }
