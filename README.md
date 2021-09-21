@@ -48,16 +48,7 @@ Copy the local host info into your internet browser, and enjoy!
 ## Illustrations  
 
 DEMO GIF
-![gif](https://s9.gifyu.com/images/Kapture-2021-09-07-at-18.07.02.gif)
-
-Home Screen - Randomly populated recipes to try out!
-![home screen](https://i.imgur.com/3HYucZ8.png)
-
-All recipes view - view all the recipes in the database and sort by filters or search by name. You can also add recipes to your favorites using the heart button on each card. 
-![all recipes demo](https://i.imgur.com/UbMf1t6.png)
-
-Saved Recipes 
-![enter image description here](https://i.imgur.com/G137V2y.png)
+![DEMO VIDEO](https://www.youtube.com/watch?v=T93U62cjrhE&t=413s)
 
 ## Contributors:  
 
