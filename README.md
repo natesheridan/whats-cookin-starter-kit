@@ -47,8 +47,7 @@ Copy the local host info into your internet browser, and enjoy!
 
 ## Illustrations  
 
-DEMO GIF
-![DEMO VIDEO](https://www.youtube.com/watch?v=T93U62cjrhE&t=413s)
+[DEMO VIDEO LINKED HERE](https://youtu.be/T93U62cjrhE)
 
 ## Contributors:  
 
